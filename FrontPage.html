@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UniQuest Roadmap</title>
+  <style>
+    /* Reset & Base */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #063651; background: #f0f3f5; }
+    a { text-decoration: none; color: inherit; }
+
+    /* Navigation */
+    nav { background: #fff; padding: 1rem 2rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 10; }
+    .nav-container { max-width: 1200px; margin: auto; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.5rem; font-weight: bold; color: #063651; }
+    .nav-logo img { height: 40px; width: auto; object-fit: contain; }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a { font-size: 0.95rem; color: #555; transition: color 0.2s; }
+    .nav-links a:hover { color: #067880; }
+    .nav-cta a { padding: 0.5rem 1.2rem; border-radius: 20px; border: 1px solid #067880; color: #067880; font-weight: 500; transition: background 0.2s, color 0.2s; }
+    .nav-cta a:hover { background: #067880; color: #fff; }
+
+    /* Hero Section */
+    #hero {
+      position: relative;
+      overflow: hidden;
+      padding: 8rem 0;        /* ← remove horizontal padding */
+      text-align: center;
+      color: #fff;
+    }
+    #hero .cover-wrapper {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+    #hero .cover-wrapper img {
+      height: auto;
+      width: 100%;
+      position:relative;
+      top: -60%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    #hero::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(6,54,81,0.4);
+      z-index: 0;
+    }
+    #hero .content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: auto;
+      padding: 0 1rem;        /* ← re-apply horizontal padding here */
+    }
+    #hero h1 { font-size: 3rem; margin-bottom: 1rem; line-height: 1.2; }
+    #hero p  { font-size: 1.15rem; margin-bottom: 2rem; }
+    #hero .btn-primary {
+      background: #69e0ce;
+      color: #063651;
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    #hero .btn-primary:hover { background: #62a6b1; }
+
+    /* Roadmap */
+    #roadmap { max-width: 1000px; margin: 4rem auto; padding: 0 1rem; }
+    #roadmap h2 { text-align: center; font-size: 2.2rem; margin-bottom: 2rem; color: #2e8699; }
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 2rem; }
+    .step-card { background: #fff; padding: 1.8rem; border-radius: 12px; box-shadow: 0 6px 12px rgba(0,0,0,0.08); transition: transform 0.3s, box-shadow 0.3s; }
+    .step-card:hover { transform: translateY(-6px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    .step-number { width: 3rem; height: 3rem; background: #067880; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1rem; margin-bottom: 1rem; }
+    .step-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.6rem; color: #063651; }
+    .step-desc { font-size: 1rem; color: #555; line-height: 1.5; }
+
+    /* Footer */
+    footer { text-align: center; padding: 2rem 1rem; font-size: 0.9rem; color: #063651; }
+
+    @media (min-width: 768px) {
+      #hero h1 { font-size: 4rem; }
+      #hero p  { font-size: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-container">
+      <div class="nav-logo">
+        <img src="logo.jpg" alt="UniQuest Logo">
+        UniQuest
+      </div>
+      <div class="nav-links">
+        <a href="#hero">Home</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#resources">Resources</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="nav-cta">
+        <a href="#trial">Free Trial</a>
+      </div>
+    </div>
+  </nav>
+
+  <section id="hero">
+    <div class="cover-wrapper">
+      <img src="coverimage.png" alt="Cover Illustration">
+    </div>
+    <div class="content">
+      <h1>Map Your Path to Global Education</h1>
+      <p>From choosing programs to landing your visa—follow our guided roadmap every step of the way.</p>
+      <a href="#roadmap" class="btn-primary">Get Started</a>
+    </div>
+  </section>
+
+  <section id="roadmap">
+    <h2>Application Roadmap</h2>
+    <div class="steps-grid" id="steps-list"></div>
+  </section>
+
+  <footer>&copy; 2025 UniQuest. All rights reserved.</footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const steps = [
+        { title: 'Research Programs', description: 'Identify target universities and programs abroad.' },
+        { title: 'Prepare Tests', description: 'Register and prepare for TOEFL, IELTS, GRE/GMAT.' },
+        { title: 'Gather Documents', description: 'Collect transcripts, recommendation letters, CV/Resume.' },
+        { title: 'Write Essays', description: 'Draft personal statements and motivation letters.' },
+        { title: 'Submit Applications', description: 'Fill out online forms and submit before deadlines.' },
+        { title: 'Apply for Visa', description: 'Prepare visa documents and attend consular interview.' },
+        { title: 'Pre-departure', description: 'Arrange accommodation, flights, and orientation.' }
+      ];
+      const container = document.getElementById('steps-list');
+      steps.forEach((step, i) => {
+        const card = document.createElement('div');
+        card.className = 'step-card';
+        card.innerHTML = `
+          <div class="step-number">${i+1}</div>
+          <div class="step-title">${step.title}</div>
+          <div class="step-desc">${step.description}</div>
+        `;
+        container.appendChild(card);
+      });
+    });
+  </script>
+</body>
+</html>
