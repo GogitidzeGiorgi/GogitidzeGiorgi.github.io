@@ -126,27 +126,30 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const steps = [
-      { title: 'Research Programs', description: 'Identify target universities and programs abroad.' },
-      { title: 'Prepare Tests', description: 'Register and prepare for TOEFL, IELTS, GRE/GMAT.' },
-      { title: 'Gather Documents', description: 'Collect transcripts, recommendation letters, CV/Resume.' },
-      { title: 'Write Essays', description: 'Draft personal statements and motivation letters.' },
-      { title: 'Submit Applications', description: 'Fill out online forms and submit before deadlines.' },
-      { title: 'Apply for Visa', description: 'Prepare visa documents and attend consular interview.' },
-      { title: 'Pre-departure', description: 'Arrange accommodation, flights, and orientation.' }
+      { title: 'Research Programs', description: 'Identify target universities and programs abroad.', link: 'research-programs.html' },
+      { title: 'Prepare Tests', description: 'Register and prepare for TOEFL, IELTS, GRE/GMAT.', link: 'prepare-tests.html' },
+      { title: 'Gather Documents', description: 'Collect transcripts, recommendation letters, CV/Resume.', link: 'gather-documents.html' },
+      { title: 'Write Essays', description: 'Draft personal statements and motivation letters.', link: 'write-essays.html' },
+      { title: 'Submit Applications', description: 'Fill out online forms and submit before deadlines.', link: 'submit-applications.html' },
+      { title: 'Apply for Visa', description: 'Prepare visa documents and attend consular interview.', link: 'apply-visa.html' },
+      { title: 'Pre-departure', description: 'Arrange accommodation, flights, and orientation.', link: 'pre-departure.html' }
     ];
     const container = document.getElementById('steps-list');
     steps.forEach((step, i) => {
       const card = document.createElement('div');
       card.className = 'step-card';
       card.innerHTML = `
-        <div class="step-number">${i+1}</div>
-        <div class="step-title">${step.title}</div>
-        <div class="step-desc">${step.description}</div>
+        <a href="${step.link}" style="color: inherit; text-decoration: none;">
+          <div class="step-number">${i+1}</div>
+          <div class="step-title">${step.title}</div>
+          <div class="step-desc">${step.description}</div>
+        </a>
       `;
       container.appendChild(card);
     });
   });
 </script>
+
 
 </body>
 </html>
