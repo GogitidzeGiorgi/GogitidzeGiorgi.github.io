@@ -123,29 +123,30 @@
     </div>
   </footer>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const steps = [
-        { title: 'Research Programs', description: 'Identify target universities and programs abroad.' },
-        { title: 'Prepare Tests', description: 'Register and prepare for TOEFL, IELTS, GRE/GMAT.' },
-        { title: 'Gather Documents', description: 'Collect transcripts, recommendation letters, CV/Resume.' },
-        { title: 'Write Essays', description: 'Draft personal statements and motivation letters.' },
-        { title: 'Submit Applications', description: 'Fill out online forms and submit before deadlines.' },
-        { title: 'Apply for Visa', description: 'Prepare visa documents and attend consular interview.' },
-        { title: 'Pre-departure', description: 'Arrange accommodation, flights, and orientation.' }
-      ];
-      const container = document.getElementById('steps-list');
-      steps.forEach((step, i) => {
-        const card = document.createElement('div');
-        card.className = 'step-card';
-        card.innerHTML = `
-          <div class="step-number">${i+1}</div>
-          <div class="step-title">${step.title}</div>
-          <div class="step-desc">${step.description}</div>
-        `;
-        container.appendChild(card);
-      });
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const steps = [
+      { title: 'Research Programs', description: 'Identify target universities and programs abroad.' },
+      { title: 'Prepare Tests', description: 'Register and prepare for TOEFL, IELTS, GRE/GMAT.' },
+      { title: 'Gather Documents', description: 'Collect transcripts, recommendation letters, CV/Resume.' },
+      { title: 'Write Essays', description: 'Draft personal statements and motivation letters.' },
+      { title: 'Submit Applications', description: 'Fill out online forms and submit before deadlines.' },
+      { title: 'Apply for Visa', description: 'Prepare visa documents and attend consular interview.' },
+      { title: 'Pre-departure', description: 'Arrange accommodation, flights, and orientation.' }
+    ];
+    const container = document.getElementById('steps-list');
+    steps.forEach((step, i) => {
+      const card = document.createElement('div');
+      card.className = 'step-card';
+      card.innerHTML = `
+        <div class="step-number">${i+1}</div>
+        <div class="step-title">${step.title}</div>
+        <div class="step-desc">${step.description}</div>
+      `;
+      container.appendChild(card);
     });
-  </script>
+  });
+</script>
+
 </body>
 </html>
