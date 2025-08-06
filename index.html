@@ -134,21 +134,23 @@
       { title: 'Apply for Visa', description: 'Prepare visa documents and attend consular interview.', link: 'apply-visa.html' },
       { title: 'Pre-departure', description: 'Arrange accommodation, flights, and orientation.', link: 'pre-departure.html' }
     ];
+
     const container = document.getElementById('steps-list');
     steps.forEach((step, i) => {
-      const card = document.createElement('div');
+      const card = document.createElement('a');   // use <a> as wrapper
+      card.href = step.link;
       card.className = 'step-card';
+      card.style.display = "block";               // ensure full card is clickable
       card.innerHTML = `
-        <a href="${step.link}" style="color: inherit; text-decoration: none;">
-          <div class="step-number">${i+1}</div>
-          <div class="step-title">${step.title}</div>
-          <div class="step-desc">${step.description}</div>
-        </a>
+        <div class="step-number">${i+1}</div>
+        <div class="step-title">${step.title}</div>
+        <div class="step-desc">${step.description}</div>
       `;
       container.appendChild(card);
     });
   });
 </script>
+
 
 
 </body>
