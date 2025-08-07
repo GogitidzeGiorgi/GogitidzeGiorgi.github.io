@@ -1,54 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" href="images/logo.png" type="image/png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pre-departure - UniQuest</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css"> <!-- optional external CSS -->
 </head>
 <body>
+  <!-- Same Navbar as index.html -->
   <nav>
-    <div class="nav-container">
-      <div class="nav-logo">
-        <img src="images/logo.jpg" alt="UniQuest Logo">
-        UniQuest
-      </div>
-      <div class="nav-links">
-        <a href="index.html#hero">Home</a>
-        <a href="index.html#roadmap">Roadmap</a>
-        <a href="index.html#resources">Resources</a>
-        <a href="index.html#contact">Contact</a>
-      </div>
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.jpg" alt="UniQuest Logo">
+      UniQuest
+    </a>
+    <div class="nav-links">
+      <a href="index.html#hero">Home</a>
+      <a href="index.html#roadmap">Roadmap</a>
+      <a href="index.html#resources">Resources</a>
+      <a href="index.html#contact">Contact</a>
     </div>
-  </nav>
+    <div class="nav-cta">
+      <a href="index.html#trial">Free Trial</a>
+    </div>
+  </div>
+</nav>
 
-  <section class="hero">
-    <h1>Pre-departure</h1>
+  <!-- Hero Section -->
+  <section id="hero" style="height: 300px; background: url('images/preDeparture.jpg') center/cover no-repeat; position:relative; color:white; text-align:center; display:flex; align-items:center; justify-content:center;">
+    <div style="background:rgba(6,54,81,0.5); padding:2rem; border-radius:10px;">
+      <h1>Pre-departure</h1>
+      <p>Arrange housing, book flights, and attend orientations.</p>
+    </div>
   </section>
 
-  <div class="page-content">
+  <!-- Content Section -->
+  <section style="max-width:800px; margin:3rem auto; padding:1rem;">
     <h2>Step 7: Pre-departure Preparations</h2>
     <p>Congratulations! You’ve made it through the application and visa process. Now prepare for your journey:</p>
+      <br>
     <ul>
       <li>Book your flight tickets early to get the best prices.</li>
       <li>Arrange accommodation—on-campus housing or off-campus rentals.</li>
       <li>Attend university orientation programs, if available.</li>
       <li>Check health insurance requirements and vaccinations.</li>
       <li>Pack wisely—don’t forget essential documents and medications.</li>
+      <li>Stay connected with international student groups for support before and after arrival.</li>
     </ul>
-    <p>Stay connected with international student groups for support before and after arrival.</p>
+  </section>
 
-    <p><a href="index.html#roadmap">⬅ Back to Roadmap</a></p>
-  </div>
-
-  <footer>
-    &copy; 2025 UniQuest. All rights reserved.<br>
-    Email: contact@uniquest.ge
+<footer>
+  <div class="footer-container">
     <div class="social-icons">
-      <a href="#" class="facebook">📘</a>
-      <a href="#" class="twitter">🐦</a>
-      <a href="#" class="instagram">📸</a>
+      <a href="https://facebook.com" target="_blank" class="facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://twitter.com" target="_blank" class="twitter"><i class="fab fa-twitter"></i></a>
+      <a href="https://instagram.com" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
     </div>
-  </footer>
+    <div class="footer-contact">
+      📧 Email: <a href="mailto:contact@uniquest.ge" style="color:#69e0ce;">contact@uniquest.ge</a>
+    </div>
+    <p>&copy; 2025 UniQuest. All rights reserved.</p>
+  </div>
+</footer>
+
 </body>
 </html>
