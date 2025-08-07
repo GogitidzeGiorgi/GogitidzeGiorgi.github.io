@@ -96,14 +96,11 @@
     <div class="content">
       <h1>Map Your Path to Global Education</h1>
       <p>From choosing programs to landing your visa—follow our guided roadmap every step of the way.</p>
-      <a href="#roadmap" class="btn-primary">Get Started</a>
+      <a href="Roadmap.html" class="btn-primary">Get Started</a>
     </div>
   </section>
 
-  <section id="roadmap">
-    <h2>Application Roadmap</h2>
-    <div class="steps-grid" id="steps-list"></div>
-  </section>
+
 
   <footer>
     <div class="footer-container">
@@ -124,36 +121,6 @@
     </div>
   </footer>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const steps = [
-      { title: 'Research Universities', description: 'Identify target universities and programs abroad.', link: 'research-universities.html' },
-      { title: 'Prepare for Tests', description: 'Register and prepare for TOEFL, IELTS, GRE/GMAT.', link: 'prepare-tests.html' },
-      { title: 'Deadlines & Tracking', description: 'Register and prepare for TOEFL, IELTS, GRE/GMAT.', link: 'deadlines-tracking.html' },
-      { title: 'Requirements & Documents', description: 'Collect transcripts, recommendation letters, CV/Resume.', link: 'requirements-documents.html' },
-      { title: 'Write Essays', description: 'Draft personal statements and motivation letters.', link: 'write-essays.html' },
-      { title: 'Scholarships', description: 'Collect transcripts, recommendation letters, CV/Resume.', link: 'scholarships.html' },
-      { title: 'Submit Applications', description: 'Fill out online forms and submit before deadlines.', link: 'submit-applications.html' },
-      { title: 'Recieve & Evaluate Offers', description: 'Fill out online forms and submit before deadlines.', link: 'uni-offers.html' },
-      { title: 'Apply for Visa', description: 'Prepare visa documents and attend consular interview.', link: 'apply-visa.html' },
-      { title: 'Prepare for Departure', description: 'Arrange accommodation, flights, and orientation.', link: 'pre-departure.html' }
-    ];
-
-    const container = document.getElementById('steps-list');
-    steps.forEach((step, i) => {
-      const card = document.createElement('a');   // use <a> as wrapper
-      card.href = step.link;
-      card.className = 'step-card';
-      card.style.display = "block";               // ensure full card is clickable
-      card.innerHTML = `
-        <div class="step-number">${i+1}</div>
-        <div class="step-title">${step.title}</div>
-        <div class="step-desc">${step.description}</div>
-      `;
-      container.appendChild(card);
-    });
-  });
-</script>
 
 
 
