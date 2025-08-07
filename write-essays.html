@@ -4,49 +4,63 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Write Essays - UniQuest</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css"> <!-- optional external CSS -->
 </head>
 <body>
+  <!-- Same Navbar as index.html -->
   <nav>
-    <div class="nav-container">
-      <div class="nav-logo">
-        <img src="images/logo.jpg" alt="UniQuest Logo">
-        UniQuest
-      </div>
-      <div class="nav-links">
-        <a href="index.html#hero">Home</a>
-        <a href="index.html#roadmap">Roadmap</a>
-        <a href="index.html#resources">Resources</a>
-        <a href="index.html#contact">Contact</a>
-      </div>
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.jpg" alt="UniQuest Logo">
+      UniQuest
+    </a>
+    <div class="nav-links">
+      <a href="index.html#hero">Home</a>
+      <a href="index.html#roadmap">Roadmap</a>
+      <a href="index.html#resources">Resources</a>
+      <a href="index.html#contact">Contact</a>
     </div>
-  </nav>
+    <div class="nav-cta">
+      <a href="index.html#trial">Free Trial</a>
+    </div>
+  </div>
+</nav>
 
-  <section class="hero">
-    <h1>Write Essays</h1>
+  <!-- Hero Section -->
+  <section id="hero" style="height: 300px; background: url('images/background-programs.jpg') center/cover no-repeat; position:relative; color:white; text-align:center; display:flex; align-items:center; justify-content:center;">
+    <div style="background:rgba(6,54,81,0.5); padding:2rem; border-radius:10px;">
+      <h1>Write Essays</h1>
+      <p>Craft compelling personal statements and motivational essays.</p>
+    </div>
   </section>
 
-  <div class="page-content">
+  <!-- Content Section -->
+  <section style="max-width:800px; margin:3rem auto; padding:1rem;">
     <h2>Step 4: Write Strong Essays & Personal Statements</h2>
     <p>Your essays are one of the most important parts of your application. They show admissions officers who you are beyond grades and test scores.</p>
+      <br>
     <ul>
-      <li>Personal Statement: Highlight your journey, values, and goals.</li>
-      <li>Motivation Letter: Explain why you chose a particular program or country.</li>
-      <li>Supplemental Essays: Answer specific prompts given by universities.</li>
+     <li>Personal Statement: Highlight your journey, values and goals.</li> 
+     <li>Motivation Letter: Explain why you chose a particular program or country.</li>
+     <li>Supplemental Essays: Answer specific prompts given by universities.</li>
+    <li>Draft early, revise multiple times, and get feedback from mentors or peers before submission.</li>
     </ul>
-    <p>Draft early, revise multiple times, and get feedback from mentors or peers before submission.</p>
+  </section>
 
-    <p><a href="index.html#roadmap">⬅ Back to Roadmap</a></p>
-  </div>
-
-  <footer>
-    &copy; 2025 UniQuest. All rights reserved.<br>
-    Email: contact@uniquest.ge
+<footer>
+  <div class="footer-container">
     <div class="social-icons">
-      <a href="#" class="facebook">📘</a>
-      <a href="#" class="twitter">🐦</a>
-      <a href="#" class="instagram">📸</a>
+      <a href="https://facebook.com" target="_blank" class="facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://twitter.com" target="_blank" class="twitter"><i class="fab fa-twitter"></i></a>
+      <a href="https://instagram.com" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
     </div>
-  </footer>
+    <div class="footer-contact">
+      📧 Email: <a href="mailto:contact@uniquest.ge" style="color:#69e0ce;">contact@uniquest.ge</a>
+    </div>
+    <p>&copy; 2025 UniQuest. All rights reserved.</p>
+  </div>
+</footer>
+
 </body>
 </html>
