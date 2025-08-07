@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="images/logo.png" type="image/png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UniQuest Roadmap</title>
+  <!-- Font Awesome for social media icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    /* Reset & Base */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #063651; background: #f0f3f5; }
+    a { text-decoration: none; color: inherit; }
+
+    /* Navigation */
+    nav { background: #fff; padding: 1rem 2rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 10; }
+    .nav-container { max-width: 1200px; margin: auto; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.5rem; font-weight: bold; color: #063651; }
+    .nav-logo img { height: 40px; width: auto; object-fit: contain; }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a { font-size: 0.95rem; color: #555; transition: color 0.2s; }
+    .nav-links a:hover { color: #067880; }
+    .nav-cta a { padding: 0.5rem 1.2rem; border-radius: 20px; border: 1px solid #067880; color: #067880; font-weight: 500; transition: background 0.2s, color 0.2s; }
+    .nav-cta a:hover { background: #067880; color: #fff; }
+
+    /* Hero Section */
+    #hero { position: relative; overflow: hidden; height: 500px; text-align: center; }
+    .hero-illustration {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%; height: auto;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+    #hero::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(6,54,81,0.4); z-index: 2; }
+    #hero .content { position: relative; max-width: 800px; margin: auto; top: 50%; transform: translateY(-50%); z-index: 3; color: #fff; }
+    #hero h1 { font-size: 3rem; margin-bottom: 1rem; line-height: 1.2; }
+    #hero p { font-size: 1.15rem; margin-bottom: 2rem; }
+    #hero .btn-primary { background: #69e0ce; color: #063651; padding: 0.8rem 2rem; border-radius: 30px; font-size: 1rem; font-weight: 600; transition: background 0.2s; }
+    #hero .btn-primary:hover { background: #62a6b1; }
+
+    /* Roadmap */
+    #roadmap { max-width: 1000px; margin: 4rem auto; padding: 0 1rem; }
+    #roadmap h2 { text-align: center; font-size: 2.2rem; margin-bottom: 2rem; color: #2e8699; }
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 2rem; }
+    .step-card { background: #fff; padding: 1.8rem; border-radius: 12px; box-shadow: 0 6px 12px rgba(0,0,0,0.08); transition: transform 0.3s, box-shadow 0.3s; }
+    .step-card:hover { transform: translateY(-6px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    .step-number { width: 3rem; height: 3rem; background: #067880; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1rem; margin-bottom: 1rem; }
+    .step-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.6rem; color: #063651; }
+    .step-desc { font-size: 1rem; color: #555; line-height: 1.5; }
+
+    /* Footer */
+    footer { background: #063651; color: #fff; padding: 2rem 1rem; margin-top: 4rem; }
+    .footer-container { max-width: 1000px; margin: auto; display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; }
+    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+    .footer-links a { color: #fff; font-size: 0.95rem; transition: color 0.3s; }
+    .footer-links a:hover { color: #69e0ce; }
+    .social-icons { display: flex; gap: 1rem; justify-content: center; }
+    .social-icons a { color: #fff; font-size: 1.5rem; transition: color 0.3s; }
+    .social-icons a.facebook:hover { color: #1877F2; }   /* Facebook Blue */
+    .social-icons a.twitter:hover { color: #1DA1F2; }   /* Twitter Blue */
+    .social-icons a.instagram:hover { color: #E4405F; } /* Instagram Pink */
+    .footer-contact { font-size: 0.95rem; }
+
+    @media (min-width: 768px) {
+      #hero h1 { font-size: 4rem; }
+      #hero p { font-size: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-container">
+      <div class="nav-logo">
+        <a href="index.html" class="nav-logo">
+      <img src="logo.jpg" alt="UniQuest Logo">
+      UniQuest
+    </a>
+      </div>
+      <div class="nav-links">
+        <a href="#hero">Home</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#resources">Resources</a>
+      </div>
+      <div class="nav-cta">
+        <a href="#trial">Free Trial</a>
+      </div>
+    </div>
+  </nav>
+
+  <section id="hero">
+    <img src="coverimage.png" alt="Educational Illustration" class="hero-illustration">
+    <div class="content">
+      <h1>Appliation Roadmap</h1>
+      <p>From choosing programs to landing your visa—follow our guided roadmap every step of the way.</p>
+      <a href="#roadmap" class="btn-primary">Get Started</a>
+    </div>
+  </section>
+
+  <section id="roadmap">
+    <h2>Application Roadmap</h2>
+    <div class="steps-grid" id="steps-list"></div>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-links">
+        <a href="#hero">Home</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#resources">Resources</a>
+      </div>
+      <div class="social-icons">
+        <a href="https://facebook.com" target="_blank" class="facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com" target="_blank" class="twitter"><i class="fab fa-twitter"></i></a>
+        <a href="https://instagram.com" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
+      </div>
+      <div class="footer-contact">
+        📧 Email: <a href="mailto:contact@uniquest.ge" style="color:#69e0ce;">contact@uniquest.ge</a>
+      </div>
+      <p>&copy; 2025 UniQuest. All rights reserved.</p>
+    </div>
+  </footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const steps = [
+      { title: 'Research Universities', description: 'Identify target universities and programs abroad.', link: 'research-universities.html' },
+      { title: 'Prepare for Tests', description: 'Register and prepare for TOEFL, IELTS, GRE/GMAT.', link: 'prepare-tests.html' },
+      { title: 'Deadlines & Tracking', description: 'Register and prepare for TOEFL, IELTS, GRE/GMAT.', link: 'deadlines-tracking.html' },
+      { title: 'Requirements & Documents', description: 'Collect transcripts, recommendation letters, CV/Resume.', link: 'requirements-documents.html' },
+      { title: 'Write Essays', description: 'Draft personal statements and motivation letters.', link: 'write-essays.html' },
+      { title: 'Scholarships', description: 'Collect transcripts, recommendation letters, CV/Resume.', link: 'scholarships.html' },
+      { title: 'Submit Applications', description: 'Fill out online forms and submit before deadlines.', link: 'submit-applications.html' },
+      { title: 'Recieve & Evaluate Offers', description: 'Fill out online forms and submit before deadlines.', link: 'uni-offers.html' },
+      { title: 'Apply for Visa', description: 'Prepare visa documents and attend consular interview.', link: 'apply-visa.html' },
+      { title: 'Prepare for Departure', description: 'Arrange accommodation, flights, and orientation.', link: 'pre-departure.html' }
+    ];
+
+    const container = document.getElementById('steps-list');
+    steps.forEach((step, i) => {
+      const card = document.createElement('a');   // use <a> as wrapper
+      card.href = step.link;
+      card.className = 'step-card';
+      card.style.display = "block";               // ensure full card is clickable
+      card.innerHTML = `
+        <div class="step-number">${i+1}</div>
+        <div class="step-title">${step.title}</div>
+        <div class="step-desc">${step.description}</div>
+      `;
+      container.appendChild(card);
+    });
+  });
+</script>
+
+
+
+</body>
+</html>
