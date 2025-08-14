@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="images/logo.png" type="image/png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQs - UniQuest</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css"> <!-- optional external CSS -->
+  <style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: Arial, sans-serif;
+    }
+    th, td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        vertical-align: top;
+        text-align: left;
+    }
+    th {
+        background-color: #002060;
+        color: white;
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    /* FAQ styles */
+    #faq {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+    #faq h2 {
+      color: #002060;
+      margin-bottom: 12px;
+      text-align: left;
+    }
+    details {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    details[open] { border-color: #69e0ce; }
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      list-style: none;
+      outline: none;
+    }
+    summary::-webkit-details-marker { display: none; }
+    .faq-answer { margin-top: 8px; color: #333; line-height: 1.5; }
+    /* Small responsive tweaks */
+    @media (max-width: 600px) {
+      #faq { padding: 12px; }
+      details { padding: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Same Navbar as index.html -->
+  <nav>
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.jpg" alt="UniQuest Logo">
+      UniQuest
+    </a>
+    <div class="nav-links">
+      <a href="index.html#hero">Home</a>
+      <a href="index.html#roadmap">Roadmap</a>
+      <a href="index.html#resources">Resources</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-cta">
+      <a href="index.html#trial">Free Trial</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Main content placeholder (existing page content like requirements table could go here) -->
+
+<section id="faq" aria-labelledby="faq-heading">
+  <h2 id="faq-heading">Student FAQs</h2>
+
+  <details>
+    <summary>What is the roadmap and how does it help me?</summary>
+    <div class="faq-answer">The roadmap is a personalized checklist of everything you need to apply—tests, transcripts, essays, recommenders, visa steps, and deadlines. It adapts to your chosen country, degree level, and target program dates, and sends reminders so you don’t miss key dates.</div>
+  </details>
+
+  <details>
+    <summary>When should I start the application process?</summary>
+    <div class="faq-answer">Start early: Undergraduate (USA/Common App) — 12–18 months before enrollment; Master’s — 9–12 months; PhD — 12–24 months (contact supervisors early). Begin visa work 2–3 months before program start; some countries require earlier steps (e.g., blocked accounts, apostilles).</div>
+  </details>
+
+  <details>
+    <summary>Which tests do I need and when should I take them?</summary>
+    <div class="faq-answer">Common tests: TOEFL/IELTS (language), SAT/ACT (US undergrad), GRE/GMAT (graduate). Check each program’s requirements, schedule tests at least 2–3 months before the earliest application deadline, and allow time for retakes.</div>
+  </details>
+
+  <details>
+    <summary>How do I request transcripts and translations?</summary>
+    <div class="faq-answer">Request official transcripts from your university early (allow 4–8 weeks). If translations or apostilles are required, start those steps immediately—they can add several weeks. Ask your university for certified copies or electronic delivery when possible.</div>
+  </details>
+
+  <details>
+    <summary>How many recommendation letters do I need and how do I manage them?</summary>
+    <div class="faq-answer">Most programs ask for 2–3 letters. Ask recommenders 6–8 weeks before deadlines, provide clear instructions and templates, and use the platform’s recommender upload link so they can submit directly. Track status (invited/submitted/overdue) through your dashboard.</div>
+  </details>
+
+  <details>
+    <summary>How should I prepare my Statement of Purpose / personal statement?</summary>
+    <div class="faq-answer">Show fit (why this program), evidence of relevant experience, research interests (if applicable), and career goals. Tailor each statement to the program, respect word limits, get mentor feedback, and proofread multiple times.</div>
+  </details>
+
+  <details>
+    <summary>What funding and scholarship steps should I take?</summary>
+    <div class="faq-answer">Search for university scholarships and external grants early—many scholarship deadlines are earlier than admissions deadlines. Prepare financial documents (bank statements, sponsor letters) and scholarship essays in parallel with applications.</div>
+  </details>
+
+  <details>
+    <summary>What do I need for the visa application?</summary>
+    <div class="faq-answer">Typical visa requirements: acceptance letter, proof of funds, passport, health insurance, visa application form, and country-specific documents (e.g., blocked account for Germany). Start visa steps 2–3 months before program start, and consult the embassy website for exact checklists.</div>
+  </details>
+
+  <details>
+    <summary>How should I format and name my documents?</summary>
+    <div class="faq-answer">Convert documents to PDF, name files like <code>Lastname_Firstname_Type.pdf</code> (e.g., Ivanov_Anna_Transcript.pdf), and keep each file under portal limits (commonly ≤10 MB). Keep versioned filenames for drafts (SOP_v1 → SOP_final).</div>
+  </details>
+
+  <details>
+    <summary>What if I miss a deadline or my visa is delayed/denied?</summary>
+    <div class="faq-answer">If you miss a deadline: check rolling rounds, alternate intakes, or contact the program about extensions. If a visa is delayed/denied: review the reasons, contact the university about deferral, and consult a visa advisor. Your roadmap will surface contingency options when available.</div>
+  </details>
+
+  <details>
+    <summary>Can recommenders upload letters for me?</summary>
+    <div class="faq-answer">Yes — the platform provides a secure upload link for recommenders so they can submit letters directly. You’ll receive notifications when letters are uploaded.</div>
+  </details>
+
+  <details>
+    <summary>What should I do after I accept an offer?</summary>
+    <div class="faq-answer">Pay any required deposit, start the visa application, arrange housing and insurance, book flights aligned with orientation, and complete any pre-arrival enrolment steps. Register with local authorities and activate student services after arrival.</div>
+  </details>
+
+</section>
+
+<footer>
+  <div class="footer-container">
+    <div class="social-icons">
+      <a href="https://facebook.com" target="_blank" class="facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://twitter.com" target="_blank" class="twitter"><i class="fab fa-twitter"></i></a>
+      <a href="https://instagram.com" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
+    </div>
+    <div class="footer-contact">
+      📧 Email: <a href="mailto:contact@uniquest.ge" style="color:#69e0ce;">contact@uniquest.ge</a>
+    </div>
+    <p>&copy; 2025 UniQuest. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
