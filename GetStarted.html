@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Get Started - UniQuest</title>
+  <link rel="icon" href="images/logo.png" type="image/png">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html,body { height: 100%; }
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: #063651;
+      background: #f0f3f5;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* Nav */
+    nav { background: #fff; padding: 1rem 1.5rem; box-shadow: 0 2px 6px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 20; }
+    .nav-container { max-width: 1200px; margin: 0 auto; display:flex; align-items:center; justify-content:space-between; gap: 1rem; }
+    .nav-logo { display:flex; align-items:center; gap:.5rem; font-weight:700; color:#063651; }
+    .nav-logo img { height:36px; width:auto; object-fit:contain; }
+    .nav-links { display:flex; gap:1rem; align-items:center; }
+    .nav-links a { color:#555; font-size:0.95rem; transition: color .15s; }
+    .nav-links a:hover { color:#067880; }
+    .nav-cta a { padding:.45rem 1rem; border-radius:20px; border:1px solid #067880; color:#067880; font-weight:600; transition:background .15s, color .15s; }
+    .nav-cta a:hover { background:#067880; color:#fff; }
+
+    /* Hero (small, consistent) */
+    .page-hero {
+      position: relative;
+      padding: 3.5rem 1rem;
+      text-align: center;
+      background: url("coverimage.png") center/cover no-repeat;
+      color: #fff;
+    }
+    .page-hero::after {
+      content:"";
+      position:absolute; inset:0; background: rgba(6,54,81,0.45); z-index:0;
+    }
+    .page-hero .hero-inner { position:relative; z-index:2; max-width:900px; margin:0 auto; }
+    .page-hero h1 { font-size:1.9rem; margin-bottom:.5rem; line-height:1.1; }
+    .page-hero p { margin-bottom: .75rem; color: #e9f8f4; }
+
+    /* Center card for choices */
+    .choice-wrap { max-width:900px; margin: 3rem auto; padding: 1rem; display:flex; align-items:center; justify-content:center; }
+    .choice-card {
+      width:100%;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      padding: 2rem;
+      display:flex;
+      gap:1.25rem;
+      align-items:center;
+      justify-content:center;
+      flex-direction: column;
+      text-align:center;
+    }
+    .choice-card h2 { color: #063651; margin-bottom: .5rem; font-size:1.25rem; }
+    .choice-card p { color: #556; margin-bottom: 1.25rem; max-width: 70ch; }
+
+    /* Buttons row */
+    .btn-row { display:flex; gap:1rem; width:100%; justify-content:center; }
+    .btn {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.6rem;
+      border-radius: 10px;
+      padding:.9rem 1.25rem;
+      font-weight:700;
+      font-size:1rem;
+      cursor:pointer;
+      border:none;
+      min-width:180px;
+    }
+    .btn-primary {
+      background: #69e0ce;
+      color: #063651;
+      border: 2px solid #69e0ce;
+    }
+    .btn-primary:hover { background:#62a6b1; color:#063651; }
+
+    .btn-secondary {
+      background: transparent;
+      color: #063651;
+      border: 2px solid rgba(6,54,81,0.08);
+    }
+    .btn-secondary:hover {
+      background: rgba(6,54,81,0.06);
+    }
+
+    /* small helper text */
+    .muted { color:#6b7a80; font-size:.95rem; margin-top:.85rem; }
+
+    /* Footer */
+    footer { background:#063651; color:#fff; padding:2rem 1rem; margin-top:3rem; }
+    .footer-container { max-width:1000px; margin:0 auto; display:flex; flex-direction:column; align-items:center; gap:.75rem; text-align:center; }
+    .social-icons { display:flex; gap:1rem; }
+    .social-icons a { color:#fff; font-size:1.25rem; }
+    .footer-contact a { color:#69e0ce; }
+
+    /* Responsive */
+    @media (min-width: 720px) {
+      .choice-card { flex-direction: row; padding: 2.4rem; text-align:left; }
+      .choice-card .text-col { flex: 1 1 50%; padding-right: 1rem; }
+      .choice-card .action-col { flex: 0 0 360px; display:flex; flex-direction:column; gap:.8rem; align-items:center; }
+      .btn-row { justify-content:flex-end; width:100%; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="UniQuest Logo"> UniQuest</a>
+      <div class="nav-links">
+        <a href="about.html">About UniQuest</a>
+        <a href="Roadmap.html">Roadmap</a>
+        <a href="resources.html">Resources</a>
+      </div>
+      <div class="nav-cta">
+        <a href="https://calendar.app.google/kasWzfhfsxm76CRo8" target="_blank">Book Consultation</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="page-hero" aria-hidden="false">
+    <div class="hero-inner">
+      <h1>Welcome — Let's get you started</h1>
+      <p>Choose one of the two quick options below to either speak with an advisor or continue with the self-guided roadmap.</p>
+    </div>
+  </section>
+
+  <main class="choice-wrap">
+    <article class="choice-card" role="region" aria-label="Get started choices">
+      <div class="text-col">
+        <h2>Book a free consultation or continue with the roadmap</h2>
+        <p>Not sure where to begin? Book a free 20-minute consultation with our advisors. Prefer DIY? Continue directly to the roadmap and follow step-by-step instructions to prepare your application.</p>
+        <div class="muted">You can change your choice anytime — both routes will help you stay on track.</div>
+      </div>
+
+      <div class="action-col">
+        <div class="btn-row" style="width:100%;">
+          <!-- Book consultation opens calendar in a new tab -->
+          <a class="btn btn-primary" href="https://calendar.app.google/BmUNypCZjLcHDvY5A" target="_blank" rel="noopener noreferrer">
+            <i class="fa-solid fa-calendar-check"></i> Book free consultation
+          </a>
+
+          <!-- Continue with roadmap goes to the roadmap page -->
+          <a class="btn btn-secondary" href="Roadmap.html">
+            <i class="fa-solid fa-road"></i> Continue with roadmap
+          </a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="social-icons" aria-hidden="false">
+        <a href="https://facebook.com" target="_blank" class="facebook" aria-label="UniQuest on Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com" target="_blank" class="twitter" aria-label="UniQuest on Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="https://instagram.com" target="_blank" class="instagram" aria-label="UniQuest on Instagram"><i class="fab fa-instagram"></i></a>
+      </div>
+      <div class="footer-contact">📧 Email: <a href="mailto:contact@uniquest.ge">contact@uniquest.ge</a></div>
+      <p>&copy; 2025 UniQuest. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
