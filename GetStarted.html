@@ -18,16 +18,16 @@
     }
     a { text-decoration: none; color: inherit; }
 
-    /* Navigation */
-    nav { background: #fff; padding: 1rem 2rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 10; }
-    .nav-container { max-width: 1200px; margin: auto; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.5rem; font-weight: bold; color: #063651; }
-    .nav-logo img { height: 40px; width: auto; object-fit: contain; }
-    .nav-links { display: flex; gap: 1.5rem; }
-    .nav-links a { font-size: 0.95rem; color: #555; transition: color 0.2s; }
-    .nav-links a:hover { color: #067880; }
-    .nav-cta a { padding: 0.5rem 1.2rem; border-radius: 20px; border: 1px solid #067880; color: #067880; font-weight: 500; transition: background 0.2s, color 0.2s; }
-    .nav-cta a:hover { background: #067880; color: #fff; }
+    /* Nav */
+    nav { background: #fff; padding: 1rem 1.5rem; box-shadow: 0 2px 6px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 20; }
+    .nav-container { max-width: 1200px; margin: 0 auto; display:flex; align-items:center; justify-content:space-between; gap: 1rem; }
+    .nav-logo { display:flex; align-items:center; gap:.5rem; font-weight:700; color:#063651; }
+    .nav-logo img { height:36px; width:auto; object-fit:contain; }
+    .nav-links { display:flex; gap:1rem; align-items:center; }
+    .nav-links a { color:#555; font-size:0.95rem; transition: color .15s; }
+    .nav-links a:hover { color:#067880; }
+    .nav-cta a { padding:.45rem 1rem; border-radius:20px; border:1px solid #067880; color:#067880; font-weight:600; transition:background .15s, color .15s; }
+    .nav-cta a:hover { background:#067880; color:#fff; }
 
     /* Hero (small, consistent) */
     .page-hero {
@@ -114,20 +114,8 @@
   </style>
 </head>
 <body>
-  <nav>
-    <div class="nav-container">
-      <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="UniQuest Logo"> UniQuest</a>
-      <div class="nav-links">
-        <a href="about.html">About UniQuest</a>
-        <a href="Roadmap.html">Roadmap</a>
-        <a href="resources.html">Resources</a>
-      </div>
-      <div class="nav-cta">
-        <a href="https://calendar.app.google/kasWzfhfsxm76CRo8" target="_blank">Book Consultation</a>
-      </div>
-    </div>
-  </nav>
-
+  <div id="header"></div>
+    <script src="header.js"></script>
   <section class="page-hero" aria-hidden="false">
     <div class="hero-inner">
       <h1>Welcome — Let's get you started</h1>
@@ -159,16 +147,8 @@
     </article>
   </main>
 
-  <footer>
-    <div class="footer-container">
-      <div class="social-icons" aria-hidden="false">
-        <a href="https://facebook.com" target="_blank" class="facebook" aria-label="UniQuest on Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://twitter.com" target="_blank" class="twitter" aria-label="UniQuest on Twitter"><i class="fab fa-twitter"></i></a>
-        <a href="https://instagram.com" target="_blank" class="instagram" aria-label="UniQuest on Instagram"><i class="fab fa-instagram"></i></a>
-      </div>
-      <div class="footer-contact">📧 Email: <a href="mailto:contact@uniquest.ge">contact@uniquest.ge</a></div>
-      <p>&copy; 2025 UniQuest. All rights reserved.</p>
-    </div>
-  </footer>
+<div id="footer"></div>
+
+ <script src="footer.js"></script>
 </body>
 </html>
