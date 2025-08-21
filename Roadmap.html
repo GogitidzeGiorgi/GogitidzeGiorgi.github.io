@@ -1,231 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" href="images/logo.png" type="image/png">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UniQuest Roadmap</title>
-  <!-- Font Awesome for social media icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <style>
-    /* palette: #62a6b1, #067880, #2e8699, #063651, #69e0ce */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #063651; background: #f0f3f5; line-height:1.45; }
-    a { text-decoration: none; color: inherit; }
+    <link rel="icon" href="images/logo.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - UniQuest</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* palette: #62a6b1, #067880, #2e8699, #063651, #69e0ce */
+        /* Reset & Base */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #063651; background: #f0f3f5; line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
 
-    /* Navigation */
-    nav { background: #fff; padding: 1rem 2rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 10; }
-    .nav-container { max-width: 1200px; margin: auto; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.25rem; font-weight: 700; color: #063651; }
-    .nav-logo img { height: 40px; width: auto; object-fit: contain; }
-    .nav-links { display: flex; gap: 1.25rem; }
-    .nav-links a { font-size: 0.95rem; color: #555; transition: color 0.2s; }
-    .nav-links a:hover { color: #067880; }
-    .nav-cta a { padding: 0.45rem 1rem; border-radius: 20px; border: 1px solid #067880; color: #067880; font-weight: 600; transition: background 0.2s, color 0.2s; }
-    .nav-cta a:hover { background: #067880; color: #fff; }
+        /* Reusing Navigation and Footer styles from your existing pages */
+        nav { background: #fff; padding: 1rem 2rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 10; }
+        .nav-container { max-width: 1200px; margin: auto; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.5rem; font-weight: bold; color: #063651; }
+        .nav-logo img { height: 40px; width: auto; object-fit: contain; }
+        .nav-links { display: flex; gap: 1.5rem; }
+        .nav-links a { font-size: 0.95rem; color: #555; transition: color 0.2s; }
+        .nav-links a:hover { color: #067880; }
+        .nav-cta a { padding: 0.5rem 1.2rem; border-radius: 20px; border: 1px solid #067880; color: #067880; font-weight: 500; transition: background 0.2s, color 0.2s; }
+        .nav-cta a:hover { background: #067880; color: #fff; }
 
-    /* Hero Section */
-    #hero { position: relative; overflow: hidden; height: 210px; text-align: center; }
-    .hero-illustration { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: auto; min-height: 100%; object-fit: cover; z-index: 1; }
-    #hero::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(6,54,81,0.4); z-index: 2; }
-    #hero .content { position: relative; max-width: 900px; margin: auto; top: 50%; transform: translateY(-50%); z-index: 3; color: #fff; }
-    #hero h1 { font-size: 2.6rem; margin-bottom: 0.6rem; line-height: 1.12; }
-    #hero p { font-size: 1.05rem; margin-bottom: 1.5rem; }
-    #hero .btn-primary { background: #69e0ce; color: #063651; padding: 0.75rem 1.8rem; border-radius: 30px; font-size: 1rem; font-weight: 600; transition: background 0.2s; }
-    #hero .btn-primary:hover { background: #62a6b1; }
+        /* Hero Section for About Page */
+        #hero { position: relative; overflow: hidden; height: 300px; text-align: center; background: #063651; }
+        .hero-illustration { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: auto; min-height: 100%; object-fit: cover; z-index: 1; opacity: 0.15; }
+        #hero::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(0deg, rgba(6,54,81,0.5) 0%, rgba(6,54,81,0.2) 100%); z-index: 2; }
+        #hero .content { position: relative; max-width: 800px; margin: auto; top: 50%; transform: translateY(-50%); z-index: 3; color: #fff; }
+        #hero h1 { font-size: 2.8rem; margin-bottom: 1rem; line-height: 1.2; }
+        #hero p { font-size: 1.1rem; max-width: 600px; margin: 0 auto; color: rgba(255,255,255,0.9); }
 
-    /* Roadmap wrapper */
-    #roadmap { max-width: 1000px; margin: 2.25rem auto 4rem; padding: 0 1rem; }
+        /* Main About Content Section */
+        .about-container {
+            max-width: 900px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
 
-    /* Compact progress info (replaces the bar) */
-    .progress-wrap { background: #fff; padding: 0.8rem 1rem; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); margin-bottom: 1rem; display:flex; gap:1rem; align-items:center; justify-content:space-between; flex-wrap:wrap; }
-    .progress-left { display:flex; gap:1rem; align-items:center; }
-    .progress-label { font-weight:700; color:#063651; }
-    .progress-info { color:#2e8699; font-weight:700; }
+        .about-section {
+            margin-bottom: 3rem;
+        }
+        .about-section:last-child {
+            margin-bottom: 0;
+        }
 
-    .progress-actions { display:flex; gap:.6rem; align-items:center; }
+        .about-section h2 {
+            font-size: 2rem;
+            color: #2e8699;
+            margin-bottom: 1rem;
+            text-align: center;
+            border-bottom: 2px solid #69e0ce;
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
 
-    .small-btn { background:transparent; border:1px solid rgba(6,54,81,0.08); padding:.5rem .6rem; border-radius:8px; cursor:pointer; font-weight:600; color:#063651; }
-    .small-btn.ghost { background:transparent; }
-    .small-btn.warn { color:#d9534f; border-color: rgba(217,83,79,0.12); }
+        .about-section p {
+            font-size: 1.05rem;
+            color: #555;
+            margin-bottom: 1rem;
+        }
 
-    /* Steps grid */
-    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 1rem; margin-top:1rem; }
-    .step-card { position:relative; background: #fff; padding: 1.2rem; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); transition: transform .18s, box-shadow .18s; display:block; color:inherit; }
-    .step-card:hover { transform: translateY(-6px); box-shadow: 0 14px 26px rgba(0,0,0,0.09); }
-    .step-number { width: 42px; height: 42px; background: #067880; color: #fff; border-radius: 50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1.05rem; margin-bottom:8px; flex-shrink:0; }
-    .step-title { font-size: 1.05rem; font-weight:700; margin-bottom:.5rem; color:#063651; }
-    .step-desc { font-size: .95rem; color: #555; }
+        /* Features Section Styling */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .feature-card {
+            text-align: center;
+            padding: 1.5rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.07);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #067880;
+            margin-bottom: 1rem;
+        }
+        .feature-card h3 {
+            font-size: 1.2rem;
+            color: #063651;
+            margin-bottom: 0.5rem;
+        }
 
-    .step-meta { display:flex; justify-content:space-between; gap: 0.5rem; align-items:flex-start; }
-    .step-left { display:flex; gap: .75rem; align-items:flex-start; }
-
-    /* completed look */
-    .step-card.completed .step-number { background: linear-gradient(90deg,#62a6b1 0%, #69e0ce 100%); color:#063651; box-shadow: 0 4px 12px rgba(98,166,177,0.12); }
-    .step-card.completed .step-title { text-decoration: line-through; color: #2e8699; }
-    .step-card .complete-toggle { position:absolute; top:10px; right:10px; background:transparent; border:0; cursor:pointer; padding:.35rem; border-radius:8px; }
-    .complete-toggle .fa-check-circle { color: rgba(0,0,0,0.12); font-size:1.1rem; transition: color .15s, transform .15s; }
-    .step-card.completed .complete-toggle .fa-check-circle { color:#063651; transform:scale(1.06); }
-
-    .step-link { display:block; width:100%; height:100%; padding:0; color:inherit; }
-
-    /* Footer */
-    footer { background: #063651; color: #fff; padding: 2rem 1rem; margin-top: 0; }
-    .footer-container { max-width: 1000px; margin: auto; display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; }
-    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
-    .footer-links a { color: #fff; font-size: 0.95rem; transition: color 0.3s; }
-    .footer-links a:hover { color: #69e0ce; }
-    .social-icons { display: flex; gap: 1rem; justify-content: center; }
-    .social-icons a { color: #fff; font-size: 1.5rem; transition: color 0.3s; }
-    .social-icons a.facebook:hover { color: #1877F2; }   /* Facebook Blue */
-    .social-icons a.twitter:hover { color: #1DA1F2; }   /* Twitter Blue */
-    .social-icons a.instagram:hover { color: #E4405F; } /* Instagram Pink */
-    .footer-contact { font-size: 0.95rem; }
-    .footer-contact,
-footer p {
-  text-align: center;
-  width: 100%;
-}
-  </style>
+        /* Footer */
+        footer { background: #063651; color: #fff; padding: 2rem 1rem; margin-top: 0; }
+        .footer-container { max-width: 1000px; margin: auto; display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; }
+        .social-icons { display: flex; gap: 1rem; justify-content: center; }
+        .social-icons a { color: #fff; font-size: 1.5rem; transition: color 0.3s; }
+        .social-icons a.facebook:hover { color: #1877F2; }
+        .social-icons a.twitter:hover { color: #1DA1F2; }
+        .social-icons a.instagram:hover { color: #E4405F; }
+        .footer-contact { font-size: 0.95rem; }
+        .footer-contact, footer p { text-align: center; width: 100%; }
+        
+        @media (max-width: 768px) {
+            #hero h1 { font-size: 2.2rem; }
+            .about-container { padding: 1.5rem; margin: 2rem auto; }
+        }
+    </style>
 </head>
 <body>
-  <!-- Header placeholder -->
-  <div id="header"></div>
-  <!-- Load nav -->
-  <script src="header.js"></script>
-</body>
-  <section id="hero">
-    <img src="coverimage.png" alt="Educational Illustration" class="hero-illustration">
-    <div class="content">
-      <h1>Application Roadmap</h1>
-      <p>From choosing programs to landing your visa—follow our guided roadmap every step of the way.</p>
-    </div>
-  </section>
 
-  <section id="roadmap">
-    <h2 style="text-align:center; color:#2e8699; margin-bottom:.75rem;">Application Roadmap</h2>
+    <!-- Assume your header is loaded via JS -->
+    <div id="header"></div>
+    <script src="header.js"></script>
 
-
-    <!-- steps -->
-    <div class="steps-grid" id="steps-list" aria-live="polite"></div>
-  </section>
-  
- <!-- Compact progress info -->
-    <div class="progress-wrap" role="region" aria-label="Roadmap controls">
-      <div class="progress-left">
-        <div class="progress-label">Your roadmap</div>
-        <div class="progress-info" id="progress-info">Completed 0 / 10</div>
-      </div>
-
-      <div style="display:flex; gap:1rem; align-items:center;">
-        <div class="progress-actions">
-          <button class="small-btn" id="mark-all">Mark all complete</button>
-          <button class="small-btn warn" id="reset">Reset</button>
+    <!-- Hero Section -->
+    <section id="hero">
+        <img src="coverimage.png" alt="Illustration of students and books" class="hero-illustration">
+        <div class="content">
+            <h1>Paving Your Path to International Education</h1>
+            <p>Learn more about our mission and how we help students achieve their dreams.</p>
         </div>
-      </div>
-    </div>
- <div id="footer"></div>
-  <script src="footer.js"></script>
+    </section>
 
-<script>
-  (function(){
-    const STORAGE_KEY = 'uniquest_roadmap_progress_v1';
+    <!-- Main Content -->
+    <main>
+        <div class="about-container">
+            <!-- Our Story Section -->
+            <section class="about-section">
+                <div class="section-header">
+                    <h2>Our Story</h2>
+                </div>
+                <p>
+                    The idea for UniQuest was born from a dream that didn't come true. We were a group of students who dreamed of studying abroad, filled with excitement for new cultures and world-class education. But as we dove into the application process, that excitement turned into frustration.
 
-    const steps = [
-      { title: 'Research Universities', description: 'Identify target universities and programs abroad.', link: 'research-universities.html' },
-      { title: 'Prepare for Tests', description: 'Register and prepare for TOEFL, IELTS, GRE/GMAT.', link: 'prepare-tests.html' },
-      { title: 'Deadlines & Tracking', description: 'Centralise deadlines and track submissions.', link: 'deadlines-tracking.html' },
-      { title: 'Requirements & Documents', description: 'Collect transcripts, recommendation letters, CV/Resume.', link: 'requirements-documents.html' },
-      { title: 'Write Essays', description: 'Draft personal statements and motivation letters.', link: 'write-essays.html' },
-      { title: 'Scholarships', description: 'Search and apply for funding opportunities.', link: 'scholarships.html' },
-      { title: 'Submit Applications', description: 'Fill out online forms and submit before deadlines.', link: 'submit-applications.html' },
-      { title: 'Receive & Evaluate Offers', description: 'Compare offers and choose the best fit.', link: 'uni-offers.html' },
-      { title: 'Apply for Visa', description: 'Prepare visa documents and attend consular interview.', link: 'apply-visa.html' },
-      { title: 'Prepare for Departure', description: 'Arrange accommodation, flights, and orientation.', link: 'pre-departure.html' }
-    ];
+We faced a confusing maze of deadlines, conflicting information, and endless paperwork. It felt overwhelming and impossible to navigate alone. We eventually had to give up on our dream, not because we weren't capable, but because the process itself was a barrier. This experience sparked a new mission: to build the platform we wish we'd had. We created UniQuest to ensure no other student has to abandon their dream because of a complicated and confusing application process.
+                </p>
+                <p>
+                    This experience inspired us to create a unified platform to simplify this chaotic process. Our goal is to provide every student with a clear, step-by-step roadmap and all the necessary resources to make the application period focused and organized, not stressful.
+                </p>
+            </section>
 
-    // load state or set defaults
-    let state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-    state.completed = state.completed || {}; // e.g. {0:true,2:true}
+            <!-- Our Mission Section -->
+            <section class="about-section">
+                <div class="section-header">
+                    <h2>Our Mission</h2>
+                </div>
+                <p>
+                    Our mission is to make international education accessible to everyone. We want every student to have access to reliable information and the tools they need to get into their dream university. We believe that with the right planning and resources, any goal is achievable.
+                </p>
+            </section>
 
-    const container = document.getElementById('steps-list');
-    const progressInfoEl = document.getElementById('progress-info');
+            <!-- Why Choose Us Section -->
+            <section class="about-section">
+                <div class="section-header">
+                    <h2>Why UniQuest?</h2>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-map-signs"></i></div>
+                        <h3>Comprehensive Roadmap</h3>
+                        <p>Our roadmap covers every stage of the application process—from university selection to securing your visa.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-book-open"></i></div>
+                        <h3>All-in-One Resources</h3>
+                        <p>Get access to prep materials for TOEFL, IELTS, GRE/GMAT, and other essential application resources.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                        <h3>Simplicity & Organization</h3>
+                        <p>Forget the chaos. Our platform helps you stay organized and never miss an important detail.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
 
-    function render() {
-      container.innerHTML = '';
-      steps.forEach((s, idx) => {
-        const card = document.createElement('article');
-        card.className = 'step-card' + (state.completed[idx] ? ' completed' : '');
-        card.setAttribute('data-idx', idx);
-
-        // checkbox toggle top-right
-        const toggle = document.createElement('button');
-        toggle.className = 'complete-toggle';
-        toggle.setAttribute('aria-label', state.completed[idx] ? 'Mark step incomplete' : 'Mark step complete');
-        toggle.innerHTML = `<i class="fa-solid fa-check-circle" aria-hidden="true"></i>`;
-        toggle.addEventListener('click', (e) => {
-          e.stopPropagation();
-          state.completed[idx] = !state.completed[idx];
-          saveState();
-          render(); // re-render to update visuals
-        });
-        card.appendChild(toggle);
-
-        // left part: number & title/desc; wrap title/desc in link so user can open page
-        const link = document.createElement('a');
-        link.className = 'step-link';
-        link.href = s.link;
-        link.innerHTML = `
-          <div class="step-meta">
-            <div class="step-left">
-              <div class="step-number">${idx+1}</div>
-              <div>
-                <div class="step-title">${s.title}</div>
-                <div class="step-desc">${s.description}</div>
-              </div>
-            </div>
-          </div>
-        `;
-        card.appendChild(link);
-
-        // allow clicking the card (not the toggle) to open the link in same tab
-        card.addEventListener('click', (e) => {
-          if (e.target.closest('.complete-toggle')) return;
-          window.location.href = s.link;
-        });
-
-        container.appendChild(card);
-      });
-
-      updateProgressInfo();
-    }
-
-    function updateProgressInfo() {
-      const total = steps.length;
-      const completedCount = Object.keys(state.completed).filter(k => state.completed[k]).length;
-      progressInfoEl.textContent = `Completed ${completedCount} / ${total}`;
-    }
-
-    function saveState(){
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    }
-
-    // actions
-    document.getElementById('mark-all').addEventListener('click', () => {
-      steps.forEach((_,i)=> state.completed[i] = true);
-      saveState();
-      render();
-    });
-    document.getElementById('reset').addEventListener('click', () => {
-      state.completed = {};
-      saveState();
-      render();
-    });
-
-    // initial render
-    render();
-  })();
-</script>
+    <!-- Assume your footer is loaded via JS -->
+    <div id="footer"></div>
+    <script src="footer.js"></script>
 
 </body>
 </html>
