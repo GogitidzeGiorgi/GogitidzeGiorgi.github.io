@@ -1,4 +1,10 @@
- /* Reset & Base */
+/* Font for Logo */
+.UniquestFont {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600; /* pick weight between 100–900 */
+  font-style: normal;
+}
+/* Reset & Base */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #063651; background: #f0f3f5; }
     a { text-decoration: none; color: inherit; }
