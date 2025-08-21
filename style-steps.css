@@ -1,0 +1,132 @@
+
+/* Font for Logo */
+.UniquestFont {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* Reset & Base */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #063651;
+  background: #f0f3f5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+a { text-decoration: none; color: inherit; }
+
+/* Navigation */
+nav {
+  background: #fff;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* stay on top */
+}
+.nav-container { max-width: 1200px; margin: auto; display: flex; align-items: center; justify-content: space-between; }
+.nav-logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.5rem; font-weight: bold; color: #063651; }
+.nav-logo img { height: 40px; width: auto; object-fit: contain; }
+.nav-links { display: flex; gap: 1.5rem; }
+.nav-links a { font-size: 0.95rem; color: #555; transition: color 0.2s; }
+.nav-links a:hover { color: #067880; }
+.nav-cta a { padding: 0.5rem 1.2rem; border-radius: 20px; border: 1px solid #067880; color: #067880; font-weight: 500; transition: background 0.2s, color 0.2s; }
+.nav-cta a:hover { background: #067880; color: #fff; }
+
+/* HERO */
+/* #hero: inline height/background are fine — keep min-height here */
+#hero {
+  position: relative;    /* establishes stacking context */
+  overflow: hidden;
+  min-height: 300px;     /* page inline style may override */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+}
+
+/* full-hero overlay (covers background image, sits under .content) */
+#hero::after {
+  content: "";
+  position: absolute;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  background: rgba(6,54,81,0.45); 
+  z-index: 1;                      
+  pointer-events: none;             
+}
+
+/* content inside hero; sits above the overlay */
+#hero .content {
+  position: relative;
+  z-index: 2;                     
+  max-width: 800px;
+  padding: 2rem;
+  border-radius: 10px;
+  background: rgba(6,54,81,0.55);  
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  color: #fff;
+}
+
+/* heading & paragraph */
+#hero .content h1 {
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.1;
+}
+#hero .content p {
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+/* responsive hero sizing */
+@media (min-width: 768px) {
+  #hero .content h1 { font-size: 3rem; }
+  #hero .content p  { font-size: 1.15rem; }
+}
+
+/* Page content */
+.page-content, section[style*="max-width:800px"] {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+.page-content h2, section h2 {
+  color: #2e8699;
+  margin-bottom: 1rem;
+}
+.page-content p, section p {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+/* simple list spacing */
+ul { margin: 1rem 0 2rem 1.25rem; }
+li { margin-bottom: 0.6rem; }
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+  color: #063651;
+  background: #063651;
+  color: #fff;
+}
+
+.footer-container { max-width: 1000px; margin: auto; display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; }
+.footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+.footer-links a { color: #fff; font-size: 0.95rem; transition: color 0.3s; }
+.footer-links a:hover { color: #69e0ce; }
+
+.social-icons { display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; }
+.social-icons a { color: #fff; font-size: 1.5rem; transition: color 0.3s; }
+.social-icons a.facebook:hover { color: #1877F2; }
+.social-icons a.twitter:hover  { color: #1DA1F2; }
+.social-icons a.instagram:hover{ color: #E4405F; }
+
+.footer-contact { font-size: 0.95rem; }
+.footer-contact, footer p { text-align: center; width: 100%; }
