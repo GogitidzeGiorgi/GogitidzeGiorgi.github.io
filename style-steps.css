@@ -47,10 +47,11 @@ nav {
   justify-content: center;
   text-align: center;
   color: #fff;
+  background: url('images/test.jpg') center/cover no-repeat;
 }
 
 /* full-hero overlay (covers background image, sits under .content) */
-#hero::after {
+#hero::before {
   content: "";
   position: absolute;
   inset: 0; /* top:0; right:0; bottom:0; left:0; */
@@ -62,7 +63,7 @@ nav {
 /* content inside hero; sits above the overlay */
 #hero .content {
   position: relative;
-  z-index: 2;                     
+  z-index: 3;                     
   max-width: 800px;
   padding: 2rem;
   border-radius: 10px;
