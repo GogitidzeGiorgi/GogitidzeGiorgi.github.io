@@ -60,9 +60,6 @@ s<!DOCTYPE html>
         </tbody>
       </table>
 
-      <h3 style="margin-top:.75rem">PDF source</h3>
-      <p class="note">This page expects the file <code>sat-practice-test-4-digital.pdf</code> to be available next to this HTML file on your server. If you store it elsewhere, edit the <code>PDF_SRC</code> constant in the script.</p>
-
       <div style="margin-top:.8rem; display:flex; gap:.5rem; flex-wrap:wrap;">
         <button id="open-full" class="btn secondary">Open full PDF in new tab</button>
         <button id="download-answers" class="btn">Export answers (CSV)</button>
@@ -100,7 +97,7 @@ s<!DOCTYPE html>
           <button id="goto-btn" class="btn secondary">Go</button>
           <span class="note" style="margin-left:auto">Module pages will be loaded automatically when you start a module.</span>
         </div>
-        <iframe id="pdf-frame" class="pdf-viewer" src="sat-practice-test-4-digital.pdf#page=12"></iframe>
+        <iframe id="pdf-frame" class="pdf-viewer" src="'tests/sat-practice-test-4-digital.pdf#page=12"></iframe>
       </div>
 
       <div class="panel">
@@ -138,7 +135,7 @@ s<!DOCTYPE html>
 
   <script>
     // Configuration
-    const PDF_SRC = 'sat-practice-test-4-digital.pdf';
+    const PDF_SRC = 'tests/sat-practice-test-4-digital.pdf';
 
     // Elements
     const pdfFrame = document.getElementById('pdf-frame');
