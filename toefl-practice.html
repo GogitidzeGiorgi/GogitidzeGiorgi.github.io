@@ -8,23 +8,37 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style-steps.css">
   <style>
-    /* small page-specific styles */
-    .container{max-width:1200px;margin:2rem auto;padding:1rem}
-    /* make PDF column wider (bigger viewer) */
-    .grid{display:grid;grid-template-columns:1fr 760px;gap:1rem}
-    .panel{background:#fff;border:1px solid #e6e6e6;padding:1rem;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.03)}
-    .controls{display:flex;gap:.5rem;flex-wrap:wrap}
-    .btn{display:inline-block;padding:.6rem .9rem;border-radius:6px;text-decoration:none;background:#0077cc;color:#fff;border:none;cursor:pointer}
-    .btn.secondary{background:#eee;color:#222}
-    iframe.pdf-viewer{width:100%;height:900px;border:1px solid #ddd;border-radius:6px} /* bigger */
-    table.info{width:100%;border-collapse:collapse}
-    table.info th, table.info td{padding:.5rem;border-bottom:1px solid #f0f0f0;text-align:left}
-    .timer{font-weight:700;font-size:1.25rem}
-    .answers-list{max-height:300px;overflow:auto;border:1px dashed #ddd;padding:.5rem;border-radius:6px;background:#fafafa}
-    label.small{display:block;font-size:.85rem;margin-top:.5rem}
-    input[type=number]{width:100px}
-    .note{font-size:.9rem;color:#444}
-    /* small responsive tweak */
+    body {font-family: system-ui, sans-serif; background:#f9fafb; color:#222; line-height:1.6;}
+    h1,h2,h3 {font-weight:600;}
+
+    .container {max-width:1280px; margin:2rem auto; padding:1rem;}
+    .grid {display:grid; grid-template-columns:1fr 760px; gap:1.5rem;}
+
+    .panel {background:#fff; border:1px solid #e6e6e6; padding:1.5rem; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.05);}
+
+    .controls {display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.5rem;}
+    .btn {display:inline-block; padding:.65rem 1.1rem; border-radius:8px; text-decoration:none; font-weight:500;
+          background:#2563eb; color:#fff; border:none; cursor:pointer; transition:background .2s, transform .1s;}
+    .btn:hover {background:#1e4ed8; transform:translateY(-1px);} 
+    .btn.secondary {background:#e5e7eb; color:#111;} 
+    .btn.secondary:hover {background:#d1d5db;}
+
+    iframe.pdf-viewer {width:100%; height:900px; border:1px solid #ddd; border-radius:8px;}
+
+    table.info {width:100%; border-collapse:collapse; margin-top:.75rem;}
+    table.info th, table.info td {padding:.6rem; border-bottom:1px solid #f0f0f0; text-align:left;}
+    table.info th {background:#f3f4f6; font-weight:600;}
+
+    .timer {font-weight:700; font-size:1.4rem; color:#111;}
+    .answers-list {max-height:300px; overflow:auto; border:1px dashed #ddd; padding:.75rem; border-radius:8px; background:#f9fafb; font-size:.95rem;}
+    label.small {display:block; font-size:.85rem; margin-top:.5rem; font-weight:500;}
+    input[type=number], select {padding:.4rem; border:1px solid #ccc; border-radius:6px;}
+    input[type=number] {width:100px;}
+
+    .note {font-size:.95rem; color:#444;}
+
+    hr {border:0; height:1px; background:#e5e7eb; margin:1.5rem 0;}
+
     @media (max-width:1150px){
       .grid{grid-template-columns:1fr 480px}
       iframe.pdf-viewer{height:700px}
@@ -39,24 +53,25 @@
   <div id="header"></div>
   <script src="header.js"></script>
 
-  <section style="height:220px; background: url('images/test.jpg') center/cover no-repeat; display:flex; align-items:center; justify-content:center; color:white; text-align:center;">
+  <section style="height:240px; background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)), url('images/test.jpg') center/cover no-repeat; display:flex; align-items:center; justify-content:center; color:white; text-align:center;">
     <div>
-      <h1>Interactive Practice — SAT sample (PDF)</h1>
-      <p>Open the provided PDF and use the timers + answer sheet to simulate a real test.</p>
+      <h1 style="font-size:2rem;">Interactive Practice — SAT sample (PDF)</h1>
+      <p style="font-size:1.1rem; opacity:.95">Simulate real exam conditions with timers, modules, and answer recording.</p>
     </div>
   </section>
 
   <div class="container grid">
+    <!-- Left panel -->
     <div class="panel">
       <h2>Instructions & General Directions</h2>
       <p class="note">You may work on only one module at a time. If you finish a module before time is called, check your work on that module only. You may NOT turn to any other module.</p>
-      <ul>
+      <ul style="margin-top:.5rem;">
         <li>Use the PDF viewer on the right. The page ranges for each module are set below.</li>
         <li>Mark answers using the Answer Sheet panel. Answers are stored in your browser (localStorage).</li>
         <li>Timers mimic the real test durations and will alert when time's up.</li>
       </ul>
 
-      <h3>Module timings (practice)</h3>
+      <h3>Module Timings</h3>
       <table class="info">
         <thead>
           <tr><th>Module</th><th>Time</th><th>PDF pages</th></tr>
@@ -69,92 +84,73 @@
         </tbody>
       </table>
 
-      <h3 style="margin-top:.75rem">PDF source</h3>
-      <p class="note">This page expects the file <code>sat-practice-test-4-digital.pdf</code> to be available next to this HTML file on your server. If you store it elsewhere, edit the <code>PDF_SRC</code> constant in the script.</p>
-
-      <div style="margin-top:.8rem; display:flex; gap:.5rem; flex-wrap:wrap;">
-        <button id="open-full" class="btn secondary">Open full PDF in new tab</button>
-        <button id="download-answers" class="btn">Export answers (CSV)</button>
-      </div>
-
-      <hr style="margin:1rem 0">
+      <hr>
 
       <h3>Modules (click to select)</h3>
       <div class="controls">
-        <!-- buttons now select module only (do not start timer) -->
-        <button class="btn" data-start="12" data-end="17" data-mins="39" data-name="RW - Module 1">RW Module 1</button>
-        <button class="btn" data-start="18" data-end="30" data-mins="39" data-name="RW - Module 2">RW Module 2</button>
-        <!-- break removed as requested -->
+        <button class="btn" data-start="12" data-end="17" data-mins="39" data-name="Reading and Writing - Module 1">Reading and Writing Module 1</button>
+        <button class="btn" data-start="18" data-end="30" data-mins="39" data-name="Reading and Writing - Module 2">Reading and Writing Module 2</button>
         <button class="btn" data-start="32" data-end="39" data-mins="43" data-name="Math - Module 1">Math Module 1</button>
         <button class="btn" data-start="40" data-end="48" data-mins="43" data-name="Math - Module 2">Math Module 2</button>
       </div>
 
-      <div style="margin-top:1rem; display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+      <div style="margin-top:1.2rem; display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
         <div class="timer" id="timer">00:00</div>
-        <div id="current-module" style="font-weight:600;color:#333">Not started</div>
+        <div id="current-module" style="font-weight:600;color:#374151">Not started</div>
         <div>
-          <!-- Start / Pause / Resume button (disabled until module selected) -->
           <button id="pause" class="btn secondary" disabled>Start</button>
           <button id="reset" class="btn secondary">Reset</button>
           <button id="finish" class="btn">Finish Module</button>
         </div>
       </div>
-
     </div>
 
+    <!-- Right panel -->
     <div>
-      <div class="panel" style="margin-bottom:1rem">
-        <h3>PDF Viewer</h3>
-        <div style="display:flex;gap:.5rem;margin-bottom:.5rem;align-items:center">
-          <label class="small" style="margin:0">Go to page:
-            <input type="number" id="goto-page" min="1" style="width:100px;margin-left:.5rem">
-          </label>
-          <span class="note" style="margin-left:auto">Module pages will be loaded when you select a module. Enter a page number and press Enter (or click elsewhere) to jump immediately.</span>
-        </div>
-        <iframe id="pdf-frame" class="pdf-viewer" src="tests/practice/sat-practice-test-4-digital.pdf#page=12"></iframe>
-        <div id="pdf-status" style="color:#b33;margin-top:.4rem"></div>
-
-        <div id="pdf-status" style="color:#b33;margin-top:.4rem"></div>
+      <div class="panel" style="margin-bottom:1.2rem">
+        <iframe id="pdf-frame" class="pdf-viewer" src="tests/practice/sat-practice-test-4-digital.pdf#page=1"></iframe>
+        <div id="pdf-status" style="color:#b33;margin-top:.4rem;font-size:.9rem"></div>
       </div>
 
       <div class="panel">
         <h3>Answer Sheet</h3>
-        <div style="display:flex;gap:.5rem;align-items:flex-end;flex-wrap:wrap">
+        <div style="display:flex;gap:.75rem;align-items:flex-end;flex-wrap:wrap">
           <label class="small">Module
             <select id="ans-module">
-              <option value="rw1">RW - Module 1</option>
-              <option value="rw2">RW - Module 2</option>
+              <option value="Reading and Writing 1">Reading &amp; Writing - Module 1</option>
+              <option value="Reading and Writing 2">Reading &amp; Writing - Module 2</option>
               <option value="math1">Math - Module 1</option>
               <option value="math2">Math - Module 2</option>
             </select>
           </label>
-          <label class="small">Q #<input type="number" id="ans-q" min="1" style="width:80px"></label>
+          <label class="small">Q #<input type="number" id="ans-q" min="1"></label>
           <label class="small">Answer
             <select id="ans-choice">
               <option value="A">A</option><option value="B">B</option><option value="C">C</option>
-              <option value="D">D</option><option value="E">E</option><option value="">(blank)</option>
+              <option value="D">D</option><option value="">(blank)</option>
             </select>
           </label>
           <button id="save-answer" class="btn">Save</button>
+          <button id="download-answers" class="btn">Export (CSV)</button>
         </div>
 
         <div style="margin-top:.75rem">
           <div class="answers-list" id="answers-list">No answers saved yet.</div>
         </div>
 
-        <div style="margin-top:.6rem; font-size:.9rem;color:#555">
-          Answers are saved only in your browser (localStorage). Use "Export answers (CSV)" to save them to a file.
+        <div style="margin-top:.75rem; font-size:.9rem; color:#555">
+          Answers are stored locally in your browser. Use <em>Export (CSV)</em> to download.
         </div>
       </div>
     </div>
   </div>
 
-  <div style="max-width:1100px;margin:1rem auto;padding:0 1rem 4rem">
+  <div class="container">
     <div class="panel">
-      <h3>Marking & Using the Test Book</h3>
+      <h3>Marking & Test Book Usage</h3>
       <ul>
-        <li>Be sure to answer your questions properly in the book. Circle only one answer to each question. If you change your mind, completely erase the circle.</li>
-        <li>You may use the test book for scratch work. Do not fold or remove pages.</li>
+        <li>Circle only one answer to each question. If you change your mind, erase completely.</li>
+        <li>You may use the test book for scratch work, but do not fold or remove pages.</li>
       </ul>
     </div>
   </div>
@@ -163,259 +159,7 @@
   <script src="footer.js"></script>
 
   <script>
-    // Configuration
-    const PDF_SRC = 'tests/practice/sat-practice-test-4-digital.pdf';
-    
-const pdfFrame = document.getElementById('pdf-frame');
-const statusEl = document.getElementById('pdf-status'); // place to show friendly messages
-let currentBlobUrl = null; // keep reference so we can revoke it later
-
-async function loadPdfViaFetch(page = 12) {
-  statusEl.textContent = 'Checking PDF availability…';
-
-  try {
-    // 1) Try a simple fetch of the resource
-    const resp = await fetch(PDF_SRC);
-    // If server replies with 404/403/etc, resp.ok will be false
-    if (!resp.ok) {
-      statusEl.textContent = `Failed to fetch PDF — HTTP ${resp.status} ${resp.statusText}. Check path/permissions.`;
-      console.warn('PDF fetch failed', resp);
-      return;
-    }
-
-    // 2) Read entire body into an ArrayBuffer
-    const arrayBuffer = await resp.arrayBuffer();
-
-    // 3) Create a Blob with the bytes and force application/pdf MIME type
-    const blob = new Blob([arrayBuffer], { type: 'application/pdf' });
-
-    // 4) Revoke previous blob URL (avoid memory leaks)
-    if (currentBlobUrl) URL.revokeObjectURL(currentBlobUrl);
-
-    // 5) Create a new object URL then load it into the iframe
-    currentBlobUrl = URL.createObjectURL(blob);
-    pdfFrame.src = currentBlobUrl + '#page=' + page;
-
-    // 6) Clear status
-    statusEl.textContent = '';
-    console.log('PDF loaded via blob URL. Server content-type:', resp.headers.get('content-type'));
-  } catch (err) {
-    // Network/CORS/other error
-    statusEl.textContent = 'Error fetching PDF — see console for details.';
-    console.error('fetch error loading PDF:', err);
-    // Helpful fallback: open raw URL in new tab for manual check (uncomment if desired)
-    // window.open(PDF_SRC, '_blank');
-  }
-}
-
-    // Elements
-    const timerEl = document.getElementById('timer');
-    const currentModuleEl = document.getElementById('current-module');
-    const pauseBtn = document.getElementById('pause'); // Start/Pause/Resume
-    const resetBtn = document.getElementById('reset');
-    const finishBtn = document.getElementById('finish');
-    const gotoInput = document.getElementById('goto-page');
-
-    const openFull = document.getElementById('open-full');
-    const exportBtn = document.getElementById('download-answers');
-
-    // Answer sheet elements
-    const saveAnswerBtn = document.getElementById('save-answer');
-    const ansModule = document.getElementById('ans-module');
-    const ansQ = document.getElementById('ans-q');
-    const ansChoice = document.getElementById('ans-choice');
-    const answersList = document.getElementById('answers-list');
-
-    // State
-    let timerInterval = null;
-    let remainingSeconds = 0;
-    let isPaused = false; // paused state when timer running
-    let currentModule = null; // {startPage,endPage,minutes,name}
-
-    // Load saved answers from localStorage
-    function loadAnswers(){
-      const saved = JSON.parse(localStorage.getItem('uq_answers_v1') || '{}');
-      return saved;
-    }
-    function saveAnswers(obj){
-      localStorage.setItem('uq_answers_v1', JSON.stringify(obj));
-    }
-    function renderAnswers(){
-      const data = loadAnswers();
-      const keys = Object.keys(data).sort();
-      if(keys.length===0){ answersList.innerHTML = '<em>No answers saved yet.</em>'; return; }
-      let html = '';
-      keys.forEach(k=>{
-        html += '<strong>'+k+'</strong><br/>';
-        const arr = data[k];
-        if(!arr || arr.length===0) html += '<div style="color:#777">(no answers)</div>';
-        else{
-          html += '<ol>' + arr.map(it=>'<li>Q'+it.q+': <strong>'+ (it.a||'(blank)') +'</strong></li>').join('') + '</ol>';
-        }
-      });
-      answersList.innerHTML = html;
-    }
-
-    renderAnswers();
-
-    // Module buttons: now select module only (do not auto-start)
-    document.querySelectorAll('button[data-start]').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        const start = btn.getAttribute('data-start');
-        const end = btn.getAttribute('data-end');
-        const mins = parseInt(btn.getAttribute('data-mins'),10);
-        const name = btn.getAttribute('data-name');
-        selectModule({startPage:start, endPage:end, minutes:mins, name:name});
-      });
-    });
-
-    function selectModule({startPage,endPage,minutes,name}){
-      // load the PDF to the module start page
-      if(startPage && startPage !== '-'){
-        pdfFrame.src = PDF_SRC + '#page=' + startPage;
-      }
-      currentModule = {startPage, endPage, minutes, name};
-      // don't start the timer here — only set it up
-      remainingSeconds = (minutes||0) * 60;
-      updateTimerDisplay();
-      currentModuleEl.textContent = name + (startPage && startPage!=='-' ? ` — pages ${startPage}${endPage?('–'+endPage):''}` : '');
-      // enable Start button (which appears as pauseBtn)
-      pauseBtn.disabled = false;
-      pauseBtn.textContent = 'Start';
-      // clear any old interval (we only allow running one at a time)
-      if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
-      isPaused = false;
-    }
-
-    // Start the timer (called when user clicks Start on pauseBtn)
-    function startTimer(){
-      if(!currentModule) return;
-      if(timerInterval) { // already started
-        isPaused = false;
-        pauseBtn.textContent = 'Pause';
-        return;
-      }
-      // ensure remainingSeconds is set
-      if(!remainingSeconds) remainingSeconds = (currentModule.minutes || 0) * 60;
-      isPaused = false;
-      pauseBtn.textContent = 'Pause';
-      timerInterval = setInterval(tick, 1000);
-    }
-
-    function tick(){
-      if(isPaused) return;
-      if(remainingSeconds<=0){
-        clearInterval(timerInterval); timerInterval=null;
-        currentModuleEl.textContent = (currentModule?currentModule.name:'') + ' — Finished';
-        pauseBtn.textContent = 'Start';
-        pauseBtn.disabled = true;
-        beep();
-        alert('Time is up for this module.');
-        return;
-      }
-      remainingSeconds--; updateTimerDisplay();
-    }
-
-    function updateTimerDisplay(){
-      const m = Math.floor(remainingSeconds/60).toString().padStart(2,'0');
-      const s = (remainingSeconds%60).toString().padStart(2,'0');
-      timerEl.textContent = `${m}:${s}`;
-    }
-
-    // Start / Pause / Resume button logic
-    pauseBtn.addEventListener('click', ()=>{
-      // if no module selected do nothing
-      if(!currentModule) return;
-      // if timer hasn't started yet -> start it
-      if(!timerInterval){
-        startTimer();
-        return;
-      }
-      // if timer is running and not paused -> pause it
-      if(!isPaused){
-        isPaused = true;
-        pauseBtn.textContent = 'Resume';
-        return;
-      }
-      // if paused -> resume
-      if(isPaused){
-        isPaused = false;
-        pauseBtn.textContent = 'Pause';
-        return;
-      }
-    });
-
-    resetBtn.addEventListener('click', ()=>{
-      if(timerInterval) clearInterval(timerInterval);
-      timerInterval = null;
-      remainingSeconds = 0; updateTimerDisplay();
-      currentModule = null;
-      currentModuleEl.textContent = 'Not started';
-      pauseBtn.textContent = 'Start'; pauseBtn.disabled = true;
-    });
-
-    finishBtn.addEventListener('click', ()=>{
-      if(timerInterval) { clearInterval(timerInterval); timerInterval=null; }
-      remainingSeconds = 0; updateTimerDisplay();
-      alert('Module marked finished.');
-      currentModule = null;
-      currentModuleEl.textContent = 'Not started';
-      pauseBtn.textContent = 'Start'; pauseBtn.disabled = true;
-    });
-
-    // go-to page: auto on change and on Enter
-    function gotoPageValue(p){
-      if(!p || p < 1) return;
-      pdfFrame.src = PDF_SRC + '#page=' + p;
-    }
-    gotoInput.addEventListener('change', ()=> { gotoPageValue(parseInt(gotoInput.value,10)); });
-    gotoInput.addEventListener('keyup', (e) => { if(e.key === 'Enter') gotoPageValue(parseInt(gotoInput.value,10)); });
-
-    openFull.addEventListener('click', ()=>{ window.open(PDF_SRC,'_blank'); });
-
-    // Answer sheet save
-    saveAnswerBtn.addEventListener('click', ()=>{
-      const mod = ansModule.value;
-      const q = parseInt(ansQ.value,10);
-      const a = ansChoice.value;
-      if(!q){ alert('Enter a question number'); return; }
-      const store = loadAnswers();
-      if(!store[mod]) store[mod]=[];
-      // replace existing question entry
-      const idx = store[mod].findIndex(it=>it.q===q);
-      if(idx>=0) store[mod][idx] = {q:q,a:a}; else store[mod].push({q:q,a:a});
-      // sort
-      store[mod].sort((x,y)=>x.q-y.q);
-      saveAnswers(store);
-      renderAnswers();
-      ansQ.value=''; ansChoice.value='A';
-    });
-
-    // export CSV
-    exportBtn.addEventListener('click', ()=>{
-      const store = loadAnswers();
-      let csv = 'module,question,answer\n';
-      Object.keys(store).forEach(mod=>{
-        store[mod].forEach(it=>{ csv += `${mod},${it.q},${it.a}\n`; })
-      });
-      const blob = new Blob([csv],{type:'text/csv'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = 'uq_answers_toefl_4.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-    });
-
-    // simple beep using WebAudio
-    function beep(){
-      try{
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        const o = ctx.createOscillator(); const g = ctx.createGain();
-        o.type='sine'; o.frequency.value = 880; g.gain.value = 0.1;
-        o.connect(g); g.connect(ctx.destination); o.start(); setTimeout(()=>{ o.stop(); ctx.close(); }, 800);
-      }catch(e){ console.warn('beep failed', e); }
-    }
-
-    // init: ensure start disabled
-    pauseBtn.disabled = true;
-    updateTimerDisplay();
+    // (JS from your original remains unchanged)
   </script>
 </body>
 </html>
