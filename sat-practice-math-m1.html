@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SAT Practice Test – Math Module 1</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    /* basic styling */
+    body {font-family: system-ui, sans-serif; background:#f9fafb; color:#111; line-height:1.6; padding:1.25rem}
+    .container {max-width:980px;margin:0 auto}
+    .panel {background:#fff;border:1px solid #e6e6e6;padding:1.25rem;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.04)}
+    h1, h2 {margin:0 0 .5rem}
+    h1 {font-size:1.35rem}
+    h2 {font-size:1.15rem; margin-top: 1.5rem; border-bottom: 1px solid #eee; padding-bottom: 0.5rem;}
+    p.lead{color:#444;margin-top:0}
+    ol.questions{counter-reset:q; margin:0;padding:0 0 0 1rem}
+    li.q{margin:.9rem 0;padding:.6rem;border-radius:8px; list-style-type: none;}
+    .stem{margin-bottom:.45rem}
+    .options label{display:block;padding:.38rem .6rem;border-radius:6px;cursor:pointer;border:1px solid transparent;margin-bottom:.32rem}
+    .options input{margin-right:.6rem}
+    .controls{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin-top:1rem}
+    .btn{background:#2563eb;color:#fff;border:none;padding:.55rem .9rem;border-radius:8px;cursor:pointer; transition: background-color 0.2s;}
+    .btn:hover {background: #1d4ed8;}
+    .btn.secondary{background:#eef2ff;color:#2563eb}
+    .btn.secondary:hover{background:#dbeafe;}
+    .note{font-size:.9rem;color:#555;margin-top:.5rem}
+    @media (max-width:720px){ .panel{padding:.85rem} }
+
+    /* grading styles */
+    .option-correct { background: #ecfdf5 !important; border-color: #34d399 !important; }
+    .option-wrong { background: #fff1f2 !important; border-color: #f87171 !important; opacity: 0.95; }
+    .correct-badge { display:inline-block; margin-left:.5rem; font-weight:700; color:#065f46; background:#bbf7d0; border-radius:4px; padding:2px 6px; font-size:.8rem; }
+    .wrong-badge { display:inline-block; margin-left:.5rem; font-weight:700; color:#7f1d1d; background:#fecaca; border-radius:4px; padding:2px 6px; font-size:.8rem; }
+    .grading-summary { margin-top:1rem; padding:.75rem; background:#f3f4f6; border-radius:8px; font-weight:600; }
+    .grading-details { margin-top:.5rem; font-size:.95rem; }
+
+    /* Modal styles */
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; }
+    .modal-content { background: #fff; padding: 1.5rem; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); text-align: center; max-width: 400px; width: 90%; transform: scale(0.9); transition: transform 0.3s; }
+    .modal-buttons { margin-top: 1rem; display: flex; justify-content: center; gap: 0.5rem; }
+    .modal-overlay.visible { opacity: 1; visibility: visible; }
+    .modal-overlay.visible .modal-content { transform: scale(1); }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="panel">
+      <h1>SAT Practice Test – Math Module 1 (29 questions)</h1>
+      <p class="lead">Select the best answer for each question.</p>
+      <div class="controls">
+        <button class="btn" id="saveAll">Save answers</button>
+        <button class="btn secondary" id="loadAll">Load saved</button>
+        <button class="btn" id="exportCsv">Export (CSV)</button>
+        <button class="btn secondary" id="clearAll">Clear</button>
+        <button class="btn" id="checkAnswers">Check answers</button>
+      </div>
+
+      <div id="timerContainer" style="display:flex;align-items:center;gap:.5rem;margin-top:0.5rem">
+          <div id="timerDisplay" style="font-weight:700;font-size:0.95rem;background:#fff;padding:.35rem .6rem;border-radius:6px;border:1px solid #e6e6e6">
+            35:00
+          </div>
+          <button class="btn secondary" id="timerStart">Start</button>
+          <button class="btn secondary" id="timerPause" disabled>Pause</button>
+          <button class="btn" id="timerReset">Reset</button>
+      </div>
+
+      <hr style="margin-top:1rem;margin-bottom:1rem;border:none;height:1px;background:#f0f3ff">
+
+      <form id="quizForm">
+        <h2>Section 1: Math (No Calculator)</h2>
+        <ol class="questions" start="97">
+            <li class="q"><div class="stem"><strong>97</strong>. Solve for x: 3x + 7 = 19</div><div class="options"><label><input type="radio" name="q97" value="A"> A) 2</label><label><input type="radio" name="q97" value="B"> B) 3</label><label><input type="radio" name="q97" value="C"> C) 4</label><label><input type="radio" name="q97" value="D"> D) 5</label></div></li>
+            <li class="q"><div class="stem"><strong>98</strong>. A line passes through points (2,3) and (4,7). What is its slope?</div><div class="options"><label><input type="radio" name="q98" value="A"> A) 1</label><label><input type="radio" name="q98" value="B"> B) 2</label><label><input type="radio" name="q98" value="C"> C) 3</label><label><input type="radio" name="q98" value="D"> D) 4</label></div></li>
+            <li class="q"><div class="stem"><strong>99</strong>. If 2x - 5 = 11, then x =</div><div class="options"><label><input type="radio" name="q99" value="A"> A) 6</label><label><input type="radio" name="q99" value="B"> B) 7</label><label><input type="radio" name="q99" value="C"> C) 8</label><label><input type="radio" name="q99" value="D"> D) 9</label></div></li>
+            <li class="q"><div class="stem"><strong>100</strong>. A rectangle has length 2x and width x+3. Which expression gives its area?</div><div class="options"><label><input type="radio" name="q100" value="A"> A) 2x + x + 3</label><label><input type="radio" name="q100" value="B"> B) 2x(x+3)</label><label><input type="radio" name="q100" value="C"> C) 2x^2 + 3</label><label><input type="radio" name="q100" value="D"> D) 2(x+3)</label></div></li>
+            <li class="q"><div class="stem"><strong>101</strong>. Simplify: 6x^2 / 3x</div><div class="options"><label><input type="radio" name="q101" value="A"> A) 2x</label><label><input type="radio" name="q101" value="B"> B) 2x^2</label><label><input type="radio" name="q101" value="C"> C) x^2</label><label><input type="radio" name="q101" value="D"> D) 3x</label></div></li>
+            <li class="q"><div class="stem"><strong>102</strong>. If f(x) = 2x^2 - 3, what is f(4)?</div><div class="options"><label><input type="radio" name="q102" value="A"> A) 5</label><label><input type="radio" name="q102" value="B"> B) 13</label><label><input type="radio" name="q102" value="C"> C) 29</label><label><input type="radio" name="q102" value="D"> D) 31</label></div></li>
+            <li class="q"><div class="stem"><strong>103</strong>. Which is equivalent to (x+5)(x-2)?</div><div class="options"><label><input type="radio" name="q103" value="A"> A) x^2 + 3x - 10</label><label><input type="radio" name="q103" value="B"> B) x^2 - 3x - 10</label><label><input type="radio" name="q103" value="C"> C) x^2 + 7x - 10</label><label><input type="radio" name="q103" value="D"> D) x^2 - 7x + 10</label></div></li>
+            <li class="q"><div class="stem"><strong>104</strong>. If 2x + 3y = 12 and x = 3, what is y?</div><div class="options"><label><input type="radio" name="q104" value="A"> A) 1.5</label><label><input type="radio" name="q104" value="B"> B) 2</label><label><input type="radio" name="q104" value="C"> C) 2.5</label><label><input type="radio" name="q104" value="D"> D) 3</label></div></li>
+            <li class="q"><div class="stem"><strong>105</strong>. The solution to |x - 4| = 2 is:</div><div class="options"><label><input type="radio" name="q105" value="A"> A) x=2 or x=6</label><label><input type="radio" name="q105" value="B"> B) x=2</label><label><input type="radio" name="q105" value="C"> C) x=-2 or x=6</label><label><input type="radio" name="q105" value="D"> D) x=-2</label></div></li>
+            <li class="q"><div class="stem"><strong>106</strong>. If a quadratic has roots 2 and -5, which could be its equation?</div><div class="options"><label><input type="radio" name="q106" value="A"> A) (x-2)(x+5)</label><label><input type="radio" name="q106" value="B"> B) (x+2)(x-5)</label><label><input type="radio" name="q106" value="C"> C) x^2 - 7</label><label><input type="radio" name="q106" value="D"> D) x^2 + 10</label></div></li>
+            <li class="q"><div class="stem"><strong>107</strong>. Simplify: (3x^2)(2x^3)</div><div class="options"><label><input type="radio" name="q107" value="A"> A) 6x^5</label><label><input type="radio" name="q107" value="B"> B) 6x^6</label><label><input type="radio" name="q107" value="C"> C) 5x^5</label><label><input type="radio" name="q107" value="D"> D) 5x^6</label></div></li>
+            <li class="q"><div class="stem"><strong>108</strong>. If 4x - 7 = 9, then 2x =</div><div class="options"><label><input type="radio" name="q108" value="A"> A) 4</label><label><input type="radio" name="q108" value="B"> B) 6</label><label><input type="radio" name="q108" value="C"> C) 8</label><label><input type="radio" name="q108" value="D"> D) 12</label></div></li>
+            <li class="q"><div class="stem"><strong>109</strong>. A right triangle has legs 5 and 12. What is the hypotenuse?</div><div class="options"><label><input type="radio" name="q109" value="A"> A) 12</label><label><input type="radio" name="q109" value="B"> B) 13</label><label><input type="radio" name="q109" value="C"> C) 17</label><label><input type="radio" name="q109" value="D"> D) 25</label></div></li>
+            <li class="q"><div class="stem"><strong>110</strong>. Solve for x: x/3 = 12/4</div><div class="options"><label><input type="radio" name="q110" value="A"> A) 3</label><label><input type="radio" name="q110" value="B"> B) 6</label><label><input type="radio" name="q110" value="C"> C) 9</label><label><input type="radio" name="q110" value="D"> D) 12</label></div></li>
+            <li class="q"><div class="stem"><strong>111</strong>. If y = 2x + 1, what is the y-intercept?</div><div class="options"><label><input type="radio" name="q111" value="A"> A) 1</label><label><input type="radio" name="q111" value="B"> B) 2</label><label><input type="radio" name="q111" value="C"> C) -1</label><label><input type="radio" name="q111" value="D"> D) 0</label></div></li>
+            <li class="q"><div class="stem"><strong>112</strong>. Which is equivalent to sqrt(49)?</div><div class="options"><label><input type="radio" name="q112" value="A"> A) 12</label><label><input type="radio" name="q112" value="B"> B) 9</label><label><input type="radio" name="q112" value="C"> C) 7</label><label><input type="radio" name="q112" value="D"> D) 14</label></div></li>
+            <li class="q"><div class="stem"><strong>113</strong>. The solution to x^2 = 36 is:</div><div class="options"><label><input type="radio" name="q113" value="A"> A) x=6 only</label><label><input type="radio" name="q113" value="B"> B) x=-6 only</label><label><input type="radio" name="q113" value="C"> C) x=6 or -6</label><label><input type="radio" name="q113" value="D"> D) x=12</label></div></li>
+            <li class="q"><div class="stem"><strong>114</strong>. A car travels 180 miles in 3 hours. What is its average speed?</div><div class="options"><label><input type="radio" name="q114" value="A"> A) 30 mph</label><label><input type="radio" name="q114" value="B"> B) 45 mph</label><label><input type="radio" name="q114" value="C"> C) 60 mph</label><label><input type="radio" name="q114" value="D"> D) 75 mph</label></div></li>
+            <li class="q"><div class="stem"><strong>115</strong>. Simplify: (x+2)^2</div><div class="options"><label><input type="radio" name="q115" value="A"> A) x^2+2</label><label><input type="radio" name="q115" value="B"> B) x^2+4</label><label><input type="radio" name="q115" value="C"> C) x^2+4x+4</label><label><input type="radio" name="q115" value="D"> D) 2x+4</label></div></li>
+            <li class="q"><div class="stem"><strong>116</strong>. The slope of y = -3x + 7 is:</div><div class="options"><label><input type="radio" name="q116" value="A"> A) -7</label><label><input type="radio" name="q116" value="B"> B) -3</label><label><input type="radio" name="q116" value="C"> C) 3</label><label><input type="radio" name="q116" value="D"> D) 7</label></div></li>
+        </ol>
+        <h2>Section 2: Math (Calculator)</h2>
+        <ol class="questions" start="117">
+            <li class="q"><div class="stem"><strong>117</strong>. Solve: 5x - 8 = 2x + 10</div><div class="options"><label><input type="radio" name="q117" value="A"> A) x=2</label><label><input type="radio" name="q117" value="B"> B) x=4</label><label><input type="radio" name="q117" value="C"> C) x=6</label><label><input type="radio" name="q117" value="D"> D) x=8</label></div></li>
+            <li class="q"><div class="stem"><strong>118</strong>. A quadratic function is given by f(x)=x^2-6x+8. What are its zeros?</div><div class="options"><label><input type="radio" name="q118" value="A"> A) x=2,4</label><label><input type="radio" name="q118" value="B"> B) x=1,8</label><label><input type="radio" name="q118" value="C"> C) x=3,3</label><label><input type="radio" name="q118" value="D"> D) x=4,6</label></div></li>
+            <li class="q"><div class="stem"><strong>119</strong>. A right circular cylinder has radius 3 and height 10. What is its volume? (Use π≈3.14)</div><div class="options"><label><input type="radio" name="q119" value="A"> A) 90π</label><label><input type="radio" name="q119" value="B"> B) 180π</label><label><input type="radio" name="q119" value="C"> C) 270π</label><label><input type="radio" name="q119" value="D"> D) 300π</label></div></li>
+            <li class="q"><div class="stem"><strong>120</strong>. Which is equivalent to log10(1000)?</div><div class="options"><label><input type="radio" name="q120" value="A"> A) 1</label><label><input type="radio" name="q120" value="B"> B) 2</label><label><input type="radio" name="q120" value="C"> C) 3</label><label><input type="radio" name="q120" value="D"> D) 1000</label></div></li>
+            <li class="q"><div class="stem"><strong>121</strong>. Solve: 5x - 8 = 2x + 10</div><div class="options"><label><input type="radio" name="q121" value="A"> A) x=2</label><label><input type="radio" name="q121" value="B"> B) x=4</label><label><input type="radio" name="q121" value="C"> C) x=6</label><label><input type="radio" name="q121" value="D"> D) x=8</label></div></li>
+            <li class="q"><div class="stem"><strong>122</strong>. A quadratic function is given by f(x)=x^2-6x+8. What are its zeros?</div><div class="options"><label><input type="radio" name="q122" value="A"> A) x=2,4</label><label><input type="radio" name="q122" value="B"> B) x=1,8</label><label><input type="radio" name="q122" value="C"> C) x=3,3</label><label><input type="radio" name="q122" value="D"> D) x=4,6</label></div></li>
+            <li class="q"><div class="stem"><strong>123</strong>. A right circular cylinder has radius 3 and height 10. What is its volume? (Use π≈3.14)</div><div class="options"><label><input type="radio" name="q123" value="A"> A) 90π</label><label><input type="radio" name="q123" value="B"> B) 180π</label><label><input type="radio" name="q123" value="C"> C) 270π</label><label><input type="radio" name="q123" value="D"> D) 300π</label></div></li>
+            <li class="q"><div class="stem"><strong>124</strong>. Which is equivalent to log10(1000)?</div><div class="options"><label><input type="radio" name="q124" value="A"> A) 1</label><label><input type="radio" name="q124" value="B"> B) 2</label><label><input type="radio" name="q124" value="C"> C) 3</label><label><input type="radio" name="q124" value="D"> D) 1000</label></div></li>
+            <li class="q"><div class="stem"><strong>125</strong>. Solve: 5x - 8 = 2x + 10</div><div class="options"><label><input type="radio" name="q125" value="A"> A) x=2</label><label><input type="radio" name="q125" value="B"> B) x=4</label><label><input type="radio" name="q125" value="C"> C) x=6</label><label><input type="radio" name="q125" value="D"> D) x=8</label></div></li>
+        </ol>
+      </form>
+
+      <div id="gradingResults" class="grading-summary" style="display:none"></div>
+
+      <div class="note">When you click <strong>Save answers</strong> they are stored locally in your browser. Use <strong>Export (CSV)</strong> to download your responses.</div>
+    </div>
+  </div>
+
+  <div id="customModal" class="modal-overlay">
+    <div class="modal-content">
+      <p id="modalMessage"></p>
+      <div id="modalButtons" class="modal-buttons"></div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'uq_sat_math_mod1_v2';
+    const MIN_Q = 97;
+    const MAX_Q = 125;
+    const TOTAL_QUESTIONS = MAX_Q - MIN_Q + 1;
+    const QUIZ_DURATION = 35 * 60;
+
+    const ANSWER_KEY = {
+        97: "C", 98: "B", 99: "C", 100: "B", 101: "A", 102: "C", 103: "A", 104: "B", 105: "A", 106: "A", 
+        107: "A", 108: "C", 109: "B", 110: "C", 111: "A", 112: "C", 113: "C", 114: "C", 115: "C", 116: "B",
+        117: "C", 118: "A", 119: "C", 120: "C", 121: "C", 122: "A", 123: "C", 124: "C", 125: "C"
+    };
+
+    const modal = document.getElementById('customModal');
+    const modalMessage = document.getElementById('modalMessage');
+    const modalButtons = document.getElementById('modalButtons');
+
+    function showMessage(message, isConfirm = false, onConfirm = null) {
+      modalMessage.textContent = message;
+      modalButtons.innerHTML = '';
+      if (isConfirm) {
+        const okBtn = document.createElement('button');
+        okBtn.textContent = 'OK';
+        okBtn.className = 'btn';
+        okBtn.onclick = () => { if (onConfirm) onConfirm(); hideModal(); };
+        const cancelBtn = document.createElement('button');
+        cancelBtn.textContent = 'Cancel';
+        cancelBtn.className = 'btn secondary';
+        cancelBtn.onclick = hideModal;
+        modalButtons.appendChild(okBtn);
+        modalButtons.appendChild(cancelBtn);
+      } else {
+        const okBtn = document.createElement('button');
+        okBtn.textContent = 'OK';
+        okBtn.className = 'btn';
+        okBtn.onclick = hideModal;
+        modalButtons.appendChild(okBtn);
+      }
+      modal.classList.add('visible');
+    }
+
+    function hideModal() { modal.classList.remove('visible'); }
+
+    function saveAll() {
+      const form = document.getElementById('quizForm');
+      const data = {};
+      for (let i = MIN_Q; i <= MAX_Q; i++) {
+        const checked = form.querySelector(`input[name="q${i}"]:checked`);
+        if (checked) data[`q${i}`] = checked.value;
+      }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      showMessage('Answers saved locally.');
+    }
+
+    function loadAll() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      document.querySelectorAll('#quizForm input[type="radio"]').forEach(r => r.checked = false);
+      Object.keys(data).forEach(k => {
+        const sel = document.querySelector(`#quizForm input[name="${k}"][value="${data[k]}"]`);
+        if (sel) sel.checked = true;
+      });
+    }
+    
+    function manualLoad() {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) { showMessage('No saved answers found.'); return; }
+        loadAll();
+        showMessage('Saved answers loaded.');
+    }
+
+    function exportCsv() {
+      const raw = localStorage.getItem(STORAGE_KEY) || '{}';
+      const data = JSON.parse(raw);
+      let csv = 'question,answer\n';
+      for (let i = MIN_Q; i <= MAX_Q; i++) {
+        const q = `q${i}`;
+        csv += `${i},${data[q] || ''}\n`;
+      }
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'sat_math_module1_answers.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    }
+
+    function clearAll() {
+      showMessage('Clear all selected answers?', true, () => {
+        document.querySelectorAll('#quizForm input[type="radio"]').forEach(r => r.checked = false);
+        localStorage.removeItem(STORAGE_KEY);
+        clearHighlights();
+      });
+    }
+
+    function clearHighlights() {
+      document.querySelectorAll('#quizForm .options label').forEach(l => {
+        l.classList.remove('option-correct', 'option-wrong');
+        const extra = l.querySelector('.correct-badge, .wrong-badge');
+        if (extra) extra.remove();
+      });
+      document.getElementById('gradingResults').style.display = 'none';
+    }
+
+    function checkAnswers() {
+      clearHighlights();
+      let correctCount = 0;
+      for (let i = MIN_Q; i <= MAX_Q; i++) {
+        const qName = `q${i}`;
+        const sel = document.querySelector(`#quizForm input[name="${qName}"]:checked`);
+        const user = sel ? sel.value : '';
+        const correct = ANSWER_KEY[i];
+        if (user === correct && user !== '') correctCount++;
+        if (sel) {
+            const label = sel.closest('label');
+            if (user === correct) {
+                label.classList.add('option-correct');
+            } else {
+                label.classList.add('option-wrong');
+                const span = document.createElement('span');
+                span.className = 'wrong-badge';
+                span.textContent = 'Your answer';
+                label.appendChild(span);
+            }
+        }
+        if (correct) {
+            const correctInput = document.querySelector(`#quizForm input[name="${qName}"][value="${correct}"]`);
+            if (correctInput) {
+                const correctLabel = correctInput.closest('label');
+                correctLabel.classList.add('option-correct');
+                if (user !== correct) {
+                    const span = document.createElement('span');
+                    span.className = 'correct-badge';
+                    span.textContent = 'Correct';
+                    correctLabel.appendChild(span);
+                }
+            }
+        }
+      }
+      const summaryBox = document.getElementById('gradingResults');
+      summaryBox.style.display = 'block';
+      summaryBox.innerHTML = `<div>Result: <strong>${correctCount} / ${TOTAL_QUESTIONS}</strong> correct</div>`;
+      summaryBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
+    let timerInterval = null;
+    let timeRemaining = QUIZ_DURATION;
+    const timerDisplay = document.getElementById('timerDisplay');
+    const startBtn = document.getElementById('timerStart');
+    const pauseBtn = document.getElementById('timerPause');
+    const resetBtn = document.getElementById('timerReset');
+
+    function updateTimerDisplay() {
+        const minutes = Math.floor(timeRemaining / 60);
+        const seconds = timeRemaining % 60;
+        timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    }
+
+    function startTimer() {
+        if (timerInterval) return;
+        timerInterval = setInterval(() => {
+            timeRemaining--;
+            if (timeRemaining < 0) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                timeRemaining = 0;
+                showMessage('Time is up!');
+            }
+            updateTimerDisplay();
+        }, 1000);
+        startBtn.disabled = true;
+        pauseBtn.disabled = false;
+    }
+
+    function pauseTimer() {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        startBtn.disabled = false;
+        pauseBtn.disabled = true;
+    }
+
+    function resetTimer() {
+        pauseTimer();
+        timeRemaining = QUIZ_DURATION;
+        updateTimerDisplay();
+    }
+
+    startBtn.addEventListener('click', startTimer);
+    pauseBtn.addEventListener('click', pauseTimer);
+    resetBtn.addEventListener('click', resetTimer);
+
+    document.getElementById('saveAll').addEventListener('click', saveAll);
+    document.getElementById('loadAll').addEventListener('click', manualLoad);
+    document.getElementById('exportCsv').addEventListener('click', exportCsv);
+    document.getElementById('clearAll').addEventListener('click', clearAll);
+    document.getElementById('checkAnswers').addEventListener('click', checkAnswers);
+
+    (function(){ if (localStorage.getItem(STORAGE_KEY)) { loadAll(); } })();
+  </script>
+</body>
+</html>
