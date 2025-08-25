@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Reading & Writing — Module 1 Quiz | UniQuest</title>
+  <link rel="icon" href="images/logo.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    /* minimal styling matching the existing test page */
+    body {font-family: system-ui, sans-serif; background:#f9fafb; color:#111; line-height:1.6; padding:1.25rem}
+    .container {max-width:980px;margin:0 auto}
+    .panel {background:#fff;border:1px solid #e6e6e6;padding:1.25rem;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.04)}
+    h1{margin:0 0 .5rem;font-size:1.35rem}
+    p.lead{color:#444;margin-top:0}
+    ol.questions{counter-reset:q; margin:0;padding:0 0 0 1rem}
+    li.q{margin:.9rem 0;padding:.6rem;border-radius:8px}
+    .stem{margin-bottom:.45rem}
+    .options label{display:block;padding:.38rem .6rem;border-radius:6px;cursor:pointer;border:1px solid transparent;margin-bottom:.32rem}
+    .options input{margin-right:.6rem}
+    .controls{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin-top:1rem}
+    .btn{background:#2563eb;color:#fff;border:none;padding:.55rem .9rem;border-radius:8px;cursor:pointer}
+    .btn.secondary{background:#eef2ff;color:#2563eb}
+    .note{font-size:.9rem;color:#555;margin-top:.5rem}
+    .small{font-size:.9rem;color:#666}
+    @media (max-width:720px){ .panel{padding:.85rem} }
+
+    /* grading styles */
+    .option-correct { background: #ecfdf5 !important; border-color: #34d399 !important; }
+    .option-wrong { background: #fff1f2 !important; border-color: #f87171 !important; opacity: 0.95; }
+    .correct-badge { display:inline-block; margin-left:.5rem; font-weight:700; color:#065f46; background:#bbf7d0; border-radius:4px; padding:2px 6px; font-size:.8rem; }
+    .wrong-badge { display:inline-block; margin-left:.5rem; font-weight:700; color:#7f1d1d; background:#fecaca; border-radius:4px; padding:2px 6px; font-size:.8rem; }
+    .grading-summary { margin-top:1rem; padding:.75rem; background:#f3f4f6; border-radius:8px; font-weight:600; }
+    .grading-details { margin-top:.5rem; font-size:.95rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="panel">
+      <h1>Reading &amp; Writing — Module 1 (33 questions)</h1>
+      <p class="lead">Test begins on the next page. All questions below are multiple-choice.</p>
+      <div class="controls">
+        <button class="btn" id="saveAll">Save answers</button>
+        <button class="btn secondary" id="loadAll">Load saved</button>
+        <button class="btn" id="exportCsv">Export (CSV)</button>
+        <button class="btn secondary" id="clearAll">Clear</button>
+
+        <!-- NEW: Check / Grade -->
+        <button class="btn" id="checkAnswers" style="margin-left:.5rem">Check / Grade</button>
+
+        <div style="margin-left:auto" class="small">Answers saved to your browser (localStorage)</div>
+      </div>
+      <hr style="margin-top:1rem;margin-bottom:1rem;border:none;height:1px;background:#f0f3ff">
+
+      <form id="quizForm">
+        <ol class="questions">
+          <!-- full set of 33 question items (unchanged) -->
+          <!-- Question 1 -->
+          <li class="q">
+            <div class="stem"><strong>1</strong>. The spacecraft OSIRIS-REx briefly made contact with the asteroid 101955 Bennu in 2020. NASA scientist Daniella DellaGiustina reports that despite facing the unexpected obstacle of a surface mostly covered in boulders, OSIRIS-REx successfully _______ a sample of the surface, gathering pieces of it to bring back to Earth.</div>
+            <div class="options">
+              <label><input type="radio" name="q1" value="A"> A) attached</label>
+              <label><input type="radio" name="q1" value="B"> B) collected</label>
+              <label><input type="radio" name="q1" value="C"> C) followed</label>
+              <label><input type="radio" name="q1" value="D"> D) replaced</label>
+            </div>
+          </li>
+
+          <!-- Question 2 -->
+          <li class="q">
+            <div class="stem"><strong>2</strong>. Research conducted by planetary scientist Katarina Miljkovic suggests that the Moon’s surface may not accurately _______ early impact events. ...</div>
+            <div class="options">
+              <label><input type="radio" name="q2" value="A"> A) reflect</label>
+              <label><input type="radio" name="q2" value="B"> B) receive</label>
+              <label><input type="radio" name="q2" value="C"> C) evaluate</label>
+              <label><input type="radio" name="q2" value="D"> D) mimic</label>
+            </div>
+          </li>
+
+          <!-- Question 3 -->
+          <li class="q">
+            <div class="stem"><strong>3</strong>. Handedness, a preferential use of either the right or left hand, typically is easy to observe in humans. Because this trait is present but less _______ in many other animals, animal-behavior researchers often employ tasks specially designed to reveal individual animals’ preferences for a certain hand or paw.</div>
+            <div class="options">
+              <label><input type="radio" name="q3" value="A"> A) recognizable</label>
+              <label><input type="radio" name="q3" value="B"> B) intriguing</label>
+              <label><input type="radio" name="q3" value="C"> C) significant</label>
+              <label><input type="radio" name="q3" value="D"> D) useful</label>
+            </div>
+          </li>
+
+          <!-- Question 4 -->
+          <li class="q">
+            <div class="stem"><strong>4</strong>. It is by no means _______ to recognize the influence of Dutch painter Hieronymus Bosch on Ali Banisadr’s paintings; indeed, Banisadr himself cites Bosch as an inspiration. However, some scholars have suggested that the ancient Mesopotamian poem Epic of Gilgamesh may have had a far greater impact on Banisadr’s work.</div>
+            <div class="options">
+              <label><input type="radio" name="q4" value="A"> A) substantial</label>
+              <label><input type="radio" name="q4" value="B"> B) satisfying</label>
+              <label><input type="radio" name="q4" value="C"> C) unimportant</label>
+              <label><input type="radio" name="q4" value="D"> D) appropriate</label>
+            </div>
+          </li>
+
+          <!-- Question 5 -->
+          <li class="q">
+            <div class="stem"><strong>5</strong>. (Passage from Susan Glaspell’s 1912 short story “'Out There.'”) Which choice best states the main purpose of the text?</div>
+            <div class="options">
+              <label><input type="radio" name="q5" value="A"> A) To reveal the shop owner’s conflicted feelings about the new picture</label>
+              <label><input type="radio" name="q5" value="B"> B) To convey the shop owner’s resentment of the person he got the new picture from</label>
+              <label><input type="radio" name="q5" value="C"> C) To describe the items that the shop owner most highly prizes</label>
+              <label><input type="radio" name="q5" value="D"> D) To explain differences between the new picture and other pictures in the shop</label>
+            </div>
+          </li>
+
+          <!-- Question 6 -->
+          <li class="q">
+            <div class="stem"><strong>6</strong>. (Poem “Black Finger” by Angelina Weld Grimké) Which choice best describes the overall structure of the text?</div>
+            <div class="options">
+              <label><input type="radio" name="q6" value="A"> A) The speaker assesses a natural phenomenon, then questions the accuracy of her assessment.</label>
+              <label><input type="radio" name="q6" value="B"> B) The speaker describes a distinctive sight in nature, then ponders what meaning to attribute to that sight.</label>
+              <label><input type="radio" name="q6" value="C"> C) The speaker presents an outdoor scene, then considers a human behavior occurring within that scene.</label>
+              <label><input type="radio" name="q6" value="D"> D) The speaker examines her surroundings, then speculates about their influence on her emotional state.</label>
+            </div>
+          </li>
+
+          <!-- Question 7 -->
+          <li class="q">
+            <div class="stem"><strong>7</strong>. (Walt Whitman “Calamus 24”) Which choice best describes the overall structure of the text?</div>
+            <div class="options">
+              <label><input type="radio" name="q7" value="A"> A) The speaker questions an increasingly prevalent attitude, then summarizes his worldview.</label>
+              <label><input type="radio" name="q7" value="B"> B) The speaker regrets his isolation from others, then predicts a profound change in society.</label>
+              <label><input type="radio" name="q7" value="C"> C) The speaker concedes his personal shortcomings, then boasts of his many achievements.</label>
+              <label><input type="radio" name="q7" value="D"> D) The speaker addresses a criticism leveled against him, then announces a grand ambition of his.</label>
+            </div>
+          </li>
+
+          <!-- Question 8 -->
+          <li class="q">
+            <div class="stem"><strong>8</strong>. The mimosa tree evolved in East Asia... Within a year, 93 percent of the trees had been attacked by the beetles. Which choice best describes the function of the third sentence?</div>
+            <div class="options">
+              <label><input type="radio" name="q8" value="A"> A) It states the hypothesis that Chang and colleagues had set out to investigate using mimosa trees and B. terrenus.</label>
+              <label><input type="radio" name="q8" value="B"> B) It presents a generalization that is exemplified by the discussion of the mimosa trees and B. terrenus.</label>
+              <label><input type="radio" name="q8" value="C"> C) It offers an alternative explanation for the findings of Chang and colleagues.</label>
+              <label><input type="radio" name="q8" value="D"> D) It provides context that clarifies why the species mentioned spread to new locations.</label>
+            </div>
+          </li>
+
+          <!-- Questions 9-33: provide compact entries -->
+          <!-- 9 -->
+          <li class="q"><div class="stem"><strong>9</strong>. Based on Texts 1 and 2, how would Graeber and Wengrow most likely respond to the “conventional wisdom”?</div>
+            <div class="options">
+              <label><input type="radio" name="q9" value="A"> A) By conceding the importance of hierarchical systems but asserting the greater significance of decentralized collective societies</label>
+              <label><input type="radio" name="q9" value="B"> B) By disputing the idea that developments in social structures have followed a linear progression through distinct stages</label>
+              <label><input type="radio" name="q9" value="C"> C) By acknowledging that hierarchical roles likely weren’t a part of social systems before the rise of agriculture</label>
+              <label><input type="radio" name="q9" value="D"> D) By challenging the assumption that groupings of hunter-gatherers were among the earliest forms of social structure</label>
+            </div></li>
+
+          <!-- 10 -->
+          <li class="q"><div class="stem"><strong>10</strong>. (From The Secret Garden) Which choice best states the main idea?</div>
+            <div class="options">
+              <label><input type="radio" name="q10" value="A"> A) Mary hides in the garden to avoid doing her chores.</label>
+              <label><input type="radio" name="q10" value="B"> B) Mary is getting bored with pulling up so many weeds in the garden.</label>
+              <label><input type="radio" name="q10" value="C"> C) Mary is clearing out the garden to create a space to play.</label>
+              <label><input type="radio" name="q10" value="D"> D) Mary feels very satisfied when she’s taking care of the garden.</label>
+            </div></li>
+
+          <!-- 11 -->
+          <li class="q"><div class="stem"><strong>11</strong>. (Ezra Pound) Based on the text, in what way is the human mind like a flower?</div>
+            <div class="options">
+              <label><input type="radio" name="q11" value="A"> A) It becomes increasingly vigorous with the passage of time.</label>
+              <label><input type="radio" name="q11" value="B"> B) It draws strength from changes in the weather.</label>
+              <label><input type="radio" name="q11" value="C"> C) It requires proper nourishment in order to thrive.</label>
+              <label><input type="radio" name="q11" value="D"> D) It perseveres despite challenging circumstances.</label>
+            </div></li>
+
+          <!-- 12 -->
+          <li class="q"><div class="stem"><strong>12</strong>. (The Call of the Wild) Which choice best states the main idea?</div>
+            <div class="options">
+              <label><input type="radio" name="q12" value="A"> A) Buck has become less social since he began living with Thornton.</label>
+              <label><input type="radio" name="q12" value="B"> B) Buck mistrusts humans and does his best to avoid them.</label>
+              <label><input type="radio" name="q12" value="C"> C) Buck has been especially well liked by most of Thornton’s friends.</label>
+              <label><input type="radio" name="q12" value="D"> D) Buck holds Thornton in higher regard than any other person.</label>
+            </div></li>
+
+          <!-- 13 -->
+          <li class="q"><div class="stem"><strong>13</strong>. (Graph question) According to USDA data, California had between 2,600 and 2,800 organic farms and _______</div>
+            <div class="options">
+              <label><input type="radio" name="q13" value="A"> A) Washington had between 600 and 800 organic farms.</label>
+              <label><input type="radio" name="q13" value="B"> B) New York had fewer than 800 organic farms.</label>
+              <label><input type="radio" name="q13" value="C"> C) Wisconsin and Iowa each had between 1,200 and 1,400 organic farms.</label>
+              <label><input type="radio" name="q13" value="D"> D) Pennsylvania had more than 1,200 organic farms.</label>
+            </div></li>
+
+          <!-- 14 -->
+          <li class="q"><div class="stem"><strong>14</strong>. (Fork-tailed flycatcher study) Which finding would most directly support the hypothesis?</div>
+            <div class="options">
+              <label><input type="radio" name="q14" value="A"> A) The feathers located on the wings of the migratory fork-tailed flycatchers have a narrower shape than those of the nonmigratory birds.</label>
+              <label><input type="radio" name="q14" value="B"> B) Over several generations, the sound made by the feathers of migratory male fork-tailed flycatchers grows progressively higher pitched relative to that made by the feathers of nonmigratory males.</label>
+              <label><input type="radio" name="q14" value="C"> C) Fork-tailed flycatchers communicate different messages to each other depending on whether their feathers create high-pitched or low-pitched sounds.</label>
+              <label><input type="radio" name="q14" value="D"> D) The breeding habits of the migratory and nonmigratory fork-tailed flycatchers remained generally the same over several generations.</label>
+            </div></li>
+
+          <!-- 15 -->
+          <li class="q"><div class="stem"><strong>15</strong>. (Table question) For example, whereas the average ablation rate for iron from AST dust is 28%, the average rate for _______</div>
+            <div class="options">
+              <label><input type="radio" name="q15" value="A"> A) iron from SPC dust is 20%.</label>
+              <label><input type="radio" name="q15" value="B"> B) sodium from OCC dust is 100%.</label>
+              <label><input type="radio" name="q15" value="C"> C) iron from HTC dust is 90%.</label>
+              <label><input type="radio" name="q15" value="D"> D) sodium from AST dust is 75%.</label>
+            </div></li>
+
+          <!-- 16 -->
+          <li class="q"><div class="stem"><strong>16</strong>. (Art collectives) Which quotation best illustrates the journalist's claim?</div>
+            <div class="options">
+              <label><input type="radio" name="q16" value="A"> A) “The first collective I joined included many amazingly talented artists, and we enjoyed each other’s company, but because we had a hard time sharing credit and responsibility for our work, the collective didn’t last.”</label>
+              <label><input type="radio" name="q16" value="B"> B) “We work together, but that doesn’t mean that individual projects are equally the work of all of us. Many of our projects are primarily the responsibility of whoever originally proposed the work to the group.”</label>
+              <label><input type="radio" name="q16" value="C"> C) “Having worked as a member of a collective for several years, it’s sometimes hard to recall what it was like to work alone without the collective’s support. But that support encourages my individual expression rather than limits it.”</label>
+              <label><input type="radio" name="q16" value="D"> D) “Sometimes an artist from outside the collective will choose to collaborate with us on a project, but all of those projects fit within the larger themes of the work the collective does on its own.”</label>
+            </div></li>
+
+          <!-- 17 -->
+          <li class="q"><div class="stem"><strong>17</strong>. (Plant/mycorrhizal table) The student was surprised to discover that _______</div>
+            <div class="options">
+              <label><input type="radio" name="q17" value="A"> A) broccoli grown in soil containing mycorrhizal fungi had a slightly higher average mass than broccoli grown in soil that had been treated to kill fungi.</label>
+              <label><input type="radio" name="q17" value="B"> B) corn grown in soil containing mycorrhizal fungi had a higher average mass than broccoli grown in soil containing mycorrhizal fungi.</label>
+              <label><input type="radio" name="q17" value="C"> C) marigolds grown in soil containing mycorrhizal fungi had a much higher average mass than marigolds grown in soil that had been treated to kill fungi.</label>
+              <label><input type="radio" name="q17" value="D"> D) corn had the highest average mass of all three species grown in soil that had been treated to kill fungi, while marigolds had the lowest.</label>
+            </div></li>
+
+          <!-- 18 -->
+          <li class="q"><div class="stem"><strong>18</strong>. (Pompeii cupids) Which choice most logically completes the text?</div>
+            <div class="options">
+              <label><input type="radio" name="q18" value="A"> A) is not conclusive evidence that the figure is Venus.</label>
+              <label><input type="radio" name="q18" value="B"> B) suggests that Venus was often depicted fishing.</label>
+              <label><input type="radio" name="q18" value="C"> C) eliminates the possibility that the figure is Venus.</label>
+              <label><input type="radio" name="q18" value="D"> D) would be difficult to account for if the figure is not Venus.</label>
+            </div></li>
+
+          <!-- 19 -->
+          <li class="q"><div class="stem"><strong>19</strong>. Literary agents estimate that more than half of all nonfiction books credited to a celebrity or other public figure are in fact written by ghostwriters, professional authors who are paid to write other _______ but whose names never appear on book covers.</div>
+            <div class="options">
+              <label><input type="radio" name="q19" value="A"> A) people’s stories</label>
+              <label><input type="radio" name="q19" value="B"> B) peoples story’s</label>
+              <label><input type="radio" name="q19" value="C"> C) peoples stories</label>
+              <label><input type="radio" name="q19" value="D"> D) people’s story’s</label>
+            </div></li>
+
+          <!-- 20 -->
+          <li class="q"><div class="stem"><strong>20</strong>. Like other amphibians, the wood frog (Rana sylvatica) is unable to generate its own heat, so during periods of subfreezing temperatures, it _______ by producing large amounts of glucose...</div>
+            <div class="options">
+              <label><input type="radio" name="q20" value="A"> A) had survived</label>
+              <label><input type="radio" name="q20" value="B"> B) survived</label>
+              <label><input type="radio" name="q20" value="C"> C) would survive</label>
+              <label><input type="radio" name="q20" value="D"> D) survives</label>
+            </div></li>
+
+          <!-- 21 -->
+          <li class="q"><div class="stem"><strong>21</strong>. After a spate of illnesses as a child, Wilma Rudolph was told she might never walk again. Defying all odds, Rudolph didn’t just walk, she _______ the 1960 Summer Olympics in Rome...</div>
+            <div class="options">
+              <label><input type="radio" name="q21" value="A"> A) ran—fast—during</label>
+              <label><input type="radio" name="q21" value="B"> B) ran—fast during</label>
+              <label><input type="radio" name="q21" value="C"> C) ran—fast, during</label>
+              <label><input type="radio" name="q21" value="D"> D) ran—fast. During</label>
+            </div></li>
+
+          <!-- 22 -->
+          <li class="q"><div class="stem"><strong>22</strong>. In many of her landscape paintings... the triangle representing the mountain itself _______ among the few defined figures in her paintings.</div>
+            <div class="options">
+              <label><input type="radio" name="q22" value="A"> A) are</label>
+              <label><input type="radio" name="q22" value="B"> B) have been</label>
+              <label><input type="radio" name="q22" value="C"> C) were</label>
+              <label><input type="radio" name="q22" value="D"> D) is</label>
+            </div></li>
+
+          <!-- 23 -->
+          <li class="q"><div class="stem"><strong>23</strong>. Seneca sculptor Marie Watt’s blanket art comes in a range of shapes and sizes. In 2004, Watt sewed strips of blankets together to craft a 10-by-13-inch _______ in 2014, she arranged folded blankets into two large stacks... Which choice completes the text?</div>
+            <div class="options">
+              <label><input type="radio" name="q23" value="A"> A) sampler later,</label>
+              <label><input type="radio" name="q23" value="B"> B) sampler;</label>
+              <label><input type="radio" name="q23" value="C"> C) sampler,</label>
+              <label><input type="radio" name="q23" value="D"> D) sampler, later,</label>
+            </div></li>
+
+          <!-- 24 -->
+          <li class="q"><div class="stem"><strong>24</strong>. African American Percy Julian was a scientist and entrepreneur... _______ led to the first mass-produced treatment for glaucoma.</div>
+            <div class="options">
+              <label><input type="radio" name="q24" value="A"> A) Julian synthesized the alkaloid physostigmine in 1935; it</label>
+              <label><input type="radio" name="q24" value="B"> B) in 1935 Julian synthesized the alkaloid physostigmine, which</label>
+              <label><input type="radio" name="q24" value="C"> C) Julian’s 1935 synthesis of the alkaloid physostigmine</label>
+              <label><input type="radio" name="q24" value="D"> D) the alkaloid physostigmine was synthesized by Julian in 1935 and</label>
+            </div></li>
+
+          <!-- 25 -->
+          <li class="q"><div class="stem"><strong>25</strong>. The Arctic-Alpine Botanic Garden... dedicated to growing diverse plant _______ fostering scientific research; and educating the public about plant conservation.</div>
+            <div class="options">
+              <label><input type="radio" name="q25" value="A"> A) species, both native and nonnative,</label>
+              <label><input type="radio" name="q25" value="B"> B) species, both native and nonnative;</label>
+              <label><input type="radio" name="q25" value="C"> C) species; both native and nonnative,</label>
+              <label><input type="radio" name="q25" value="D"> D) species both native and nonnative,</label>
+            </div></li>
+
+          <!-- 26 -->
+          <li class="q"><div class="stem"><strong>26</strong>. Okinaka doesn’t make such decisions _______ all historical designations must be approved by a group of nine other experts...</div>
+            <div class="options">
+              <label><input type="radio" name="q26" value="A"> A) single-handedly, however;</label>
+              <label><input type="radio" name="q26" value="B"> B) single-handedly; however,</label>
+              <label><input type="radio" name="q26" value="C"> C) single-handedly, however,</label>
+              <label><input type="radio" name="q26" value="D"> D) single-handedly however</label>
+            </div></li>
+
+          <!-- 27 -->
+          <li class="q"><div class="stem"><strong>27</strong>. Conyers introduced a bill... They resubmitted the bill every session for the next fifteen years. _______ in 1983, the bill passed.</div>
+            <div class="options">
+              <label><input type="radio" name="q27" value="A"> A) Instead,</label>
+              <label><input type="radio" name="q27" value="B"> B) Likewise,</label>
+              <label><input type="radio" name="q27" value="C"> C) Finally,</label>
+              <label><input type="radio" name="q27" value="D"> D) Additionally,</label>
+            </div></li>
+
+          <!-- 28 -->
+          <li class="q"><div class="stem"><strong>28</strong>. Mauna Loa vs. Pūhāhonu: Which transition fits best?</div>
+            <div class="options">
+              <label><input type="radio" name="q28" value="A"> A) Secondly,</label>
+              <label><input type="radio" name="q28" value="B"> B) Consequently,</label>
+              <label><input type="radio" name="q28" value="C"> C) Moreover,</label>
+              <label><input type="radio" name="q28" value="D"> D) However,</label>
+            </div></li>
+
+          <!-- 29 -->
+          <li class="q"><div class="stem"><strong>29</strong>. Samuel Coleridge-Taylor incorporated the sounds of traditional African music into his classical music compositions. Which transition?</div>
+            <div class="options">
+              <label><input type="radio" name="q29" value="A"> A) In addition,</label>
+              <label><input type="radio" name="q29" value="B"> B) Actually,</label>
+              <label><input type="radio" name="q29" value="C"> C) However,</label>
+              <label><input type="radio" name="q29" value="D"> D) Regardless,</label>
+            </div></li>
+
+          <!-- 30 -->
+          <li class="q"><div class="stem"><strong>30</strong>. Jurado Gonzalez &amp; Nasrallah prepared a stew from a 4,000-year-old recipe... Which transition fits?</div>
+            <div class="options">
+              <label><input type="radio" name="q30" value="A"> A) Therefore,</label>
+              <label><input type="radio" name="q30" value="B"> B) Alternately,</label>
+              <label><input type="radio" name="q30" value="C"> C) Nevertheless,</label>
+              <label><input type="radio" name="q30" value="D"> D) Likewise,</label>
+            </div></li>
+
+          <!-- 31 -->
+          <li class="q"><div class="stem"><strong>31</strong>. (Baking notes) Which choice most effectively emphasizes a difference between baking soda and baking powder?</div>
+            <div class="options">
+              <label><input type="radio" name="q31" value="A"> A) To make batters rise, bakers use chemical leavening agents such as baking soda and baking powder.</label>
+              <label><input type="radio" name="q31" value="B"> B) Baking soda and baking powder are chemical leavening agents that, when mixed with other ingredients, cause carbon dioxide to be released within a batter.</label>
+              <label><input type="radio" name="q31" value="C"> C) Baking soda is pure sodium bicarbonate, and honey is a type of acidic ingredient.</label>
+              <label><input type="radio" name="q31" value="D"> D) To produce carbon dioxide within a liquid batter, baking soda needs to be mixed with an acidic ingredient, whereas baking powder does not.</label>
+            </div></li>
+
+          <!-- 32 -->
+          <li class="q"><div class="stem"><strong>32</strong>. (Soo Sunny Park notes) Which choice most effectively describes Unwoven Light to an unfamiliar audience?</div>
+            <div class="options">
+              <label><input type="radio" name="q32" value="A"> A) Park’s 2013 installation Unwoven Light, which included a chain-link fence and iridescent tiles made from plexiglass, featured light as its primary medium of expression.</label>
+              <label><input type="radio" name="q32" value="B"> B) Korean American light artist Soo Sunny Park created Unwoven Light in 2013.</label>
+              <label><input type="radio" name="q32" value="C"> C) The chain-link fence in Soo Sunny Park’s Unwoven Light was fitted with tiles made from iridescent plexiglass.</label>
+              <label><input type="radio" name="q32" value="D"> D) In Unwoven Light, a 2013 work by Korean American artist Soo Sunny Park, light formed colorful prisms as it passed through a fence Park had fitted with iridescent tiles.</label>
+            </div></li>
+
+          <!-- 33 -->
+          <li class="q"><div class="stem"><strong>33</strong>. (Angkor Wat notes) Which choice most effectively presents Tan’s research to an audience unfamiliar with Angkor Wat?</div>
+            <div class="options">
+              <label><input type="radio" name="q33" value="A"> A) Tan photographed Angkor Wat’s plaster walls and then applied decorrelation stretch analysis to the photographs.</label>
+              <label><input type="radio" name="q33" value="B"> B) Decorrelation stretch analysis is a novel digital imaging technique that Tan used to enhance the contrast between colors in a photograph.</label>
+              <label><input type="radio" name="q33" value="C"> C) Using a novel digital imaging technique, Tan revealed hundreds of images hidden on the walls of Angkor Wat, a Cambodian temple.</label>
+              <label><input type="radio" name="q33" value="D"> D) Built to honor a Hindu god before becoming a Buddhist temple, Cambodia’s Angkor Wat concealed hundreds of images on its plaster walls.</label>
+            </div></li>
+
+        </ol>
+      </form>
+
+      <div id="gradingResults" class="grading-summary" style="display:none"></div>
+
+      <div class="note">When you click <strong>Save answers</strong> they are stored locally in your browser. Use <strong>Export (CSV)</strong> to download your responses.</div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'uq_rw_module1_answers_v1';
+
+    /***** existing save/load/export/clear functions (unchanged) *****/
+
+    function saveAll() {
+      const form = document.getElementById('quizForm');
+      const data = {};
+      const inputs = form.querySelectorAll('input[type="radio"]');
+      inputs.forEach(inp => {
+        if (inp.checked) data[inp.name] = inp.value;
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      alert('Answers saved locally.');
+    }
+
+    function loadAll() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) { alert('No saved answers found.'); return; }
+      const data = JSON.parse(raw);
+      // clear radios
+      document.querySelectorAll('#quizForm input[type="radio"]').forEach(r => r.checked = false);
+      Object.keys(data).forEach(k => {
+        const sel = document.querySelector(`#quizForm input[name="${k}"][value="${data[k]}"]`);
+        if (sel) sel.checked = true;
+      });
+      alert('Saved answers loaded.');
+    }
+
+    function exportCsv() {
+      const raw = localStorage.getItem(STORAGE_KEY) || '{}';
+      const data = JSON.parse(raw);
+      let csv = 'question,answer\n';
+      for (let i=1;i<=33;i++) {
+        const q = 'q'+i;
+        csv += `${q},${data[q] || ''}\n`;
+      }
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'rw_module1_answers.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    }
+
+    function clearAll() {
+      if (!confirm('Clear all selected answers on this page?')) return;
+      document.querySelectorAll('#quizForm input[type="radio"]').forEach(r => r.checked = false);
+      localStorage.removeItem(STORAGE_KEY);
+    }
+
+    document.getElementById('saveAll').addEventListener('click', saveAll);
+    document.getElementById('loadAll').addEventListener('click', loadAll);
+    document.getElementById('exportCsv').addEventListener('click', exportCsv);
+    document.getElementById('clearAll').addEventListener('click', clearAll);
+
+    // auto-load if answers exist
+    (function(){
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) loadAll();
+    })();
+
+    /***** NEW: grading functionality *****/
+
+    // Answer key for Reading & Writing Module 1 (questions 1..33)
+    const ANSWER_KEY = {
+      1: "B",2: "A",3: "A",4: "C",5: "A",6: "B",7: "D",8: "B",9: "B",10: "D",
+      11: "C",12: "D",13: "A",14: "B",15: "C",16: "A",17: "A",18: "A",19: "A",20: "D",
+      21: "D",22: "D",23: "B",24: "C",25: "B",26: "A",27: "C",28: "D",29: "A",30: "A",
+      31: "D",32: "D",33: "C"
+    };
+
+    // clear previous grading highlights
+    function clearHighlights() {
+      document.querySelectorAll('#quizForm .options label').forEach(l => {
+        l.classList.remove('option-correct','option-wrong');
+        const extra = l.querySelector('.correct-badge, .wrong-badge');
+        if (extra) extra.remove();
+      });
+      const summary = document.getElementById('gradingResults');
+      summary.style.display = 'none';
+      summary.innerHTML = '';
+    }
+
+    // get current answers from the form (not only saved)
+    function getCurrentAnswers() {
+      const answers = {};
+      for (let i=1;i<=33;i++) {
+        const name = `q${i}`;
+        const sel = document.querySelector(`#quizForm input[name="${name}"]:checked`);
+        answers[name] = sel ? sel.value : '';
+      }
+      return answers;
+    }
+
+    // grade function
+    function checkAnswers() {
+      clearHighlights();
+      const answers = getCurrentAnswers();
+      let correctCount = 0;
+      const details = [];
+
+      for (let i=1;i<=33;i++) {
+        const qName = `q${i}`;
+        const user = (answers[qName] || '').toUpperCase();
+        const correct = (ANSWER_KEY[i] || '').toUpperCase();
+
+        // mark selected option label (if any)
+        const selectedInput = document.querySelector(`#quizForm input[name="${qName}"]:checked`);
+        if (selectedInput) {
+          const selectedLabel = selectedInput.closest('label');
+          if (selectedLabel) {
+            if (user === correct && user !== '') {
+              selectedLabel.classList.add('option-correct');
+            } else {
+              selectedLabel.classList.add('option-wrong');
+            }
+          }
+        }
+
+        // always highlight the correct choice so student sees it
+        if (correct) {
+          const correctInput = document.querySelector(`#quizForm input[name="${qName}"][value="${correct}"]`);
+          if (correctInput) {
+            const correctLabel = correctInput.closest('label');
+            if (correctLabel) {
+              correctLabel.classList.add('option-correct');
+              // if student selected wrong or blank, add small badge to correct label
+              if (user !== correct) {
+                // avoid duplicate badge
+                if (!correctLabel.querySelector('.correct-badge')) {
+                  const span = document.createElement('span');
+                  span.className = 'correct-badge';
+                  span.textContent = 'Correct';
+                  correctLabel.appendChild(span);
+                }
+              }
+            }
+          }
+        }
+
+        // if student selected wrong, add a wrong badge next to their choice
+        if (selectedInput && user !== correct) {
+          const userLabel = selectedInput.closest('label');
+          if (userLabel && !userLabel.querySelector('.wrong-badge')) {
+            const span = document.createElement('span');
+            span.className = 'wrong-badge';
+            span.textContent = 'Your answer';
+            userLabel.appendChild(span);
+          }
+        }
+
+        if (user === correct && user !== '') correctCount++;
+        details.push({ q: i, user: user || '(blank)', correct: correct || '(no key)' });
+      }
+
+      // show summary
+      const summaryBox = document.getElementById('gradingResults');
+      summaryBox.style.display = 'block';
+      summaryBox.innerHTML = `<div>Reading &amp; Writing — Module 1: <strong>${correctCount} / 33</strong> correct</div>
+                              <div class="grading-details">You can review each question's highlighted option above. Correct answers are shown in green; your mistaken choices are shown in red.</div>`;
+
+      // optional: add a small table of results (collapsed by default)
+      const detailsToggle = document.createElement('button');
+      detailsToggle.className = 'btn secondary';
+      detailsToggle.style.marginTop = '0.6rem';
+      detailsToggle.textContent = 'Show detailed results';
+      let detailsVisible = false;
+      const detailsDiv = document.createElement('div');
+      detailsDiv.style.display = 'none';
+      detailsDiv.style.marginTop = '0.6rem';
+      detailsDiv.style.maxHeight = '260px';
+      detailsDiv.style.overflow = 'auto';
+      detailsDiv.style.background = '#fff';
+      detailsDiv.style.padding = '.6rem';
+      detailsDiv.style.borderRadius = '6px';
+      detailsDiv.style.border = '1px solid #eef2ff';
+      detailsDiv.innerHTML = `<table style="width:100%;border-collapse:collapse"><thead><tr><th style="text-align:left;padding:.3rem;border-bottom:1px solid #f0f0f0">Q</th><th style="text-align:left;padding:.3rem;border-bottom:1px solid #f0f0f0">Your</th><th style="text-align:left;padding:.3rem;border-bottom:1px solid #f0f0f0">Correct</th></tr></thead><tbody>` +
+        details.map(d => `<tr><td style="padding:.35rem;border-bottom:1px solid #fafafa">${d.q}</td><td style="padding:.35rem;border-bottom:1px solid #fafafa">${d.user}</td><td style="padding:.35rem;border-bottom:1px solid #fafafa">${d.correct}</td></tr>`).join('') +
+        `</tbody></table>`;
+
+      detailsToggle.addEventListener('click', () => {
+        detailsVisible = !detailsVisible;
+        detailsDiv.style.display = detailsVisible ? 'block' : 'none';
+        detailsToggle.textContent = detailsVisible ? 'Hide detailed results' : 'Show detailed results';
+      });
+
+      summaryBox.appendChild(detailsToggle);
+      summaryBox.appendChild(detailsDiv);
+      // scroll summary into view for the student
+      summaryBox.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+
+    document.getElementById('checkAnswers').addEventListener('click', checkAnswers);
+
+  </script>
+</body>
+</html>
