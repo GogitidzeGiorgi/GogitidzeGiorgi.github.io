@@ -46,7 +46,7 @@
 </head>
 <body>
 <div id="header"></div>
-    <script src="header.js"></script>
+<script src="header.js"></script>
   <div class="container">
     <div class="panel">
       <h1>SAT Practice Test – Math Module 2 (29 questions)</h1>
@@ -119,189 +119,16 @@
   </div>
 
   <script>
-    const STORAGE_KEY = 'uq_sat_math_mod2_v2';
-    const MIN_Q = 126;
-    const MAX_Q = 154;
-    const TOTAL_QUESTIONS = MAX_Q - MIN_Q + 1;
-    const QUIZ_DURATION = 35 * 60;
-
-    const ANSWER_KEY = {
-        126: "A", 127: "C", 128: "C", 129: "C", 130: "A", 131: "C", 132: "C", 133: "C", 134: "A", 135: "C", 
-        136: "C", 137: "C", 138: "A", 139: "C", 140: "C", 141: "C", 142: "A", 143: "C", 144: "C", 145: "C", 
-        146: "A", 147: "C", 148: "C", 149: "C", 150: "A", 151: "C", 152: "C", 153: "C", 154: "A"
-    };
-
     const modal = document.getElementById('customModal');
     const modalMessage = document.getElementById('modalMessage');
     const modalButtons = document.getElementById('modalButtons');
 
-    function showMessage(message, isConfirm = false, onConfirm = null) {
-      modalMessage.textContent = message;
-      modalButtons.innerHTML = '';
-      if (isConfirm) {
-        const okBtn = document.createElement('button');
-        okBtn.textContent = 'OK';
-        okBtn.className = 'btn';
-        okBtn.onclick = () => { if (onConfirm) onConfirm(); hideModal(); };
-        const cancelBtn = document.createElement('button');
-        cancelBtn.textContent = 'Cancel';
-        cancelBtn.className = 'btn secondary';
-        cancelBtn.onclick = hideModal;
-        modalButtons.appendChild(okBtn);
-        modalButtons.appendChild(cancelBtn);
-      } else {
-        const okBtn = document.createElement('button');
-        okBtn.textContent = 'OK';
-        okBtn.className = 'btn';
-        okBtn.onclick = hideModal;
-        modalButtons.appendChild(okBtn);
-      }
-      modal.classList.add('visible');
-    }
-
-    function hideModal() { modal.classList.remove('visible'); }
-
-    function saveAll() {
-      const form = document.getElementById('quizForm');
-      const data = {};
-      for (let i = MIN_Q; i <= MAX_Q; i++) {
-        const checked = form.querySelector(`input[name="q${i}"]:checked`);
-        if (checked) data[`q${i}`] = checked.value;
-      }
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-      showMessage('Answers saved locally.');
-    }
-
-    function loadAll() {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return;
-      const data = JSON.parse(raw);
-      document.querySelectorAll('#quizForm input[type="radio"]').forEach(r => r.checked = false);
-      Object.keys(data).forEach(k => {
-        const sel = document.querySelector(`#quizForm input[name="${k}"][value="${data[k]}"]`);
-        if (sel) sel.checked = true;
-      });
-    }
-    
-    function manualLoad() {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (!raw) { showMessage('No saved answers found.'); return; }
-        loadAll();
-        showMessage('Saved answers loaded.');
-    }
-
-    function exportCsv() {
-      const raw = localStorage.getItem(STORAGE_KEY) || '{}';
-      const data = JSON.parse(raw);
-      let csv = 'question,answer\n';
-      for (let i = MIN_Q; i <= MAX_Q; i++) {
-        const q = `q${i}`;
-        csv += `${i},${data[q] || ''}\n`;
-      }
-      const blob = new Blob([csv], { type: 'text/csv' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = 'sat_math_module2_answers.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-    }
-
-    function clearAll() {
-      showMessage('Clear all selected answers?', true, () => {
-        document.querySelectorAll('#quizForm input[type="radio"]').forEach(r => r.checked = false);
-        localStorage.removeItem(STORAGE_KEY);
-        clearHighlights();
-      });
-    }
-
-    function clearHighlights() {
-      document.querySelectorAll('#quizForm .options label').forEach(l => {
-        l.classList.remove('option-correct', 'option-wrong');
-        const extra = l.querySelector('.correct-badge, .wrong-badge');
-        if (extra) extra.remove();
-      });
-      document.getElementById('gradingResults').style.display = 'none';
-    }
-
-    function checkAnswers() {
-      clearHighlights();
-      let correctCount = 0;
-      for (let i = MIN_Q; i <= MAX_Q; i++) {
-        const qName = `q${i}`;
-        const sel = document.querySelector(`#quizForm input[name="${qName}"]:checked`);
-        const user = sel ? sel.value : '';
-        const correct = ANSWER_KEY[i];
-        if (user === correct && user !== '') correctCount++;
-        if (sel) {
-            const label = sel.closest('label');
-            if (user === correct) {
-                label.classList.add('option-correct');
-            } else {
-                label.classList.add('option-wrong');
-                const span = document.createElement('span');
-                span.className = 'wrong-badge';
-                span.textContent = 'Your answer';
-                label.appendChild(span);
-            }
-        }
-        if (correct) {
-            const correctInput = document.querySelector(`#quizForm input[name="${qName}"][value="${correct}"]`);
-            if (correctInput) {
-                const correctLabel = correctInput.closest('label');
-                correctLabel.classList.add('option-correct');
-                if (user !== correct) {
-                    const span = document.createElement('span');
-                    span.className = 'correct-badge';
-                    span.textContent = 'Correct';
-                    correctLabel.appendChild(span);
-                }
-            }
-        }
-      }
-      const summaryBox = document.getElementById('gradingResults');
-      summaryBox.style.display = 'block';
-      summaryBox.innerHTML = `<div>Result: <strong>${correctCount} / ${TOTAL_QUESTIONS}</strong> correct</div>`;
-      summaryBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-    
     let timerInterval = null;
     let timeRemaining = QUIZ_DURATION;
     const timerDisplay = document.getElementById('timerDisplay');
     const startBtn = document.getElementById('timerStart');
     const pauseBtn = document.getElementById('timerPause');
     const resetBtn = document.getElementById('timerReset');
-
-    function updateTimerDisplay() {
-        const minutes = Math.floor(timeRemaining / 60);
-        const seconds = timeRemaining % 60;
-        timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-    }
-
-    function startTimer() {
-        if (timerInterval) return;
-        timerInterval = setInterval(() => {
-            timeRemaining--;
-            if (timeRemaining < 0) {
-                clearInterval(timerInterval);
-                timerInterval = null;
-                timeRemaining = 0;
-                showMessage('Time is up!');
-            }
-            updateTimerDisplay();
-        }, 1000);
-        startBtn.disabled = true;
-        pauseBtn.disabled = false;
-    }
-
-    function pauseTimer() {
-        clearInterval(timerInterval);
-        timerInterval = null;
-        startBtn.disabled = false;
-        pauseBtn.disabled = true;
-    }
-
-    function resetTimer() {
-        pauseTimer();
-        timeRemaining = QUIZ_DURATION;
-        updateTimerDisplay();
-    }
 
     startBtn.addEventListener('click', startTimer);
     pauseBtn.addEventListener('click', pauseTimer);
@@ -321,6 +148,21 @@
     Check Final Score &rarr;
   </button>
 </div>
+
+<script>
+    const STORAGE_KEY = 'uq_sat_math_mod2_v2';
+    const MIN_Q = 126;
+    const MAX_Q = 154;
+    const TOTAL_QUESTIONS = MAX_Q - MIN_Q + 1;
+    const QUIZ_DURATION = 35 * 60;
+
+    const ANSWER_KEY = {
+        126: "A", 127: "C", 128: "C", 129: "C", 130: "A", 131: "C", 132: "C", 133: "C", 134: "A", 135: "C", 
+        136: "C", 137: "C", 138: "A", 139: "C", 140: "C", 141: "C", 142: "A", 143: "C", 144: "C", 145: "C", 
+        146: "A", 147: "C", 148: "C", 149: "C", 150: "A", 151: "C", 152: "C", 153: "C", 154: "A"
+    };
+
+</script>
 
 <div id="footer"></div>
  <script src="footer.js"></script>

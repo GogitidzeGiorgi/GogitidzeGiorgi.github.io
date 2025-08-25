@@ -48,7 +48,7 @@
 </head>
 <body>
 <div id="header"></div>
-    <script src="header.js"></script>
+<script src="header.js"></script>
   <div class="container">
     <div class="panel">
       <h1>Writing & Language Practice Quiz Module 2 (44 questions)</h1>
@@ -167,194 +167,13 @@ The future of literacy education <strong>(93) (remains uncertain)</strong>. What
   </div>
 
   <script>
-    const STORAGE_KEY = 'uq_writing_quiz_answers_v2';
-    const MIN_Q = 53;
-    const MAX_Q = 96;
-    const TOTAL_QUESTIONS = MAX_Q - MIN_Q + 1;
-    const QUIZ_DURATION = 35 * 60; // 35 minutes in seconds
-
-    // Answer Key
-    const ANSWER_KEY = {
-        53: "B", 54: "B", 55: "B", 56: "B", 57: "B", 58: "B", 59: "C", 60: "B", 61: "B", 62: "A", 63: "A",
-        64: "B", 65: "B", 66: "B", 67: "B", 68: "B", 69: "B", 70: "B", 71: "A", 72: "D", 73: "B", 74: "B",
-        75: "B", 76: "B", 77: "C", 78: "A", 79: "B", 80: "B", 81: "A", 82: "B", 83: "B", 84: "C", 85: "B",
-        86: "B", 87: "B", 88: "B", 89: "B", 90: "A", 91: "A", 92: "B", 93: "A", 94: "B", 95: "B", 96: "B"
-    };
-
     // --- Custom Modal Logic ---
     const modal = document.getElementById('customModal');
     const modalMessage = document.getElementById('modalMessage');
     const modalButtons = document.getElementById('modalButtons');
 
-    function showMessage(message, isConfirm = false, onConfirm = null) {
-      modalMessage.textContent = message;
-      modalButtons.innerHTML = ''; // Clear previous buttons
-
-      if (isConfirm) {
-        const okBtn = document.createElement('button');
-        okBtn.textContent = 'OK';
-        okBtn.className = 'btn';
-        okBtn.onclick = () => {
-          if (onConfirm) onConfirm();
-          hideModal();
-        };
-
-        const cancelBtn = document.createElement('button');
-        cancelBtn.textContent = 'Cancel';
-        cancelBtn.className = 'btn secondary';
-        cancelBtn.onclick = hideModal;
-        
-        modalButtons.appendChild(okBtn);
-        modalButtons.appendChild(cancelBtn);
-      } else {
-        const okBtn = document.createElement('button');
-        okBtn.textContent = 'OK';
-        okBtn.className = 'btn';
-        okBtn.onclick = hideModal;
-        modalButtons.appendChild(okBtn);
-      }
-      modal.classList.add('visible');
-    }
-
-    function hideModal() {
-      modal.classList.remove('visible');
-    }
-
-    // --- Quiz Functionality ---
-    function saveAll() {
-      const form = document.getElementById('quizForm');
-      const data = {};
-      for (let i = MIN_Q; i <= MAX_Q; i++) {
-        const checked = form.querySelector(`input[name="q${i}"]:checked`);
-        if (checked) {
-          data[`q${i}`] = checked.value;
-        }
-      }
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-      showMessage('Answers saved locally.');
-    }
-
-    function loadAll() {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) { showMessage('No saved answers found.'); return; }
-      const data = JSON.parse(raw);
-      document.querySelectorAll('#quizForm input[type="radio"]').forEach(r => r.checked = false);
-      Object.keys(data).forEach(k => {
-        const sel = document.querySelector(`#quizForm input[name="${k}"][value="${data[k]}"]`);
-        if (sel) sel.checked = true;
-      });
-      // Do not show a confirmation on auto-load, only on manual load.
-    }
     
-    function manualLoad() {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (!raw) { showMessage('No saved answers found.'); return; }
-        loadAll();
-        showMessage('Saved answers loaded.');
-    }
 
-    function exportCsv() {
-      const raw = localStorage.getItem(STORAGE_KEY) || '{}';
-      const data = JSON.parse(raw);
-      let csv = 'question,answer\n';
-      for (let i = MIN_Q; i <= MAX_Q; i++) {
-        const q = `q${i}`;
-        csv += `${i},${data[q] || ''}\n`;
-      }
-      const blob = new Blob([csv], { type: 'text/csv' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = 'writing_quiz_answers.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-    }
-
-    function clearAll() {
-      showMessage('Clear all selected answers on this page?', true, () => {
-        document.querySelectorAll('#quizForm input[type="radio"]').forEach(r => r.checked = false);
-        localStorage.removeItem(STORAGE_KEY);
-        clearHighlights();
-      });
-    }
-
-    function clearHighlights() {
-      document.querySelectorAll('#quizForm .options label').forEach(l => {
-        l.classList.remove('option-correct', 'option-wrong');
-        const extra = l.querySelector('.correct-badge, .wrong-badge');
-        if (extra) extra.remove();
-      });
-      const summary = document.getElementById('gradingResults');
-      summary.style.display = 'none';
-      summary.innerHTML = '';
-    }
-
-    function getCurrentAnswers() {
-      const answers = {};
-      for (let i = MIN_Q; i <= MAX_Q; i++) {
-        const name = `q${i}`;
-        const sel = document.querySelector(`#quizForm input[name="${name}"]:checked`);
-        answers[name] = sel ? sel.value : '';
-      }
-      return answers;
-    }
-
-    function checkAnswers() {
-      clearHighlights();
-      const answers = getCurrentAnswers();
-      let correctCount = 0;
-
-      for (let i = MIN_Q; i <= MAX_Q; i++) {
-        const qName = `q${i}`;
-        const user = (answers[qName] || '').toUpperCase();
-        const correct = (ANSWER_KEY[i] || '').toUpperCase();
-
-        const selectedInput = document.querySelector(`#quizForm input[name="${qName}"]:checked`);
-        if (selectedInput) {
-            const selectedLabel = selectedInput.closest('label');
-            if (selectedLabel) {
-                if (user === correct && user !== '') {
-                    selectedLabel.classList.add('option-correct');
-                } else {
-                    selectedLabel.classList.add('option-wrong');
-                }
-            }
-        }
-        
-        if (correct) {
-            const correctInput = document.querySelector(`#quizForm input[name="${qName}"][value="${correct}"]`);
-            if (correctInput) {
-                const correctLabel = correctInput.closest('label');
-                if (correctLabel) {
-                    correctLabel.classList.add('option-correct');
-                    if (user !== correct) {
-                        if (!correctLabel.querySelector('.correct-badge')) {
-                            const span = document.createElement('span');
-                            span.className = 'correct-badge';
-                            span.textContent = 'Correct';
-                            correctLabel.appendChild(span);
-                        }
-                    }
-                }
-            }
-        }
-
-        if (selectedInput && user !== correct) {
-            const userLabel = selectedInput.closest('label');
-            if (userLabel && !userLabel.querySelector('.wrong-badge')) {
-                const span = document.createElement('span');
-                span.className = 'wrong-badge';
-                span.textContent = 'Your answer';
-                userLabel.appendChild(span);
-            }
-        }
-
-        if (user === correct && user !== '') correctCount++;
-      }
-
-      const summaryBox = document.getElementById('gradingResults');
-      summaryBox.style.display = 'block';
-      summaryBox.innerHTML = `<div>Quiz Result: <strong>${correctCount} / ${TOTAL_QUESTIONS}</strong> correct</div>
-                              <div class="grading-details">Review your answers above. Correct answers are green; your incorrect choices are red.</div>`;
-      summaryBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-    
     // --- Timer Logic ---
     let timerInterval = null;
     let timeRemaining = QUIZ_DURATION;
@@ -364,40 +183,6 @@ The future of literacy education <strong>(93) (remains uncertain)</strong>. What
     const pauseBtn = document.getElementById('timerPause');
     const resetBtn = document.getElementById('timerReset');
 
-    function updateTimerDisplay() {
-        const minutes = Math.floor(timeRemaining / 60);
-        const seconds = timeRemaining % 60;
-        timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-    }
-
-    function startTimer() {
-        if (timerInterval) return;
-        timerInterval = setInterval(() => {
-            timeRemaining--;
-            if (timeRemaining < 0) {
-                clearInterval(timerInterval);
-                timerInterval = null;
-                timeRemaining = 0;
-                showMessage('Time is up!');
-            }
-            updateTimerDisplay();
-        }, 1000);
-        startBtn.disabled = true;
-        pauseBtn.disabled = false;
-    }
-
-    function pauseTimer() {
-        clearInterval(timerInterval);
-        timerInterval = null;
-        startBtn.disabled = false;
-        pauseBtn.disabled = true;
-    }
-
-    function resetTimer() {
-        pauseTimer();
-        timeRemaining = QUIZ_DURATION;
-        updateTimerDisplay();
-    }
 
     startBtn.addEventListener('click', startTimer);
     pauseBtn.addEventListener('click', pauseTimer);
@@ -427,5 +212,26 @@ The future of literacy education <strong>(93) (remains uncertain)</strong>. What
 
 <div id="footer"></div>
  <script src="footer.js"></script>
+ 
+<script src="quiz-logic.js"></script>
+
+<script>
+    const STORAGE_KEY = 'uq_writing_quiz_answers_v2';
+    const MIN_Q = 53;
+    const MAX_Q = 96;
+    const TOTAL_QUESTIONS = MAX_Q - MIN_Q + 1;
+    const QUIZ_DURATION = 35 * 60; // 35 minutes in seconds
+
+    // Answer Key
+    const ANSWER_KEY = {
+        53: "B", 54: "B", 55: "B", 56: "B", 57: "B", 58: "B", 59: "C", 60: "B", 61: "B", 62: "A", 63: "A",
+        64: "B", 65: "B", 66: "B", 67: "B", 68: "B", 69: "B", 70: "B", 71: "A", 72: "D", 73: "B", 74: "B",
+        75: "B", 76: "B", 77: "C", 78: "A", 79: "B", 80: "B", 81: "A", 82: "B", 83: "B", 84: "C", 85: "B",
+        86: "B", 87: "B", 88: "B", 89: "B", 90: "A", 91: "A", 92: "B", 93: "A", 94: "B", 95: "B", 96: "B"
+    };
+
+
+  document.getElementById('checkAnswers').addEventListener('click', checkAnswers);
+</script>
 </body>
 </html>
