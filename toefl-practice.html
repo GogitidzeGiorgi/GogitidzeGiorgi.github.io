@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -18,6 +18,8 @@
           background:#2563eb; color:#fff; border:none; cursor:pointer; transition:background .2s, transform .1s;}
     .btn:hover {background:#1e4ed8; transform:translateY(-1px);} 
     .btn.secondary {background:#e5e7eb; color:#111;} .btn.secondary:hover {background:#d1d5db;}
+    .primary-large {padding:.85rem 1.4rem; font-size:1.05rem; border-radius:10px}
+    .btn.ghost {background:transparent; color:#2563eb; border:1px solid #cfe1ff}
     iframe.pdf-viewer {width:100%; height:900px; border:1px solid #ddd; border-radius:8px;}
     table.info {width:100%; border-collapse:collapse; margin-top:.75rem;}
     table.info th, table.info td {padding:.6rem; border-bottom:1px solid #f0f0f0; text-align:left;}
@@ -42,6 +44,8 @@
     .mcq label:hover {background:#f3f4ff;}
     .mcq label.selected {background:#eef2ff; border-color:#c7d2fe;}
     .numeric-input {display:none;}
+    .section-buttons {display:flex;gap:.6rem;margin-top:.6rem}
+    .section-buttons .btn {font-weight:700}
     @media (max-width:1150px){ .grid{grid-template-columns:1fr 480px} iframe.pdf-viewer{height:700px} }
     @media (max-width:800px){ .grid{grid-template-columns:1fr} iframe.pdf-viewer{height:600px} }
   </style>
@@ -81,8 +85,15 @@
 
       <hr>
 
-      <h3>Modules (click to select)</h3>
-      <div class="controls">
+      <h3>Quick sections</h3>
+      <div class="section-buttons">
+        <!-- top-level buttons that jump to the first page of that section -->
+        <button class="btn primary-large" id="btn-rw" data-start="12" data-default-mod="rw1">Reading &amp; Writing</button>
+        <button class="btn primary-large" id="btn-math" data-start="32" data-default-mod="m1">Math</button>
+      </div>
+
+      <h3 style="margin-top:1rem">Modules (click to select)</h3>
+      <div class="controls" id="module-controls">
         <button class="btn" data-start="12" data-end="17" data-mins="39" data-name="rw1">Reading &amp; Writing — Module 1</button>
         <button class="btn" data-start="18" data-end="30" data-mins="39" data-name="rw2">Reading &amp; Writing — Module 2</button>
         <button class="btn" data-start="32" data-end="39" data-mins="43" data-name="m1">Math — Module 1</button>
@@ -174,7 +185,7 @@
    * Answer-checking + grading implementation (modified input UI)
    **************************************************************************/
 
-  // Correct answer key (as before)
+  // Correct answer key (unchanged from user's original)
   const CORRECT = {
     rw1: {
       1:"B",2:"A",3:"A",4:"C",5:"A",6:"B",7:"D",8:"B",9:"B",10:"D",
@@ -201,7 +212,7 @@
   };
 
   // Ranges (unchanged)
-  const RW_RANGES = [ /* ... as in previous code ... */
+  const RW_RANGES = [ /* ... existing ranges ... */
     [200,200],[200,200],[200,200],[200,200],[200,200],[200,200],[200,200],
     [200,210],[200,220],[210,230],[230,250],[240,260],[250,270],[260,280],[280,300],[290,310],
     [320,340],[340,360],[350,370],[360,380],[370,390],[370,390],[380,400],[390,410],[400,420],
@@ -270,7 +281,7 @@
       const diff = Math.abs(userNum - corrNum);
       return diff < 0.05 || (Math.abs((userNum - corrNum) / Math.max(1, Math.abs(corrNum))) < 0.02);
     }
-    const variants = correct.split(/;|\/|,/).map(s => s.trim()).filter(Boolean);
+  const variants = correct.split(/[;\/,]/).map(s => s.trim()).filter(Boolean);
     if (variants.length > 1) {
       for (const v of variants) { if (isAnswerCorrect(user, v)) return true; }
     }
@@ -406,7 +417,59 @@
     const a = document.createElement('a'); a.href = url; a.download = 'uq_answers_export.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
   }
 
-  // wire up UI events
+  // --- Timer implementation (basic start / pause / reset)
+  let timerInterval = null;
+  let remainingSeconds = 0;
+  let currentModuleKey = null;
+
+  function formatTime(sec) {
+    const m = Math.floor(sec/60).toString().padStart(2,'0');
+    const s = (sec%60).toString().padStart(2,'0');
+    return `${m}:${s}`;
+  }
+
+  function setTimerForMins(mins) {
+    remainingSeconds = Math.max(0, Math.floor(mins*60));
+    document.getElementById('timer').textContent = formatTime(remainingSeconds);
+  }
+
+  function startTimer() {
+    if (timerInterval) return; // already running
+    timerInterval = setInterval(()=>{
+      if (remainingSeconds <= 0) { clearInterval(timerInterval); timerInterval = null; alert('Time is up for this module'); return; }
+      remainingSeconds--;
+      document.getElementById('timer').textContent = formatTime(remainingSeconds);
+    }, 1000);
+    document.getElementById('pause').textContent = 'Pause';
+    document.getElementById('pause').disabled = false;
+  }
+
+  function pauseTimer() {
+    if (timerInterval) { clearInterval(timerInterval); timerInterval = null; document.getElementById('pause').textContent = 'Resume'; }
+    else { startTimer(); }
+  }
+
+  function resetTimer() {
+    if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+    const btn = document.querySelector('button[data-name="'+(currentModuleKey||'')+'"]');
+    if (btn) {
+      const mins = Number(btn.getAttribute('data-mins')) || 0;
+      setTimerForMins(mins);
+      document.getElementById('pause').textContent = 'Start';
+      document.getElementById('pause').disabled = false;
+    } else {
+      remainingSeconds = 0; document.getElementById('timer').textContent = '00:00'; document.getElementById('pause').disabled = true; document.getElementById('pause').textContent = 'Start';
+    }
+  }
+
+  // Finish module: stop timer and mark module finished
+  function finishModule() {
+    if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+    document.getElementById('current-module').textContent = 'Finished';
+    document.getElementById('pause').disabled = true;
+  }
+
+  // wire up UI events for answers
   document.getElementById('ans-module').addEventListener('change', updateAnswerInputUI);
   document.getElementById('save-answer').addEventListener('click', saveAnswerFromUI);
   document.getElementById('download-answers').addEventListener('click', exportCSV);
@@ -421,16 +484,61 @@
     btn.addEventListener('click', () => {
       const start = btn.getAttribute('data-start');
       const name = btn.getAttribute('data-name');
+      const mins = Number(btn.getAttribute('data-mins')) || 0;
       const iframe = document.getElementById('pdf-frame');
       if (start && start !== '-') {
         iframe.src = 'tests/practice/sat-practice-test-4-digital.pdf#page=' + start;
       }
-      document.getElementById('current-module').textContent = name;
+      currentModuleKey = name || null;
+      document.getElementById('current-module').textContent = modLabel(name || '') || name;
+      // set timer
+      setTimerForMins(mins);
+      // enable start/pause
       const pauseBtn = document.getElementById('pause');
       pauseBtn.disabled = false;
       pauseBtn.textContent = 'Start';
+      // visually highlight selected module
+      document.querySelectorAll('#module-controls button').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      // also select the matching option in answer sheet
+      const ansSel = document.getElementById('ans-module');
+      if (name && ['rw1','rw2','m1','m2'].includes(name)) ansSel.value = name;
+      updateAnswerInputUI();
     });
   });
+
+  // top-level section buttons (jump to the first module of the section)
+  document.getElementById('btn-rw').addEventListener('click', (e) => {
+    const start = e.target.getAttribute('data-start');
+    const defaultMod = e.target.getAttribute('data-default-mod');
+    const iframe = document.getElementById('pdf-frame');
+    iframe.src = 'tests/practice/sat-practice-test-4-digital.pdf#page=' + start;
+    // find the module button for rw1 and simulate click to set timer etc.
+    const targetBtn = document.querySelector('button[data-name="'+defaultMod+'"]');
+    if (targetBtn) targetBtn.click();
+  });
+
+  document.getElementById('btn-math').addEventListener('click', (e) => {
+    const start = e.target.getAttribute('data-start');
+    const defaultMod = e.target.getAttribute('data-default-mod');
+    const iframe = document.getElementById('pdf-frame');
+    iframe.src = 'tests/practice/sat-practice-test-4-digital.pdf#page=' + start;
+    const targetBtn = document.querySelector('button[data-name="'+defaultMod+'"]');
+    if (targetBtn) targetBtn.click();
+  });
+
+  // start / pause / reset / finish wiring
+  document.getElementById('pause').addEventListener('click', () => {
+    // if labeled Start -> begin countdown
+    const v = document.getElementById('pause').textContent.toLowerCase();
+    if (v.includes('start') || v.includes('resume')) {
+      startTimer();
+    } else {
+      pauseTimer();
+    }
+  });
+  document.getElementById('reset').addEventListener('click', resetTimer);
+  document.getElementById('finish').addEventListener('click', finishModule);
 
   </script>
 </body>
