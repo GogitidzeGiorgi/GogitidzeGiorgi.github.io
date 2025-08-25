@@ -40,16 +40,24 @@
       <h1>Reading &amp; Writing — Module 1 (33 questions)</h1>
       <p class="lead">Test begins on the next page. All questions below are multiple-choice.</p>
       <div class="controls">
-        <button class="btn" id="saveAll">Save answers</button>
-        <button class="btn secondary" id="loadAll">Load saved</button>
-        <button class="btn" id="exportCsv">Export (CSV)</button>
-        <button class="btn secondary" id="clearAll">Clear</button>
+  <button class="btn" id="saveAll">Save answers</button>
+  <button class="btn secondary" id="loadAll">Load saved</button>
+  <button class="btn" id="exportCsv">Export (CSV)</button>
+  <button class="btn secondary" id="clearAll">Clear</button>
 
-        <!-- NEW: Check / Grade -->
-        <button class="btn" id="checkAnswers" style="margin-left:.5rem">Check / Grade</button>
+  <!-- TIMER UI (add this) -->
+  <div id="timerContainer" style="display:flex;align-items:center;gap:.5rem;margin-left:8px">
+    <div id="timerDisplay" style="font-weight:700;font-size:0.95rem;background:#fff;padding:.35rem .6rem;border-radius:6px;border:1px solid #e6e6e6">
+      39:00
+    </div>
+    <button class="btn secondary" id="timerStart">Start</button>
+    <button class="btn secondary" id="timerPause" disabled>Pause</button>
+    <button class="btn" id="timerReset">Reset</button>
+  </div>
 
-        <div style="margin-left:auto" class="small">Answers saved to your browser (localStorage)</div>
-      </div>
+  <div style="margin-left:auto" class="small">Answers saved to your browser (localStorage)</div>
+</div>
+
       <hr style="margin-top:1rem;margin-bottom:1rem;border:none;height:1px;background:#f0f3ff">
 
       <form id="quizForm">
@@ -430,6 +438,97 @@
     document.getElementById('loadAll').addEventListener('click', loadAll);
     document.getElementById('exportCsv').addEventListener('click', exportCsv);
     document.getElementById('clearAll').addEventListener('click', clearAll);
+
+
+
+/* ===== Timer: add below your other functions, before the (function(){ ... }) auto-load call ===== */
+
+const TIMER_DEFAULT_MINUTES = 39; // change this if you want a different default
+let timerSeconds = TIMER_DEFAULT_MINUTES * 60;
+let timerInterval = null;
+
+function formatTime(seconds) {
+  const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+  const s = (seconds % 60).toString().padStart(2, '0');
+  return `${m}:${s}`;
+}
+
+function updateTimerDisplay() {
+  const disp = document.getElementById('timerDisplay');
+  if (disp) disp.textContent = formatTime(timerSeconds);
+}
+
+function startTimer() {
+  if (timerInterval) return; // already running
+  // optional: disable Clear while running: document.getElementById('clearAll').disabled = true;
+  timerInterval = setInterval(() => {
+    if (timerSeconds <= 0) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      updateTimerDisplay();
+      // enable/disable buttons appropriately
+      document.getElementById('timerStart').disabled = true;
+      document.getElementById('timerPause').disabled = true;
+      alert('Time is up for this module.');
+      return;
+    }
+    timerSeconds--;
+    updateTimerDisplay();
+  }, 1000);
+  document.getElementById('timerStart').disabled = true;
+  document.getElementById('timerPause').disabled = false;
+  document.getElementById('timerPause').textContent = 'Pause';
+}
+
+function pauseTimer() {
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    document.getElementById('timerStart').disabled = false;
+    document.getElementById('timerPause').textContent = 'Resume';
+  } else {
+    // resume
+    startTimer();
+    document.getElementById('timerPause').textContent = 'Pause';
+  }
+}
+
+function resetTimer() {
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+  timerSeconds = TIMER_DEFAULT_MINUTES * 60;
+  updateTimerDisplay();
+  document.getElementById('timerStart').disabled = false;
+  document.getElementById('timerPause').disabled = true;
+  document.getElementById('timerPause').textContent = 'Pause';
+  // optional: re-enable Clear button if you disabled it earlier
+  // document.getElementById('clearAll').disabled = false;
+}
+
+/* attach event listeners */
+document.getElementById('timerStart').addEventListener('click', startTimer);
+document.getElementById('timerPause').addEventListener('click', pauseTimer);
+document.getElementById('timerReset').addEventListener('click', resetTimer);
+
+/* initialize display */
+updateTimerDisplay();
+
+/* optional: if you want the timer to persist between page reloads (sessionStorage),
+   you can add code here to save timerSeconds and timerInterval state to sessionStorage
+   and restore it on load. I left that out to keep it simple. */
+
+/* optional helper: disable the Check button while the timer is running:
+document.getElementById('timerStart').addEventListener('click', () => {
+  document.getElementById('checkAnswers')?.setAttribute('disabled', 'true');
+});
+document.getElementById('timerReset').addEventListener('click', () => {
+  document.getElementById('checkAnswers')?.removeAttribute('disabled');
+});
+*/
+
+
 
     // auto-load if answers exist
     (function(){
