@@ -339,28 +339,21 @@
     document.getElementById('grading-results').innerHTML = outHtml;
     renderSavedAnswers(highlights);
   }
+function updateAnswerInputUI() {
+  // Always show MCQ options for every module (including math)
+  const mcqArea = document.getElementById('mcq-area');
+  const numericArea = document.getElementById('numeric-area');
+  if (mcqArea) mcqArea.style.display = 'block';
+  if (numericArea) numericArea.style.display = 'none';
 
-  // NEW: toggle MCQ vs numeric input depending on module
-  function updateAnswerInputUI() {
-    const mod = document.getElementById('ans-module').value;
-    const mcqArea = document.getElementById('mcq-area');
-    const numericArea = document.getElementById('numeric-area');
-    // if module starts with 'm' -> math -> show numeric input
-    if (mod && mod.startsWith('m')) {
-      mcqArea.style.display = 'none';
-      numericArea.style.display = 'block';
-      // clear radios
-      document.querySelectorAll('input[name="mcq"]').forEach(r=> r.checked = false);
-      // focus numeric input
-      document.getElementById('ans-choice-text').focus();
-    } else {
-      mcqArea.style.display = 'block';
-      numericArea.style.display = 'none';
-      document.getElementById('ans-choice-text').value = '';
-    }
-    // remove .selected class from MCQ labels
-    document.querySelectorAll('#mcq-area label').forEach(l => l.classList.remove('selected'));
-  }
+  // Clear numeric box and radios for a clean start
+  const txt = document.getElementById('ans-choice-text');
+  if (txt) txt.value = '';
+
+  document.querySelectorAll('input[name="mcq"]').forEach(r => r.checked = false);
+  document.querySelectorAll('#mcq-area label').forEach(l => l.classList.remove('selected'));
+}
+
 
   // set label selected state when radio chosen (visual feedback)
   document.addEventListener('click', (e) => {
