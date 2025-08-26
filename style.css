@@ -22,8 +22,7 @@
 
 /* Hero Section */
 
-.hero h1 { font-size: 2.5rem; }
-/* Hero Section */
+  .hero h1 { font-size: 2.5rem; }
     #hero { position: relative; overflow: hidden; height: 500px; text-align: center; }
     .hero-illustration {
       position: absolute;
@@ -104,8 +103,6 @@ footer p {
     html, body {
   height: 100%;       /* full height */
   margin: 0;
-  display: flex;
-  flex-direction: column;
 }
 #hero {
   flex: 1;            /* expand hero to fill leftover space between header + footer */
