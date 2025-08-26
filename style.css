@@ -21,17 +21,7 @@
     .nav-cta a:hover { background: #067880; color: #fff; }
 
 /* Hero Section */
-.hero {
-  position: relative;
-  overflow: hidden;
-  height: 300px;
- /* background: #063651; */
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
+
 .hero h1 { font-size: 2.5rem; }
 /* Hero Section */
     #hero { position: relative; overflow: hidden; height: 500px; text-align: center; }
