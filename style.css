@@ -110,3 +110,38 @@ footer p {
 header, footer {
   flex-shrink: 0;
 }
+
+/* Language Switcher Container */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Adds space between the flags */
+}
+
+/* Common style for the flag images */
+.lang-switcher img {
+  width: 32px;
+  height: auto;
+  display: block; /* Removes extra space below the image */
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* Style for the flag that links to the OTHER language (makes it look inactive) */
+.lang-switcher .lang-flag-link {
+  opacity: 0.6;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* Make the inactive flag fully visible on hover */
+.lang-switcher .lang-flag-link:hover {
+  opacity: 1;
+}
+
+/* Style for the CURRENT language flag (makes it look active) */
+.lang-switcher .lang-flag-current img {
+  opacity: 1;
+  /* Optional: Adds a subtle blue glow to the active flag */
+  box-shadow: 0 0 6px rgba(0, 82, 155, 0.7);
+  border: 1px solid #00529B;
+}

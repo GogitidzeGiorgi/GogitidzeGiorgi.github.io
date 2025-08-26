@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="images/logo.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - UniQuest</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* palette: #62a6b1, #067880, #2e8699, #063651, #69e0ce */
+        /* Reset & Base */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #063651; background: #f0f3f5; line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+
+        /* Reusing Navigation and Footer styles from your existing pages */
+        nav { background: #fff; padding: 1rem 2rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 10; }
+        .nav-container { max-width: 1200px; margin: auto; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.5rem; font-weight: bold; color: #063651; }
+        .nav-logo img { height: 40px; width: auto; object-fit: contain; }
+        .nav-links { display: flex; gap: 1.5rem; }
+        .nav-links a { font-size: 0.95rem; color: #555; transition: color 0.2s; }
+        .nav-links a:hover { color: #067880; }
+        .nav-cta a { padding: 0.5rem 1.2rem; border-radius: 20px; border: 1px solid #067880; color: #067880; font-weight: 500; transition: background 0.2s, color 0.2s; }
+        .nav-cta a:hover { background: #067880; color: #fff; }
+
+        /* Hero Section for About Page */
+        #hero { position: relative; overflow: hidden; height: 300px; text-align: center; background: #063651; }
+        .hero-illustration { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: auto; min-height: 100%; object-fit: cover; z-index: 1; opacity: 0.15; }
+        #hero::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(0deg, rgba(6,54,81,0.5) 0%, rgba(6,54,81,0.2) 100%); z-index: 2; }
+        #hero .content { position: relative; max-width: 800px; margin: auto; top: 50%; transform: translateY(-50%); z-index: 3; color: #fff; }
+        #hero h1 { font-size: 2.8rem; margin-bottom: 1rem; line-height: 1.2; }
+        #hero p { font-size: 1.1rem; max-width: 600px; margin: 0 auto; color: rgba(255,255,255,0.9); }
+
+        /* Main About Content Section */
+        .about-container {
+            max-width: 900px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .about-section {
+            margin-bottom: 3rem;
+        }
+        .about-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .about-section h2 {
+            font-size: 2rem;
+            color: #2e8699;
+            margin-bottom: 1rem;
+            text-align: center;
+            border-bottom: 2px solid #69e0ce;
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-section p {
+            font-size: 1.05rem;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        /* Features Section Styling */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .feature-card {
+            text-align: center;
+            padding: 1.5rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.07);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #067880;
+            margin-bottom: 1rem;
+        }
+        .feature-card h3 {
+            font-size: 1.2rem;
+            color: #063651;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer { background: #063651; color: #fff; padding: 2rem 1rem; margin-top: 0; }
+        .footer-container { max-width: 1000px; margin: auto; display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; }
+        .social-icons { display: flex; gap: 1rem; justify-content: center; }
+        .social-icons a { color: #fff; font-size: 1.5rem; transition: color 0.3s; }
+        .social-icons a.facebook:hover { color: #1877F2; }
+        .social-icons a.twitter:hover { color: #1DA1F2; }
+        .social-icons a.instagram:hover { color: #E4405F; }
+        .footer-contact { font-size: 0.95rem; }
+        .footer-contact, footer p { text-align: center; width: 100%; }
+        
+        @media (max-width: 768px) {
+            #hero h1 { font-size: 2.2rem; }
+            .about-container { padding: 1.5rem; margin: 2rem auto; }
+        }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+    <script src="header.js"></script>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <img src="images/coverimage.png" alt="Illustration of students and books" class="hero-illustration">
+        <div class="content">
+            <h1>Paving Your Path to International Education</h1>
+            <p>Learn more about our mission and how we help students achieve their dreams.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <div class="about-container">
+            <!-- Our Story Section -->
+            <section class="about-section">
+                <div class="section-header">
+                    <h2>Our Story</h2>
+                </div>
+                <p>
+                    The idea for UniQuest was born from a dream that didn't come true. We were a group of students who dreamed of studying abroad, filled with excitement for new cultures and world-class education. But as we dove into the application process, that excitement turned into frustration.
+
+We faced a confusing maze of deadlines, conflicting information, and endless paperwork. It felt overwhelming and impossible to navigate alone. We eventually had to give up on our dream, not because we weren't capable, but because the process itself was a barrier. This experience sparked a new mission: to build the platform we wish we'd had. We created UniQuest to ensure no other student has to abandon their dream because of a complicated and confusing application process.
+                </p>
+                <p>
+                    This experience inspired us to create a unified platform to simplify this chaotic process. Our goal is to provide every student with a clear, step-by-step roadmap and all the necessary resources to make the application period focused and organized, not stressful.
+                </p>
+            </section>
+
+            <!-- Our Mission Section -->
+            <section class="about-section">
+                <div class="section-header">
+                    <h2>Our Mission</h2>
+                </div>
+                <p>
+                    Our mission is to make international education accessible to everyone. We want every student to have access to reliable information and the tools they need to get into their dream university. We believe that with the right planning and resources, any goal is achievable.
+                </p>
+            </section>
+
+            <!-- Why Choose Us Section -->
+            <section class="about-section">
+                <div class="section-header">
+                    <h2>Why UniQuest?</h2>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-map-signs"></i></div>
+                        <h3>Comprehensive Roadmap</h3>
+                        <p>Our roadmap covers every stage of the application process—from university selection to securing your visa.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-book-open"></i></div>
+                        <h3>All-in-One Resources</h3>
+                        <p>Get access to prep materials for TOEFL, IELTS, GRE/GMAT, and other essential application resources.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                        <h3>Simplicity & Organization</h3>
+                        <p>Forget the chaos. Our platform helps you stay organized and never miss an important detail.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+<div id="footer"></div>
+
+ <script src="footer.js"></script>
+
+</body>
+</html>

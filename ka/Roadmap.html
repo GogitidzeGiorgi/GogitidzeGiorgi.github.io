@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+ <link rel="icon" href="images/logo.png" type="image/png">
+
+ <meta charset="UTF-8">
+
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+ <title>უნიქვესთის გზამკვლევი</title>
+
+ <!-- Font Awesome for social media icons -->
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+ <style>
+
+  /* palette: #62a6b1, #067880, #2e8699, #063651, #69e0ce */
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #063651; background: #f0f3f5; line-height:1.45; }
+
+  a { text-decoration: none; color: inherit; }
+
+
+
+  /* Navigation */
+
+  nav { background: #fff; padding: 1rem 2rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 10; }
+
+  .nav-container { max-width: 1200px; margin: auto; display: flex; align-items: center; justify-content: space-between; }
+
+  .nav-logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.25rem; font-weight: 700; color: #063651; }
+
+  .nav-logo img { height: 40px; width: auto; object-fit: contain; }
+
+  .nav-links { display: flex; gap: 1.25rem; }
+
+  .nav-links a { font-size: 0.95rem; color: #555; transition: color 0.2s; }
+
+  .nav-links a:hover { color: #067880; }
+
+  .nav-cta a { padding: 0.45rem 1rem; border-radius: 20px; border: 1px solid #067880; color: #067880; font-weight: 600; transition: background 0.2s, color 0.2s; }
+
+  .nav-cta a:hover { background: #067880; color: #fff; }
+
+
+
+  /* Hero Section */
+
+  #hero { position: relative; overflow: hidden; height: 210px; text-align: center; }
+
+  .hero-illustration { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: auto; min-height: 100%; object-fit: cover; z-index: 1; }
+
+  #hero::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(6,54,81,0.4); z-index: 2; }
+
+  #hero .content { position: relative; max-width: 900px; margin: auto; top: 50%; transform: translateY(-50%); z-index: 3; color: #fff; }
+
+  #hero h1 { font-size: 2.6rem; margin-bottom: 0.6rem; line-height: 1.12; }
+
+  #hero p { font-size: 1.05rem; margin-bottom: 1.5rem; }
+
+  #hero .btn-primary { background: #69e0ce; color: #063651; padding: 0.75rem 1.8rem; border-radius: 30px; font-size: 1rem; font-weight: 600; transition: background 0.2s; }
+
+  #hero .btn-primary:hover { background: #62a6b1; }
+
+
+
+  /* Roadmap wrapper */
+
+  #roadmap { max-width: 1000px; margin: 2.25rem auto 4rem; padding: 0 1rem; }
+
+
+
+  /* Compact progress info (replaces the bar) */
+
+  .progress-wrap { background: #fff; padding: 0.8rem 1rem; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); margin-bottom: 1rem; display:flex; gap:1rem; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+
+  .progress-left { display:flex; gap:1rem; align-items:center; }
+
+  .progress-label { font-weight:700; color:#063651; }
+
+  .progress-info { color:#2e8699; font-weight:700; }
+
+
+
+  .progress-actions { display:flex; gap:.6rem; align-items:center; }
+
+
+
+  .small-btn { background:transparent; border:1px solid rgba(6,54,81,0.08); padding:.5rem .6rem; border-radius:8px; cursor:pointer; font-weight:600; color:#063651; }
+
+  .small-btn.ghost { background:transparent; }
+
+  .small-btn.warn { color:#d9534f; border-color: rgba(217,83,79,0.12); }
+
+
+
+  /* Steps grid */
+
+  .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 1rem; margin-top:1rem; }
+
+  .step-card { position:relative; background: #fff; padding: 1.2rem; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); transition: transform .18s, box-shadow .18s; display:block; color:inherit; }
+
+  .step-card:hover { transform: translateY(-6px); box-shadow: 0 14px 26px rgba(0,0,0,0.09); }
+
+  .step-number { width: 42px; height: 42px; background: #067880; color: #fff; border-radius: 50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1.05rem; margin-bottom:8px; flex-shrink:0; }
+
+  .step-title { font-size: 1.05rem; font-weight:700; margin-bottom:.5rem; color:#063651; }
+
+  .step-desc { font-size: .95rem; color: #555; }
+
+
+
+  .step-meta { display:flex; justify-content:space-between; gap: 0.5rem; align-items:flex-start; }
+
+  .step-left { display:flex; gap: .75rem; align-items:flex-start; }
+
+
+
+  /* completed look */
+
+  .step-card.completed .step-number { background: linear-gradient(90deg,#62a6b1 0%, #69e0ce 100%); color:#063651; box-shadow: 0 4px 12px rgba(98,166,177,0.12); }
+
+  .step-card.completed .step-title { text-decoration: line-through; color: #2e8699; }
+
+  .step-card .complete-toggle { position:absolute; top:10px; right:10px; background:transparent; border:0; cursor:pointer; padding:.35rem; border-radius:8px; }
+
+  .complete-toggle .fa-check-circle { color: rgba(0,0,0,0.12); font-size:1.1rem; transition: color .15s, transform .15s; }
+
+  .step-card.completed .complete-toggle .fa-check-circle { color:#063651; transform:scale(1.06); }
+
+
+
+  .step-link { display:block; width:100%; height:100%; padding:0; color:inherit; }
+
+
+
+  /* Footer */
+
+  footer { background: #063651; color: #fff; padding: 2rem 1rem; margin-top: 0; }
+
+  .footer-container { max-width: 1000px; margin: auto; display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; }
+
+  .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+
+  .footer-links a { color: #fff; font-size: 0.95rem; transition: color 0.3s; }
+
+  .footer-links a:hover { color: #69e0ce; }
+
+  .social-icons { display: flex; gap: 1rem; justify-content: center; }
+
+  .social-icons a { color: #fff; font-size: 1.5rem; transition: color 0.3s; }
+
+  .social-icons a.facebook:hover { color: #1877F2; }  /* Facebook Blue */
+
+  .social-icons a.twitter:hover { color: #1DA1F2; }  /* Twitter Blue */
+
+  .social-icons a.instagram:hover { color: #E4405F; } /* Instagram Pink */
+
+  .footer-contact { font-size: 0.95rem; }
+
+  .footer-contact,
+
+footer p {
+  /* Following two lines are necessary for horizontal row of buttons, otherwise it's vertical */
+ text-align: center;
+ width: 100%;
+ /* Do not remove */
+}
+
+    html, body {
+  display: inline;
+}
+ </style>
+
+</head>
+
+<body>
+
+ <!-- Header placeholder -->
+
+ <div id="header"></div>
+
+ <!-- Load nav -->
+
+ <script src="header.js"></script>
+
+
+ <section id="hero">
+
+  <img src="coverimage.png" alt="Educational Illustration" class="hero-illustration">
+
+  <div class="content">
+  <h1>სააპლიკაციო გზამკვლევი</h1>
+  <p>პროგრამების შერჩევიდან ვიზის მიღებამდე - მიჰყევით ჩვენს გზამკვლევს ყველა ეტაპზე.</p>
+</div>
+
+ </section>
+
+
+
+ <section id="roadmap">
+
+  <h2 style="text-align:center; color:#2e8699; margin-bottom:.75rem;">სააპლიკაციო გზამკვლევი</h2>
+
+
+
+
+
+  <!-- steps -->
+
+  <div class="steps-grid" id="steps-list" aria-live="polite"></div>
+
+ </section>
+
+
+
+<!-- Compact progress info -->
+
+  <div class="progress-wrap" role="region" aria-label="Roadmap controls">
+
+   <div class="progress-left">
+
+    <div class="progress-label">შენი ქვესთი</div>
+
+    <div class="progress-info" id="progress-info">შესრულებულია 0 / 10</div>
+
+   </div>
+
+
+
+   <div style="display:flex; gap:1rem; align-items:center;">
+
+    <div class="progress-actions">
+
+     <button class="small-btn" id="mark-all">ყველას მონიშვნა შესრულებულად</button>
+<button class="small-btn warn" id="reset">განულება</button>
+
+    </div>
+
+   </div>
+
+  </div>
+
+<div id="footer"></div>
+
+ <script src="footer.js"></script>
+
+
+
+<script>
+
+ (function(){
+
+  const STORAGE_KEY = 'uniquest_roadmap_progress_v1';
+
+
+
+  const steps = [
+    { title: 'უნივერსიტეტების მოძიება', description: 'მოიძიეთ სამიზნე უნივერსიტეტები და პროგრამები საზღვარგარეთ.', link: 'research-universities.html' },
+    { title: 'ტესტებისთვის მომზადება', description: 'დარეგისტრირდით და მოემზადეთ TOEFL, IELTS, GRE/GMAT-ისთვის.', link: 'prepare-tests.html' },
+    { title: 'ვადები', description: 'მოაქციეთ ვადები ერთ სისტემაში და აკონტროლეთ განაცხადები.', link: 'deadlines-tracking.html' },
+    { title: 'მოთხოვნილებები და დოკუმენტები', description: 'შეაგროვეთ ნიშნების ფურცლები, სარეკომენდაციო წერილები, CV/რეზიუმე.', link: 'requirements-documents.html' },
+    { title: 'ესეების დაწერა', description: 'მოამზადეთ სამოტივაციო და პირადი წერილების სამუშაო ვერსიები.', link: 'write-essays.html' },
+    { title: 'სწავლის დაფინანსება', description: 'მოიძიეთ დაფინანსების შესაძლებლობები და შეიტანეთ განაცხადი.', link: 'scholarships.html' },
+    { title: 'განაცხადების გაგზავნა', description: 'შეავსეთ ონლაინ ფორმები და გააგზავნეთ ვადების ამოწურვამდე.', link: 'submit-applications.html' },
+    { title: 'შემოთავაზებების მიღება და შეფასება', description: 'შეადარეთ შემოთავაზებები და აირჩიეთ საუკეთესო.', link: 'uni-offers.html' },
+    { title: 'სავიზო განაცხადის რეგისტრაცია', description: 'მოამზადეთ სავიზო დოკუმენტები და დაესწარით საკონსულო გასაუბრებას.', link: 'apply-visa.html' },
+    { title: 'გამგზავრებისთვის მომზადება', description: 'მოაგვარეთ საცხოვრებლის, ფრენებისა და საორიენტაციო შეხვედრის საკითხები.', link: 'pre-departure.html' }
+];
+
+  // load state or set defaults
+
+  let state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+
+  state.completed = state.completed || {}; // e.g. {0:true,2:true}
+
+
+
+  const container = document.getElementById('steps-list');
+
+  const progressInfoEl = document.getElementById('progress-info');
+
+
+
+  function render() {
+
+   container.innerHTML = '';
+
+   steps.forEach((s, idx) => {
+
+    const card = document.createElement('article');
+
+    card.className = 'step-card' + (state.completed[idx] ? ' completed' : '');
+
+    card.setAttribute('data-idx', idx);
+
+
+
+    // checkbox toggle top-right
+
+    const toggle = document.createElement('button');
+
+    toggle.className = 'complete-toggle';
+
+    toggle.setAttribute('aria-label', state.completed[idx] ? 'Mark step incomplete' : 'Mark step complete');
+
+    toggle.innerHTML = `<i class="fa-solid fa-check-circle" aria-hidden="true"></i>`;
+
+    toggle.addEventListener('click', (e) => {
+
+     e.stopPropagation();
+
+     state.completed[idx] = !state.completed[idx];
+
+     saveState();
+
+     render(); // re-render to update visuals
+
+    });
+
+    card.appendChild(toggle);
+
+
+
+    // left part: number & title/desc; wrap title/desc in link so user can open page
+
+    const link = document.createElement('a');
+
+    link.className = 'step-link';
+
+    link.href = s.link;
+
+    link.innerHTML = `
+
+     <div class="step-meta">
+
+      <div class="step-left">
+
+       <div class="step-number">${idx+1}</div>
+
+       <div>
+
+        <div class="step-title">${s.title}</div>
+
+        <div class="step-desc">${s.description}</div>
+
+       </div>
+
+      </div>
+
+     </div>
+
+    `;
+
+    card.appendChild(link);
+
+
+
+    // allow clicking the card (not the toggle) to open the link in same tab
+
+    card.addEventListener('click', (e) => {
+
+     if (e.target.closest('.complete-toggle')) return;
+
+     window.location.href = s.link;
+
+    });
+
+
+
+    container.appendChild(card);
+
+   });
+
+
+
+   updateProgressInfo();
+
+  }
+
+
+
+  function updateProgressInfo() {
+
+   const total = steps.length;
+
+   const completedCount = Object.keys(state.completed).filter(k => state.completed[k]).length;
+
+   progressInfoEl.textContent = `Completed ${completedCount} / ${total}`;
+
+  }
+
+
+
+  function saveState(){
+
+   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+
+  }
+
+
+
+  // actions
+
+  document.getElementById('mark-all').addEventListener('click', () => {
+
+   steps.forEach((_,i)=> state.completed[i] = true);
+
+   saveState();
+
+   render();
+
+  });
+
+  document.getElementById('reset').addEventListener('click', () => {
+
+   state.completed = {};
+
+   saveState();
+
+   render();
+
+  });
+
+
+
+  // initial render
+
+  render();
+
+ })();
+
+</script>
+
+</body>
+</html>

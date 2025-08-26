@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Writing & Language Practice Quiz</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* basic styling */
+    body {font-family: system-ui, sans-serif; background:#f9fafb; color:#111; line-height:1.6; padding:1.25rem}
+    .container {max-width:980px;margin:0 auto}
+    .panel {background:#fff;border:1px solid #e6e6e6;padding:1.25rem;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.04)}
+    h1, h2 {margin:0 0 .5rem}
+    h1 {font-size:1.35rem}
+    h2 {font-size:1.15rem; margin-top: 1.5rem; border-bottom: 1px solid #eee; padding-bottom: 0.5rem;}
+    p.lead{color:#444;margin-top:0}
+    p.passage { background-color: #f8f9fa; border-left: 3px solid #dee2e6; padding: 1rem; margin-bottom: 1.5rem; border-radius: 4px; white-space: pre-wrap; }
+    ol.questions{counter-reset:q; margin:0;padding:0 0 0 1rem}
+    li.q{margin:.9rem 0;padding:.6rem;border-radius:8px; list-style-type: none;}
+    .stem{margin-bottom:.45rem}
+    .options label{display:block;padding:.38rem .6rem;border-radius:6px;cursor:pointer;border:1px solid transparent;margin-bottom:.32rem}
+    .options input{margin-right:.6rem}
+    .controls{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin-top:1rem}
+    .btn{background:#2563eb;color:#fff;border:none;padding:.55rem .9rem;border-radius:8px;cursor:pointer; transition: background-color 0.2s;}
+    .btn:hover {background: #1d4ed8;}
+    .btn.secondary{background:#eef2ff;color:#2563eb}
+    .btn.secondary:hover{background:#dbeafe;}
+    .note{font-size:.9rem;color:#555;margin-top:.5rem}
+    .small{font-size:.9rem;color:#666}
+    @media (max-width:720px){ .panel{padding:.85rem} }
+
+    /* grading styles */
+    .option-correct { background: #ecfdf5 !important; border-color: #34d399 !important; }
+    .option-wrong { background: #fff1f2 !important; border-color: #f87171 !important; opacity: 0.95; }
+    .correct-badge { display:inline-block; margin-left:.5rem; font-weight:700; color:#065f46; background:#bbf7d0; border-radius:4px; padding:2px 6px; font-size:.8rem; }
+    .wrong-badge { display:inline-block; margin-left:.5rem; font-weight:700; color:#7f1d1d; background:#fecaca; border-radius:4px; padding:2px 6px; font-size:.8rem; }
+    .grading-summary { margin-top:1rem; padding:.75rem; background:#f3f4f6; border-radius:8px; font-weight:600; }
+    .grading-details { margin-top:.5rem; font-size:.95rem; }
+
+    /* Modal styles for custom alerts */
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; }
+    .modal-content { background: #fff; padding: 1.5rem; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); text-align: center; max-width: 400px; width: 90%; transform: scale(0.9); transition: transform 0.3s; }
+    .modal-buttons { margin-top: 1rem; display: flex; justify-content: center; gap: 0.5rem; }
+    .modal-overlay.visible { opacity: 1; visibility: visible; }
+    .modal-overlay.visible .modal-content { transform: scale(1); }
+  </style>
+</head>
+<body>
+<div id="header"></div>
+<script src="header.js"></script>
+  <div class="container">
+    <div class="panel">
+      <h1>Writing & Language Practice Quiz Module 2 (44 questions)</h1>
+      <p class="lead">Select the most applicable answer for each question based on the passages.</p>
+      <div class="controls">
+        <button class="btn" id="saveAll">Save answers</button>
+        <button class="btn secondary" id="loadAll">Load saved</button>
+        <button class="btn" id="exportCsv">Export (CSV)</button>
+        <button class="btn secondary" id="clearAll">Clear</button>
+        <button class="btn" id="checkAnswers">Check answers</button>
+      </div>
+
+      <div id="timerContainer" style="display:flex;align-items:center;gap:.5rem;margin-top:0.5rem">
+          <div id="timerDisplay" style="font-weight:700;font-size:0.95rem;background:#fff;padding:.35rem .6rem;border-radius:6px;border:1px solid #e6e6e6">
+            32:00
+          </div>
+          <button class="btn secondary" id="timerStart">Start</button>
+          <button class="btn secondary" id="timerPause" disabled>Pause</button>
+          <button class="btn" id="timerReset">Reset</button>
+      </div>
+
+      <hr style="margin-top:1rem;margin-bottom:1rem;border:none;height:1px;background:#f0f3ff">
+
+      <form id="quizForm">
+        <h2>Passage 1 – Environmental Policy</h2>
+        <p class="passage">"In recent decades, governments around the world <strong>(53) (have begin)</strong> to recognize the dangers of climate change. Scientists warn that rising sea levels and extreme weather events <strong>(54) (threatens)</strong> not only ecosystems but also human societies. Despite these warnings, efforts to curb carbon emissions have often <strong>(55) (proving)</strong> inadequate.
+One proposal frequently debated involves implementing a carbon tax. Proponents argue that by putting a price on pollution, industries will be motivated to innovate cleaner technologies. Critics, however, claim such a tax <strong>(56) (are unfair)</strong> to low-income households, who may pay a higher proportion of their income on energy.
+<strong>(59)</strong> Another strategy focuses on renewable energy. Solar and wind power <strong>(57) (have became)</strong> more affordable in the past decade, leading to rapid adoption in many countries. Yet fossil fuels still dominate, partly because governments <strong>(58) (provides)</strong> subsidies that make oil and coal artificially cheap. <strong>(62)</strong>
+The challenge of climate policy illustrates a broader truth: meaningful change often requires both technological progress and political will. Without cooperation among nations, the <strong>(60) (problem would continues)</strong> to grow. Whether humanity rises to meet this challenge <strong>(61) (remain)</strong> one of the most pressing questions of our century." <strong>(63)</strong></p>
+        <ol class="questions" start="53">
+          <li class="q"><div class="stem"><strong>53</strong>. (have begin)</div><div class="options"><label><input type="radio" name="q53" value="A"> A) NO CHANGE</label><label><input type="radio" name="q53" value="B"> B) has begun</label><label><input type="radio" name="q53" value="C"> C) have began</label><label><input type="radio" name="q53" value="D"> D) had begin</label></div></li>
+          <li class="q"><div class="stem"><strong>54</strong>. (threatens)</div><div class="options"><label><input type="radio" name="q54" value="A"> A) NO CHANGE</label><label><input type="radio" name="q54" value="B"> B) threaten</label><label><input type="radio" name="q54" value="C"> C) threatened</label><label><input type="radio" name="q54" value="D"> D) threatening</label></div></li>
+          <li class="q"><div class="stem"><strong>55</strong>. (proving)</div><div class="options"><label><input type="radio" name="q55" value="A"> A) NO CHANGE</label><label><input type="radio" name="q55" value="B"> B) proved</label><label><input type="radio" name="q55" value="C"> C) has prove</label><label><input type="radio" name="q55" value="D"> D) proving to be</label></div></li>
+          <li class="q"><div class="stem"><strong>56</strong>. (are unfair)</div><div class="options"><label><input type="radio" name="q56" value="A"> A) NO CHANGE</label><label><input type="radio" name="q56" value="B"> B) is unfair</label><label><input type="radio" name="q56" value="C"> C) were unfair</label><label><input type="radio" name="q56" value="D"> D) being unfair</label></div></li>
+          <li class="q"><div class="stem"><strong>57</strong>. (have became)</div><div class="options"><label><input type="radio" name="q57" value="A"> A) NO CHANGE</label><label><input type="radio" name="q57" value="B"> B) have become</label><label><input type="radio" name="q57" value="C"> C) had became</label><label><input type="radio" name="q57" value="D"> D) becoming</label></div></li>
+          <li class="q"><div class="stem"><strong>58</strong>. (provides)</div><div class="options"><label><input type="radio" name="q58" value="A"> A) NO CHANGE</label><label><input type="radio" name="q58" value="B"> B) provide</label><label><input type="radio" name="q58" value="C"> C) provided</label><label><input type="radio" name="q58" value="D"> D) providing</label></div></li>
+          <li class="q"><div class="stem"><strong>59</strong>. Which choice most effectively combines the sentences at the start of paragraph 3?</div><div class="options"><label><input type="radio" name="q59" value="A"> A) Another strategy focuses on renewable energy, solar and wind power have become more affordable.</label><label><input type="radio" name="q59" value="B"> B) Another strategy focuses on renewable energy, which has become more affordable in the past decade and has led to rapid adoption.</label><label><input type="radio" name="q59" value="C"> C) Another strategy focuses on renewable energy, particularly solar and wind power, which have become more affordable in the past decade and have led to rapid adoption.</label><label><input type="radio" name="q59" value="D"> D) Another strategy focuses on renewable energy, and solar and wind power being more affordable in the past decade has led to rapid adoption.</label></div></li>
+          <li class="q"><div class="stem"><strong>60</strong>. (problem would continues)</div><div class="options"><label><input type="radio" name="q60" value="A"> A) NO CHANGE</label><label><input type="radio" name="q60" value="B"> B) problem would continue</label><label><input type="radio" name="q60" value="C"> C) problem continues</label><label><input type="radio" name="q60" value="D"> D) problem had continued</label></div></li>
+          <li class="q"><div class="stem"><strong>61</strong>. (remain)</div><div class="options"><label><input type="radio" name="q61" value="A"> A) NO CHANGE</label><label><input type="radio" name="q61" value="B"> B) remains</label><label><input type="radio" name="q61" value="C"> C) remaining</label><label><input type="radio" name="q61" value="D"> D) will remain</label></div></li>
+          <li class="q"><div class="stem"><strong>62</strong>. The author wants to add a detail to support the claim about subsidies in paragraph 3. Which choice best accomplishes this?</div><div class="options"><label><input type="radio" name="q62" value="A"> A) “For example, in 2020 the International Energy Agency estimated global fossil fuel subsidies exceeded $400 billion.”</label><label><input type="radio" name="q62" value="B"> B) “For example, wind turbines can now power thousands of homes.”</label><label><input type="radio" name="q62" value="C"> C) “For example, many scientists agree the Earth is warming.”</label><label><input type="radio" name="q62" value="D"> D) “For example, some companies advertise their products as green.”</label></div></li>
+          <li class="q"><div class="stem"><strong>63</strong>. The author is considering deleting the final sentence. Should it be kept or deleted?</div><div class="options"><label><input type="radio" name="q63" value="A"> A) Kept, because it reinforces the urgency of the issue.</label><label><input type="radio" name="q63" value="B"> B) Kept, because it provides a statistic about energy use.</label><label><input type="radio" name="q63" value="C"> C) Deleted, because it repeats information already provided.</label><label><input type="radio" name="q63" value="D"> D) Deleted, because it contradicts the passage’s main idea.</label></div></li>
+        </ol>
+
+        <h2>Passage 2 – History / Biography</h2>
+        <p class="passage">"When Ida B. Wells began her work as a journalist in the late nineteenth century, many Americans <strong>(64) (was unaware)</strong> of the scale of racial violence in the South. Wells investigated lynching, documenting cases that local newspapers often ignored. Her fearless reporting <strong>(65) (have revealed)</strong> not only individual tragedies but also a pattern of systematic injustice.
+Wells faced tremendous resistance. Printers refused to publish her work, mobs threatened her safety, and <strong>(66) (her career were marked)</strong> by constant danger. Yet she persisted, convinced that silence would only perpetuate the crimes she exposed.
+<strong>(68)</strong> In addition to journalism, Wells was also a public speaker and activist. She traveled widely, <strong>(67) (delivering speeches which was calling)</strong> for anti-lynching legislation. Many political leaders dismissed her arguments, claiming that lynching was a response to crime. <strong>(69)</strong> Wells countered with careful statistics, showing that most victims had not even been accused of serious offenses.
+Today historians recognize her as a pioneer of both investigative journalism and civil rights activism. Her legacy <strong>(70) (demonstrate)</strong> the power of evidence and courage in the face of injustice. Though the obstacles she encountered were enormous, Wells’s work <strong>(71) (remains)</strong> an inspiration for journalists and activists <strong>(72) (alike, who strive)</strong> to shed light on society’s darkest corners." <strong>(73)</strong></p>
+        <ol class="questions" start="64">
+          <li class="q"><div class="stem"><strong>64</strong>. (was unaware)</div><div class="options"><label><input type="radio" name="q64" value="A"> A) NO CHANGE</label><label><input type="radio" name="q64" value="B"> B) were unaware</label><label><input type="radio" name="q64" value="C"> C) is unaware</label><label><input type="radio" name="q64" value="D"> D) be unaware</label></div></li>
+          <li class="q"><div class="stem"><strong>65</strong>. (have revealed)</div><div class="options"><label><input type="radio" name="q65" value="A"> A) NO CHANGE</label><label><input type="radio" name="q65" value="B"> B) revealed</label><label><input type="radio" name="q65" value="C"> C) revealing</label><label><input type="radio" name="q65" value="D"> D) reveals</label></div></li>
+          <li class="q"><div class="stem"><strong>66</strong>. (her career were marked)</div><div class="options"><label><input type="radio" name="q66" value="A"> A) NO CHANGE</label><label><input type="radio" name="q66" value="B"> B) her career was marked</label><label><input type="radio" name="q66" value="C"> C) her careers was marked</label><label><input type="radio" name="q66" value="D"> D) careers were marked</label></div></li>
+          <li class="q"><div class="stem"><strong>67</strong>. (delivering speeches which was calling)</div><div class="options"><label><input type="radio" name="q67" value="A"> A) NO CHANGE</label><label><input type="radio" name="q67" value="B"> B) delivering speeches, calling</label><label><input type="radio" name="q67" value="C"> C) delivered speeches that call</label><label><input type="radio" name="q67" value="D"> D) delivering speeches who called</label></div></li>
+          <li class="q"><div class="stem"><strong>68</strong>. Which choice provides the best transition from Wells’s challenges to her activism?</div><div class="options"><label><input type="radio" name="q68" value="A"> A) NO CHANGE</label><label><input type="radio" name="q68" value="B"> B) Despite these obstacles, she also became a public speaker and activist.</label><label><input type="radio" name="q68" value="C"> C) She disliked journalism and turned instead to speeches.</label><label><input type="radio" name="q68" value="D"> D) As a result, she retired from writing and pursued politics.</label></div></li>
+          <li class="q"><div class="stem"><strong>69</strong>. Which statement best supports Wells’s reliance on statistics?</div><div class="options"><label><input type="radio" name="q69" value="A"> A) “Many political leaders dismissed her arguments…”</label><label><input type="radio" name="q69" value="B"> B) “Wells countered with careful statistics, showing that most victims…”</label><label><input type="radio" name="q69" value="C"> C) “She traveled widely, delivering speeches…”</label><label><input type="radio" name="q69" value="D"> D) “Her legacy demonstrates the power…”</label></div></li>
+          <li class="q"><div class="stem"><strong>70</strong>. (demonstrate)</div><div class="options"><label><input type="radio" name="q70" value="A"> A) NO CHANGE</label><label><input type="radio" name="q70" value="B"> B) demonstrates</label><label><input type="radio" name="q70" value="C"> C) demonstrated</label><label><input type="radio" name="q70" value="D"> D) demonstrating</label></div></li>
+          <li class="q"><div class="stem"><strong>71</strong>. (remains)</div><div class="options"><label><input type="radio" name="q71" value="A"> A) NO CHANGE</label><label><input type="radio" name="q71" value="B"> B) remain</label><label><input type="radio" name="q71" value="C"> C) remained</label><label><input type="radio" name="q71" value="D"> D) remaining</label></div></li>
+          <li class="q"><div class="stem"><strong>72</strong>. (alike, who strive)</div><div class="options"><label><input type="radio" name="q72" value="A"> A) NO CHANGE</label><label><input type="radio" name="q72" value="B"> B) alike; striving</label><label><input type="radio" name="q72" value="C"> C) alike who strives</label><label><input type="radio" name="q72" value="D"> D) alike, striving</label></div></li>
+          <li class="q"><div class="stem"><strong>73</strong>. Which choice best concludes the passage?</div><div class="options"><label><input type="radio" name="q73" value="A"> A) “Her courage was unusual for the time.”</label><label><input type="radio" name="q73" value="B"> B) “Her example reminds us that exposing injustice is essential to change.”</label><label><input type="radio" name="q73" value="C"> C) “Her travels took her across the country.”</label><label><input type="radio" name="q73" value="D"> D) “She is remembered mostly for her speeches.”</label></div></li>
+          <li class="q"><div class="stem"><strong>74</strong>. The tone of the passage is best described as:</div><div class="options"><label><input type="radio" name="q74" value="A"> A) critical and mocking</label><label><input type="radio" name="q74" value="B"> B) respectful and admiring</label><label><input type="radio" name="q74" value="C"> C) casual and humorous</label><label><input type="radio" name="q74" value="D"> D) neutral and detached</label></div></li>
+        </ol>
+
+        <h2>Passage 3 – Science / Technology</h2>
+        <p class="passage">"In recent years, the use of drones <strong>(75) (have increased)</strong> dramatically. Once restricted to military applications, drones are now employed in agriculture, filmmaking, search-and-rescue, and even package delivery. Some companies <strong>(76) (is experimenting)</strong> with drones that can transport medical supplies to remote areas.
+Supporters argue that drones offer speed and efficiency. A farmer using aerial drones can monitor crops in minutes, a task that would otherwise take hours. Firefighters <strong>(77) (have uses)</strong> drones to track wildfires from above, reducing risk to human pilots.
+Critics, however, warn of privacy and safety concerns. Drones <strong>(78) (has been known)</strong> to crash, causing damage to property, and cameras mounted on drones <strong>(79) (raise)</strong> questions about surveillance. <strong>(81)</strong> In some countries, regulations <strong>(80) (remain lax)</strong>, creating uncertainty about responsibility when accidents occur.
+Still, experts predict that drones will continue to expand into new industries. Whether they become a routine part of daily life <strong>(82) (depend)</strong> not only on technological advances but also on laws that balance innovation with public trust." <strong>(83)</strong></p>
+        <ol class="questions" start="75">
+          <li class="q"><div class="stem"><strong>75</strong>. (have increased)</div><div class="options"><label><input type="radio" name="q75" value="A"> A) NO CHANGE</label><label><input type="radio" name="q75" value="B"> B) has increased</label><label><input type="radio" name="q75" value="C"> C) increase</label><label><input type="radio" name="q75" value="D"> D) had increased</label></div></li>
+          <li class="q"><div class="stem"><strong>76</strong>. (is experimenting)</div><div class="options"><label><input type="radio" name="q76" value="A"> A) NO CHANGE</label><label><input type="radio" name="q76" value="B"> B) are experimenting</label><label><input type="radio" name="q76" value="C"> C) were experimenting</label><label><input type="radio" name="q76" value="D"> D) have experimented</label></div></li>
+          <li class="q"><div class="stem"><strong>77</strong>. (have uses)</div><div class="options"><label><input type="radio" name="q77" value="A"> A) NO CHANGE</label><label><input type="radio" name="q77" value="B"> B) has used</label><label><input type="radio" name="q77" value="C"> C) have used</label><label><input type="radio" name="q77" value="D"> D) used</label></div></li>
+          <li class="q"><div class="stem"><strong>78</strong>. Which choice most effectively illustrates the benefit of drones in agriculture?</div><div class="options"><label><input type="radio" name="q78" value="A"> A) “A farmer using aerial drones can monitor crops in minutes.”</label><label><input type="radio" name="q78" value="B"> B) “Some drones can fly thousands of feet high.”</label><label><input type="radio" name="q78" value="C"> C) “Drones are small and lightweight.”</label><label><input type="radio" name="q78" value="D"> D) “Pilots enjoy experimenting with new technology.”</label></div></li>
+          <li class="q"><div class="stem"><strong>79</strong>. (has been known)</div><div class="options"><label><input type="radio" name="q79" value="A"> A) NO CHANGE</label><label><input type="radio" name="q79" value="B"> B) have been known</label><label><input type="radio" name="q79" value="C"> C) is known</label><label><input type="radio" name="q79" value="D"> D) are knowing</label></div></li>
+          <li class="q"><div class="stem"><strong>80</strong>. (raise)</div><div class="options"><label><input type="radio" name="q80" value="A"> A) NO CHANGE</label><label><input type="radio" name="q80" value="B"> B) raises</label><label><input type="radio" name="q80" value="C"> C) raised</label><label><input type="radio" name="q80" value="D"> D) raising</label></div></li>
+          <li class="q"><div class="stem"><strong>81</strong>. (remain lax)</div><div class="options"><label><input type="radio" name="q81" value="A"> A) NO CHANGE</label><label><input type="radio" name="q81" value="B"> B) remains lax</label><label><input type="radio" name="q81" value="C"> C) remaining lax</label><label><input type="radio" name="q81" value="D"> D) laxly remains</label></div></li>
+          <li class="q"><div class="stem"><strong>82</strong>. Which choice most clearly strengthens the critics’ concern about privacy?</div><div class="options"><label><input type="radio" name="q82" value="A"> A) “Some people enjoy flying drones as a hobby.”</label><label><input type="radio" name="q82" value="B"> B) “In certain cases, drones have been used to capture private conversations without consent.”</label><label><input type="radio" name="q82" value="C"> C) “Farmers benefit from drones’ efficiency.”</label><label><input type="radio" name="q82" value="D"> D) “Military drones are larger than civilian ones.”</label></div></li>
+          <li class="q"><div class="stem"><strong>83</strong>. (depend)</div><div class="options"><label><input type="radio" name="q83" value="A"> A) NO CHANGE</label><label><input type="radio" name="q83" value="B"> B) depends</label><label><input type="radio" name="q83" value="C"> C) depended</label><label><input type="radio" name="q83" value="D"> D) will depending</label></div></li>
+          <li class="q"><div class="stem"><strong>84</strong>. Which sentence would best conclude the passage?</div><div class="options"><label><input type="radio" name="q84" value="A"> A) “It is likely that drones will vanish from public use.”</label><label><input type="radio" name="q84" value="B"> B) “This suggests drones will eventually solve all privacy issues.”</label><label><input type="radio" name="q84" value="C"> C) “Thus, the challenge is to ensure drones serve society responsibly.”</label><label><input type="radio" name="q84" value="D"> D) “Therefore, drones are unlikely to be used outside agriculture.”</label></div></li>
+          <li class="q"><div class="stem"><strong>85</strong>. The author’s overall attitude toward drones is best described as:</div><div class="options"><label><input type="radio" name="q85" value="A"> A) hostile and dismissive</label><label><input type="radio" name="q85" value="B"> B) balanced and analytical</label><label><input type="radio" name="q85" value="C"> C) humorous and casual</label><label><input type="radio" name="q85" value="D"> D) enthusiastic and promotional</label></div></li>
+        </ol>
+
+        <h2>Passage 4 – Humanities / Education</h2>
+        <p class="passage">"For much of history, the ability to read and write <strong>(86) (was limited)</strong> to a small elite. Today, literacy is considered a universal right, yet debates continue about what it truly means to be literate. Some educators argue that literacy should not be confined to basic reading and writing; it should include digital skills, critical thinking, and even the ability to evaluate media sources. <strong>(90)</strong>
+Recent studies suggest that students who <strong>(87) (is trained)</strong> to analyze digital content are better prepared to navigate modern society. At the same time, many schools <strong>(88) (has struggled)</strong> to update curricula quickly enough to keep pace with technological change. Teachers often point out that while their students can operate smartphones, they <strong>(89) (lack the ability to critically assessing)</strong> online information.
+Expanding the definition of literacy raises questions for policymakers. Should governments invest more heavily in teaching digital skills, or should traditional literacy remain the focus? Advocates of digital literacy argue that students who lack these skills <strong>(91) (are at a disadvantage)</strong> in the workforce. Critics caution, however, that emphasizing technology might overshadow the foundational skills of reading and writing. <strong>(92)</strong>
+The future of literacy education <strong>(93) (remains uncertain)</strong>. What is clear is that the concept of literacy <strong>(94) (continue to evolve)</strong>, shaped by the demands of culture, technology, and the changing world of communication." <strong>(95)</strong></p>
+        <ol class="questions" start="86">
+          <li class="q"><div class="stem"><strong>86</strong>. (was limited)</div><div class="options"><label><input type="radio" name="q86" value="A"> A) NO CHANGE</label><label><input type="radio" name="q86" value="B"> B) were limited</label><label><input type="radio" name="q86" value="C"> C) is limited</label><label><input type="radio" name="q86" value="D"> D) limiting</label></div></li>
+          <li class="q"><div class="stem"><strong>87</strong>. (is trained)</div><div class="options"><label><input type="radio" name="q87" value="A"> A) NO CHANGE</label><label><input type="radio" name="q87" value="B"> B) are trained</label><label><input type="radio" name="q87" value="C"> C) was trained</label><label><input type="radio" name="q87" value="D"> D) being trained</label></div></li>
+          <li class="q"><div class="stem"><strong>88</strong>. (has struggled)</div><div class="options"><label><input type="radio" name="q88" value="A"> A) NO CHANGE</label><label><input type="radio" name="q88" value="B"> B) have struggled</label><label><input type="radio" name="q88" value="C"> C) struggling</label><label><input type="radio" name="q88" value="D"> D) had struggled</label></div></li>
+          <li class="q"><div class="stem"><strong>89</strong>. (lack the ability to critically assessing)</div><div class="options"><label><input type="radio" name="q89" value="A"> A) NO CHANGE</label><label><input type="radio" name="q89" value="B"> B) lack the ability to critically assess</label><label><input type="radio" name="q89" value="C"> C) lacks the ability to critically assess</label><label><input type="radio" name="q89" value="D"> D) lacking the ability to assess critically</label></div></li>
+          <li class="q"><div class="stem"><strong>90</strong>. Which choice best strengthens the point about evaluating media sources?</div><div class="options"><label><input type="radio" name="q90" value="A"> A) “For example, students may share false news articles without verifying them.”</label><label><input type="radio" name="q90" value="B"> B) “For example, teachers assign classic novels for discussion.”</label><label><input type="radio" name="q90" value="C"> C) “For example, some schools encourage reading clubs.”</label><label><input type="radio" name="q90" value="D"> D) “For example, literacy rates have improved worldwide.”</label></div></li>
+          <li class="q"><div class="stem"><strong>91</strong>. (are at a disadvantage)</div><div class="options"><label><input type="radio" name="q91" value="A"> A) NO CHANGE</label><label><input type="radio" name="q91" value="B"> B) is at a disadvantage</label><label><input type="radio" name="q91" value="C"> C) was disadvantaged</label><label><input type="radio" name="q91" value="D"> D) have disadvantaged</label></div></li>
+          <li class="q"><div class="stem"><strong>92</strong>. Which choice best emphasizes critics’ concern?</div><div class="options"><label><input type="radio" name="q92" value="A"> A) “Some critics believe students enjoy digital devices too much.”</label><label><input type="radio" name="q92" value="B"> B) “Some critics worry that focusing on technology could erode basic reading and writing abilities.”</label><label><input type="radio" name="q92" value="C"> C) “Some critics argue that literacy is unimportant.”</label><label><input type="radio" name="q92" value="D"> D) “Some critics say funding is unnecessary.”</label></div></li>
+          <li class="q"><div class="stem"><strong>93</strong>. (remains uncertain)</div><div class="options"><label><input type="radio" name="q93" value="A"> A) NO CHANGE</label><label><input type="radio" name="q93" value="B"> B) remain uncertain</label><label><input type="radio" name="q93" value="C"> C) remained uncertain</label><label><input type="radio" name="q93" value="D"> D) remaining uncertain</label></div></li>
+          <li class="q"><div class="stem"><strong>94</strong>. (continue to evolve)</div><div class="options"><label><input type="radio" name="q94" value="A"> A) NO CHANGE</label><label><input type="radio" name="q94" value="B"> B) continues to evolve</label><label><input type="radio" name="q94" value="C"> C) continued to evolve</label><label><input type="radio" name="q94" value="D"> D) evolving continuously</label></div></li>
+          <li class="q"><div class="stem"><strong>95</strong>. Which sentence would best conclude the passage?</div><div class="options"><label><input type="radio" name="q95" value="A"> A) “Literacy will probably never change again.”</label><label><input type="radio" name="q95" value="B"> B) “This suggests that literacy must always adapt to new contexts.”</label><label><input type="radio" name="q95" value="C"> C) “Therefore, digital literacy should replace reading and writing entirely.”</label><label><input type="radio" name="q95" value="D"> D) “In conclusion, literacy has little effect on society.”</label></div></li>
+          <li class="q"><div class="stem"><strong>96</strong>. The passage’s central idea is that:</div><div class="options"><label><input type="radio" name="q96" value="A"> A) literacy is no longer important</label><label><input type="radio" name="q96" value="B"> B) literacy should be redefined to include new skills</label><label><input type="radio" name="q96" value="C"> C) schools should abandon traditional reading</label><label><input type="radio" name="q96" value="D"> D) digital devices make education unnecessary</label></div></li>
+        </ol>
+      </form>
+
+      <div id="gradingResults" class="grading-summary" style="display:none"></div>
+
+      <div class="note">When you click <strong>Save answers</strong> they are stored locally in your browser. Use <strong>Export (CSV)</strong> to download your responses.</div>
+    </div>
+  </div>
+
+  <!-- Custom Modal for Alerts and Confirms -->
+  <div id="customModal" class="modal-overlay">
+    <div class="modal-content">
+      <p id="modalMessage"></p>
+      <div id="modalButtons" class="modal-buttons">
+        <!-- Buttons will be injected here by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- Custom Modal Logic ---
+    const modal = document.getElementById('customModal');
+    const modalMessage = document.getElementById('modalMessage');
+    const modalButtons = document.getElementById('modalButtons');
+
+    
+
+    // --- Timer Logic ---
+    let timerInterval = null;
+    let timeRemaining = QUIZ_DURATION;
+
+    const timerDisplay = document.getElementById('timerDisplay');
+    const startBtn = document.getElementById('timerStart');
+    const pauseBtn = document.getElementById('timerPause');
+    const resetBtn = document.getElementById('timerReset');
+
+
+    startBtn.addEventListener('click', startTimer);
+    pauseBtn.addEventListener('click', pauseTimer);
+    resetBtn.addEventListener('click', resetTimer);
+
+
+    // --- Event Listeners ---
+    document.getElementById('saveAll').addEventListener('click', saveAll);
+    document.getElementById('loadAll').addEventListener('click', manualLoad);
+    document.getElementById('exportCsv').addEventListener('click', exportCsv);
+    document.getElementById('clearAll').addEventListener('click', clearAll);
+    document.getElementById('checkAnswers').addEventListener('click', checkAnswers);
+
+    // Auto-load saved answers on page load
+    (function(){
+      if (localStorage.getItem(STORAGE_KEY)) {
+          loadAll();
+      }
+    })();
+  </script>
+
+<div style="margin-top: 1.5rem; text-align: center;">
+  <button class="btn" onclick="window.location.href='sat-practice-math-m1.html'">
+    Continue to Next Module &rarr;
+  </button>
+</div>
+
+<div id="footer"></div>
+ <script src="footer.js"></script>
+ 
+<script src="quiz-logic.js"></script>
+
+<script>
+    const STORAGE_KEY = 'uq_writing_quiz_answers_v2';
+    const MIN_Q = 53;
+    const MAX_Q = 96;
+    const TOTAL_QUESTIONS = MAX_Q - MIN_Q + 1;
+    const QUIZ_DURATION = 35 * 60; // 35 minutes in seconds
+
+    // Answer Key
+    const ANSWER_KEY = {
+        53: "B", 54: "B", 55: "B", 56: "B", 57: "B", 58: "B", 59: "C", 60: "B", 61: "B", 62: "A", 63: "A",
+        64: "B", 65: "B", 66: "B", 67: "B", 68: "B", 69: "B", 70: "B", 71: "A", 72: "D", 73: "B", 74: "B",
+        75: "B", 76: "B", 77: "C", 78: "A", 79: "B", 80: "B", 81: "A", 82: "B", 83: "B", 84: "C", 85: "B",
+        86: "B", 87: "B", 88: "B", 89: "B", 90: "A", 91: "A", 92: "B", 93: "A", 94: "B", 95: "B", 96: "B"
+    };
+
+
+  document.getElementById('checkAnswers').addEventListener('click', checkAnswers);
+</script>
+</body>
+</html>

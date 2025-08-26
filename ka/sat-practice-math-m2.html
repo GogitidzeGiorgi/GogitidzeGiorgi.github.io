@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SAT Practice Test – Math Module 2</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* basic styling */
+    body {font-family: system-ui, sans-serif; background:#f9fafb; color:#111; line-height:1.6; padding:1.25rem}
+    .container {max-width:980px;margin:0 auto}
+    .panel {background:#fff;border:1px solid #e6e6e6;padding:1.25rem;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.04)}
+    h1, h2 {margin:0 0 .5rem}
+    h1 {font-size:1.35rem}
+    h2 {font-size:1.15rem; margin-top: 1.5rem; border-bottom: 1px solid #eee; padding-bottom: 0.5rem;}
+    p.lead{color:#444;margin-top:0}
+    ol.questions{counter-reset:q; margin:0;padding:0 0 0 1rem}
+    li.q{margin:.9rem 0;padding:.6rem;border-radius:8px; list-style-type: none;}
+    .stem{margin-bottom:.45rem}
+    .options label{display:block;padding:.38rem .6rem;border-radius:6px;cursor:pointer;border:1px solid transparent;margin-bottom:.32rem}
+    .options input{margin-right:.6rem}
+    .controls{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin-top:1rem}
+    .btn{background:#2563eb;color:#fff;border:none;padding:.55rem .9rem;border-radius:8px;cursor:pointer; transition: background-color 0.2s;}
+    .btn:hover {background: #1d4ed8;}
+    .btn.secondary{background:#eef2ff;color:#2563eb}
+    .btn.secondary:hover{background:#dbeafe;}
+    .note{font-size:.9rem;color:#555;margin-top:.5rem}
+    @media (max-width:720px){ .panel{padding:.85rem} }
+
+    /* grading styles */
+    .option-correct { background: #ecfdf5 !important; border-color: #34d399 !important; }
+    .option-wrong { background: #fff1f2 !important; border-color: #f87171 !important; opacity: 0.95; }
+    .correct-badge { display:inline-block; margin-left:.5rem; font-weight:700; color:#065f46; background:#bbf7d0; border-radius:4px; padding:2px 6px; font-size:.8rem; }
+    .wrong-badge { display:inline-block; margin-left:.5rem; font-weight:700; color:#7f1d1d; background:#fecaca; border-radius:4px; padding:2px 6px; font-size:.8rem; }
+    .grading-summary { margin-top:1rem; padding:.75rem; background:#f3f4f6; border-radius:8px; font-weight:600; }
+    .grading-details { margin-top:.5rem; font-size:.95rem; }
+
+    /* Modal styles */
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; }
+    .modal-content { background: #fff; padding: 1.5rem; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); text-align: center; max-width: 400px; width: 90%; transform: scale(0.9); transition: transform 0.3s; }
+    .modal-buttons { margin-top: 1rem; display: flex; justify-content: center; gap: 0.5rem; }
+    .modal-overlay.visible { opacity: 1; visibility: visible; }
+    .modal-overlay.visible .modal-content { transform: scale(1); }
+  </style>
+</head>
+<body>
+<div id="header"></div>
+<script src="header.js"></script>
+  <div class="container">
+    <div class="panel">
+      <h1>SAT Practice Test – Math Module 2 (29 questions)</h1>
+      <p class="lead">Select the best answer for each question. A calculator is permitted for this section.</p>
+      <div class="controls">
+        <button class="btn" id="saveAll">Save answers</button>
+        <button class="btn secondary" id="loadAll">Load saved</button>
+        <button class="btn" id="exportCsv">Export (CSV)</button>
+        <button class="btn secondary" id="clearAll">Clear</button>
+        <button class="btn" id="checkAnswers">Check answers</button>
+      </div>
+
+      <div id="timerContainer" style="display:flex;align-items:center;gap:.5rem;margin-top:0.5rem">
+          <div id="timerDisplay" style="font-weight:700;font-size:0.95rem;background:#fff;padding:.35rem .6rem;border-radius:6px;border:1px solid #e6e6e6">
+            35:00
+          </div>
+          <button class="btn secondary" id="timerStart">Start</button>
+          <button class="btn secondary" id="timerPause" disabled>Pause</button>
+          <button class="btn" id="timerReset">Reset</button>
+      </div>
+
+      <hr style="margin-top:1rem;margin-bottom:1rem;border:none;height:1px;background:#f0f3ff">
+
+      <form id="quizForm">
+        <h2>Section 2: Math (Calculator)</h2>
+        <ol class="questions" start="126">
+            <li class="q"><div class="stem"><strong>126</strong>. A quadratic function is given by f(x)=x^2-6x+8. What are its zeros?</div><div class="options"><label><input type="radio" name="q126" value="A"> A) x=2,4</label><label><input type="radio" name="q126" value="B"> B) x=1,8</label><label><input type="radio" name="q126" value="C"> C) x=3,3</label><label><input type="radio" name="q126" value="D"> D) x=4,6</label></div></li>
+            <li class="q"><div class="stem"><strong>127</strong>. A right circular cylinder has radius 3 and height 10. What is its volume? (Use π≈3.14)</div><div class="options"><label><input type="radio" name="q127" value="A"> A) 90π</label><label><input type="radio" name="q127" value="B"> B) 180π</label><label><input type="radio" name="q127" value="C"> C) 270π</label><label><input type="radio" name="q127" value="D"> D) 300π</label></div></li>
+            <li class="q"><div class="stem"><strong>128</strong>. Which is equivalent to log10(1000)?</div><div class="options"><label><input type="radio" name="q128" value="A"> A) 1</label><label><input type="radio" name="q128" value="B"> B) 2</label><label><input type="radio" name="q128" value="C"> C) 3</label><label><input type="radio" name="q128" value="D"> D) 1000</label></div></li>
+            <li class="q"><div class="stem"><strong>129</strong>. Solve: 5x - 8 = 2x + 10</div><div class="options"><label><input type="radio" name="q129" value="A"> A) x=2</label><label><input type="radio" name="q129" value="B"> B) x=4</label><label><input type="radio" name="q129" value="C"> C) x=6</label><label><input type="radio" name="q129" value="D"> D) x=8</label></div></li>
+            <li class="q"><div class="stem"><strong>130</strong>. A quadratic function is given by f(x)=x^2-6x+8. What are its zeros?</div><div class="options"><label><input type="radio" name="q130" value="A"> A) x=2,4</label><label><input type="radio" name="q130" value="B"> B) x=1,8</label><label><input type="radio" name="q130" value="C"> C) x=3,3</label><label><input type="radio" name="q130" value="D"> D) x=4,6</label></div></li>
+            <li class="q"><div class="stem"><strong>131</strong>. A right circular cylinder has radius 3 and height 10. What is its volume? (Use π≈3.14)</div><div class="options"><label><input type="radio" name="q131" value="A"> A) 90π</label><label><input type="radio" name="q131" value="B"> B) 180π</label><label><input type="radio" name="q131" value="C"> C) 270π</label><label><input type="radio" name="q131" value="D"> D) 300π</label></div></li>
+            <li class="q"><div class="stem"><strong>132</strong>. Which is equivalent to log10(1000)?</div><div class="options"><label><input type="radio" name="q132" value="A"> A) 1</label><label><input type="radio" name="q132" value="B"> B) 2</label><label><input type="radio" name="q132" value="C"> C) 3</label><label><input type="radio" name="q132" value="D"> D) 1000</label></div></li>
+            <li class="q"><div class="stem"><strong>133</strong>. Solve: 5x - 8 = 2x + 10</div><div class="options"><label><input type="radio" name="q133" value="A"> A) x=2</label><label><input type="radio" name="q133" value="B"> B) x=4</label><label><input type="radio" name="q133" value="C"> C) x=6</label><label><input type="radio" name="q133" value="D"> D) x=8</label></div></li>
+            <li class="q"><div class="stem"><strong>134</strong>. A quadratic function is given by f(x)=x^2-6x+8. What are its zeros?</div><div class="options"><label><input type="radio" name="q134" value="A"> A) x=2,4</label><label><input type="radio" name="q134" value="B"> B) x=1,8</label><label><input type="radio" name="q134" value="C"> C) x=3,3</label><label><input type="radio" name="q134" value="D"> D) x=4,6</label></div></li>
+            <li class="q"><div class="stem"><strong>135</strong>. A right circular cylinder has radius 3 and height 10. What is its volume? (Use π≈3.14)</div><div class="options"><label><input type="radio" name="q135" value="A"> A) 90π</label><label><input type="radio" name="q135" value="B"> B) 180π</label><label><input type="radio" name="q135" value="C"> C) 270π</label><label><input type="radio" name="q135" value="D"> D) 300π</label></div></li>
+            <li class="q"><div class="stem"><strong>136</strong>. Which is equivalent to log10(1000)?</div><div class="options"><label><input type="radio" name="q136" value="A"> A) 1</label><label><input type="radio" name="q136" value="B"> B) 2</label><label><input type="radio" name="q136" value="C"> C) 3</label><label><input type="radio" name="q136" value="D"> D) 1000</label></div></li>
+            <li class="q"><div class="stem"><strong>137</strong>. Solve: 5x - 8 = 2x + 10</div><div class="options"><label><input type="radio" name="q137" value="A"> A) x=2</label><label><input type="radio" name="q137" value="B"> B) x=4</label><label><input type="radio" name="q137" value="C"> C) x=6</label><label><input type="radio" name="q137" value="D"> D) x=8</label></div></li>
+            <li class="q"><div class="stem"><strong>138</strong>. A quadratic function is given by f(x)=x^2-6x+8. What are its zeros?</div><div class="options"><label><input type="radio" name="q138" value="A"> A) x=2,4</label><label><input type="radio" name="q138" value="B"> B) x=1,8</label><label><input type="radio" name="q138" value="C"> C) x=3,3</label><label><input type="radio" name="q138" value="D"> D) x=4,6</label></div></li>
+            <li class="q"><div class="stem"><strong>139</strong>. A right circular cylinder has radius 3 and height 10. What is its volume? (Use π≈3.14)</div><div class="options"><label><input type="radio" name="q139" value="A"> A) 90π</label><label><input type="radio" name="q139" value="B"> B) 180π</label><label><input type="radio" name="q139" value="C"> C) 270π</label><label><input type="radio" name="q139" value="D"> D) 300π</label></div></li>
+            <li class="q"><div class="stem"><strong>140</strong>. Which is equivalent to log10(1000)?</div><div class="options"><label><input type="radio" name="q140" value="A"> A) 1</label><label><input type="radio" name="q140" value="B"> B) 2</label><label><input type="radio" name="q140" value="C"> C) 3</label><label><input type="radio" name="q140" value="D"> D) 1000</label></div></li>
+            <li class="q"><div class="stem"><strong>141</strong>. Solve: 5x - 8 = 2x + 10</div><div class="options"><label><input type="radio" name="q141" value="A"> A) x=2</label><label><input type="radio" name="q141" value="B"> B) x=4</label><label><input type="radio" name="q141" value="C"> C) x=6</label><label><input type="radio" name="q141" value="D"> D) x=8</label></div></li>
+            <li class="q"><div class="stem"><strong>142</strong>. A quadratic function is given by f(x)=x^2-6x+8. What are its zeros?</div><div class="options"><label><input type="radio" name="q142" value="A"> A) x=2,4</label><label><input type="radio" name="q142" value="B"> B) x=1,8</label><label><input type="radio" name="q142" value="C"> C) x=3,3</label><label><input type="radio" name="q142" value="D"> D) x=4,6</label></div></li>
+            <li class="q"><div class="stem"><strong>143</strong>. A right circular cylinder has radius 3 and height 10. What is its volume? (Use π≈3.14)</div><div class="options"><label><input type="radio" name="q143" value="A"> A) 90π</label><label><input type="radio" name="q143" value="B"> B) 180π</label><label><input type="radio" name="q143" value="C"> C) 270π</label><label><input type="radio" name="q143" value="D"> D) 300π</label></div></li>
+            <li class="q"><div class="stem"><strong>144</strong>. Which is equivalent to log10(1000)?</div><div class="options"><label><input type="radio" name="q144" value="A"> A) 1</label><label><input type="radio" name="q144" value="B"> B) 2</label><label><input type="radio" name="q144" value="C"> C) 3</label><label><input type="radio" name="q144" value="D"> D) 1000</label></div></li>
+            <li class="q"><div class="stem"><strong>145</strong>. Solve: 5x - 8 = 2x + 10</div><div class="options"><label><input type="radio" name="q145" value="A"> A) x=2</label><label><input type="radio" name="q145" value="B"> B) x=4</label><label><input type="radio" name="q145" value="C"> C) x=6</label><label><input type="radio" name="q145" value="D"> D) x=8</label></div></li>
+            <li class="q"><div class="stem"><strong>146</strong>. A quadratic function is given by f(x)=x^2-6x+8. What are its zeros?</div><div class="options"><label><input type="radio" name="q146" value="A"> A) x=2,4</label><label><input type="radio" name="q146" value="B"> B) x=1,8</label><label><input type="radio" name="q146" value="C"> C) x=3,3</label><label><input type="radio" name="q146" value="D"> D) x=4,6</label></div></li>
+            <li class="q"><div class="stem"><strong>147</strong>. A right circular cylinder has radius 3 and height 10. What is its volume? (Use π≈3.14)</div><div class="options"><label><input type="radio" name="q147" value="A"> A) 90π</label><label><input type="radio" name="q147" value="B"> B) 180π</label><label><input type="radio" name="q147" value="C"> C) 270π</label><label><input type="radio" name="q147" value="D"> D) 300π</label></div></li>
+            <li class="q"><div class="stem"><strong>148</strong>. Which is equivalent to log10(1000)?</div><div class="options"><label><input type="radio" name="q148" value="A"> A) 1</label><label><input type="radio" name="q148" value="B"> B) 2</label><label><input type="radio" name="q148" value="C"> C) 3</label><label><input type="radio" name="q148" value="D"> D) 1000</label></div></li>
+            <li class="q"><div class="stem"><strong>149</strong>. Solve: 5x - 8 = 2x + 10</div><div class="options"><label><input type="radio" name="q149" value="A"> A) x=2</label><label><input type="radio" name="q149" value="B"> B) x=4</label><label><input type="radio" name="q149" value="C"> C) x=6</label><label><input type="radio" name="q149" value="D"> D) x=8</label></div></li>
+            <li class="q"><div class="stem"><strong>150</strong>. A quadratic function is given by f(x)=x^2-6x+8. What are its zeros?</div><div class="options"><label><input type="radio" name="q150" value="A"> A) x=2,4</label><label><input type="radio" name="q150" value="B"> B) x=1,8</label><label><input type="radio" name="q150" value="C"> C) x=3,3</label><label><input type="radio" name="q150" value="D"> D) x=4,6</label></div></li>
+            <li class="q"><div class="stem"><strong>151</strong>. A right circular cylinder has radius 3 and height 10. What is its volume? (Use π≈3.14)</div><div class="options"><label><input type="radio" name="q151" value="A"> A) 90π</label><label><input type="radio" name="q151" value="B"> B) 180π</label><label><input type="radio" name="q151" value="C"> C) 270π</label><label><input type="radio" name="q151" value="D"> D) 300π</label></div></li>
+            <li class="q"><div class="stem"><strong>152</strong>. Which is equivalent to log10(1000)?</div><div class="options"><label><input type="radio" name="q152" value="A"> A) 1</label><label><input type="radio" name="q152" value="B"> B) 2</label><label><input type="radio" name="q152" value="C"> C) 3</label><label><input type="radio" name="q152" value="D"> D) 1000</label></div></li>
+            <li class="q"><div class="stem"><strong>153</strong>. Solve: 5x - 8 = 2x + 10</div><div class="options"><label><input type="radio" name="q153" value="A"> A) x=2</label><label><input type="radio" name="q153" value="B"> B) x=4</label><label><input type="radio" name="q153" value="C"> C) x=6</label><label><input type="radio" name="q153" value="D"> D) x=8</label></div></li>
+            <li class="q"><div class="stem"><strong>154</strong>. A quadratic function is given by f(x)=x^2-6x+8. What are its zeros?</div><div class="options"><label><input type="radio" name="q154" value="A"> A) x=2,4</label><label><input type="radio" name="q154" value="B"> B) x=1,8</label><label><input type="radio" name="q154" value="C"> C) x=3,3</label><label><input type="radio" name="q154" value="D"> D) x=4,6</label></div></li>
+        </ol>
+      </form>
+
+      <div id="gradingResults" class="grading-summary" style="display:none"></div>
+
+      <div class="note">When you click <strong>Save answers</strong> they are stored locally in your browser. Use <strong>Export (CSV)</strong> to download your responses.</div>
+    </div>
+  </div>
+
+  <div id="customModal" class="modal-overlay">
+    <div class="modal-content">
+      <p id="modalMessage"></p>
+      <div id="modalButtons" class="modal-buttons"></div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('customModal');
+    const modalMessage = document.getElementById('modalMessage');
+    const modalButtons = document.getElementById('modalButtons');
+
+    let timerInterval = null;
+    let timeRemaining = QUIZ_DURATION;
+    const timerDisplay = document.getElementById('timerDisplay');
+    const startBtn = document.getElementById('timerStart');
+    const pauseBtn = document.getElementById('timerPause');
+    const resetBtn = document.getElementById('timerReset');
+
+    startBtn.addEventListener('click', startTimer);
+    pauseBtn.addEventListener('click', pauseTimer);
+    resetBtn.addEventListener('click', resetTimer);
+
+    document.getElementById('saveAll').addEventListener('click', saveAll);
+    document.getElementById('loadAll').addEventListener('click', manualLoad);
+    document.getElementById('exportCsv').addEventListener('click', exportCsv);
+    document.getElementById('clearAll').addEventListener('click', clearAll);
+    document.getElementById('checkAnswers').addEventListener('click', checkAnswers);
+
+    (function(){ if (localStorage.getItem(STORAGE_KEY)) { loadAll(); } })();
+  </script>
+  
+<div style="margin-top: 1.5rem; text-align: center;">
+  <button class="btn" onclick="window.location.href='sat-score.html'">
+    Check Final Score &rarr;
+  </button>
+</div>
+
+<script>
+    const STORAGE_KEY = 'uq_sat_math_mod2_v2';
+    const MIN_Q = 126;
+    const MAX_Q = 154;
+    const TOTAL_QUESTIONS = MAX_Q - MIN_Q + 1;
+    const QUIZ_DURATION = 35 * 60;
+
+    const ANSWER_KEY = {
+        126: "A", 127: "C", 128: "C", 129: "C", 130: "A", 131: "C", 132: "C", 133: "C", 134: "A", 135: "C", 
+        136: "C", 137: "C", 138: "A", 139: "C", 140: "C", 141: "C", 142: "A", 143: "C", 144: "C", 145: "C", 
+        146: "A", 147: "C", 148: "C", 149: "C", 150: "A", 151: "C", 152: "C", 153: "C", 154: "A"
+    };
+
+</script>
+
+<div id="footer"></div>
+ <script src="footer.js"></script>
+</body>
+</html>

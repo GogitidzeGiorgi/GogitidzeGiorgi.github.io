@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Choose Exam - UniQuest</title>
+  <title>აირჩიე გამოცდა - უნიქვესთი</title>
   <link rel="icon" href="images/logo.png" type="image/png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style.css">
@@ -55,7 +55,10 @@
   display: inline;
   flex-direction: row; /* Changes stacking from vertical to horizontal */
 }
-html, body {
+
+   html, body {
+  height: 100%;       /* full height */
+  margin: 0;
   display: flex;
   flex-direction: column;
 }
@@ -65,72 +68,64 @@ html, body {
   <div id="header"></div>
   <script src="header.js"></script>
 
-  <!-- Hero Section -->
   <section id="hero" style="height: 300px; background: url('images/test.jpg') center/cover no-repeat; position:relative; color:white; text-align:center; display:flex; align-items:center; justify-content:center;">
     <div class="content">
-      <h1>Choose the exam to prepare for</h1>
-      <p>Pick an exam to open UniQuest's dedicated study page for that test — study plans, resources, and practice will be ready there.</p>
+      <h1>აირჩიეთ საგამოცდო ტესტი მოსამზადებლად</h1>
+      <p>აირჩიეთ გამოცდა, რათa გახსნათ UniQuest-ის სპეციალური მოსამზადებელი გვერდი — იქ დაგხვდებათ სასწავლო გეგმები, რესურსები და სავარჯიშოები.</p>
     </div>
   </section>
 
   <main class="container">
 
     <section class="cards" role="list">
-      <!-- TOEFL -->
-      <article class="card" role="listitem" data-key="toefl" tabindex="0" title="TOEFL study page">
+      <article class="card" role="listitem" data-key="toefl" tabindex="0" title="TOEFL-ის მოსამზადებელი გვერდი">
         <div class="top"><div class="icon"><i class="fa-solid fa-language"></i></div>
         <div>
           <div class="title">TOEFL</div>
-          <div class="sub">Reading · Listening · Speaking · Writing</div>
+          <div class="sub">კითხვა · მოსმენა · საუბარი · წერა</div>
         </div></div>
       </article>
 
-      <!-- IELTS -->
-      <article class="card" role="listitem" data-key="ielts" tabindex="0" title="IELTS study page">
+      <article class="card" role="listitem" data-key="ielts" tabindex="0" title="IELTS-ის მოსამზადებელი გვერდი">
         <div class="top"><div class="icon"><i class="fa-solid fa-comments"></i></div>
         <div>
           <div class="title">IELTS</div>
-          <div class="sub">Academic & General — Listening · Reading · Writing · Speaking</div>
+          <div class="sub">აკადემიური და ზოგადი — მოსმენა · კითხვა · წერა · საუბარი</div>
         </div></div>
       </article>
 
-      <!-- GRE -->
-      <article class="card" role="listitem" data-key="gre" tabindex="0" title="GRE study page">
+      <article class="card" role="listitem" data-key="gre" tabindex="0" title="GRE-ს მოსამზადებელი გვერდი">
         <div class="top"><div class="icon"><i class="fa-solid fa-calculator"></i></div>
         <div>
-          <div class="title">GRE General Test</div>
-          <div class="sub">Verbal · Quant · Analytical Writing</div>
+          <div class="title">GRE ზოგადი ტესტი</div>
+          <div class="sub">ვერბალური · რაოდენობრივი · ანალიტიკური წერა</div>
         </div></div>
       </article>
 
-      <!-- GMAT -->
-      <article class="card" role="listitem" data-key="gmat" tabindex="0" title="GMAT study page">
+      <article class="card" role="listitem" data-key="gmat" tabindex="0" title="GMAT-ის მოსამზადებელი გვერდი">
         <div class="top"><div class="icon"><i class="fa-solid fa-briefcase"></i></div>
         <div>
           <div class="title">GMAT</div>
-          <div class="sub">Quant · Verbal · Data Insights</div>
+          <div class="sub">რაოდენობრივი · ვერბალური · მონაცემთა ანალიზი</div>
         </div></div>
       </article>
 
-      <!-- SAT -->
-      <article class="card" role="listitem" data-key="sat" tabindex="0" title="SAT study page">
+      <article class="card" role="listitem" data-key="sat" tabindex="0" title="SAT-ის მოსამზადებელი გვერდი">
         <div class="top"><div class="icon"><i class="fa-solid fa-school"></i></div>
         <div>
           <div class="title">SAT</div>
-          <div class="sub">Evidence-Based Reading & Writing · Math</div>
+          <div class="sub">მტკიცებულებებზე დაფუძნებული კითხვა და წერა · მათემატიკა</div>
         </div></div>
       </article>
 
-      <!-- ACT -->
-      <article class="card" role="listitem" data-key="act" tabindex="0" title="ACT study page">
+      <article class="card" role="listitem" data-key="act" tabindex="0" title="ACT-ის მოსამზადებელი გვერდი">
         <div class="top"><div class="icon"><i class="fa-solid fa-pen-fancy"></i></div>
         <div>
           <div class="title">ACT</div>
-          <div class="sub">English · Math · Reading · Science</div>
+          <div class="sub">ინგლისური · მათემატიკა · კითხვა · მეცნიერება</div>
         </div></div>
       </article>
     </section>
-
   </main>
 
   <script>

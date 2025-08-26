@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Reading Comprehension Practice Quiz</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* basic styling */
+    body {font-family: system-ui, sans-serif; background:#f9fafb; color:#111; line-height:1.6; padding:1.25rem}
+    .container {max-width:980px;margin:0 auto}
+    .panel {background:#fff;border:1px solid #e6e6e6;padding:1.25rem;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.04)}
+    h1, h2 {margin:0 0 .5rem}
+    h1 {font-size:1.35rem}
+    h2 {font-size:1.15rem; margin-top: 1.5rem; border-bottom: 1px solid #eee; padding-bottom: 0.5rem;}
+    p.lead{color:#444;margin-top:0}
+    p.passage { background-color: #f8f9fa; border-left: 3px solid #dee2e6; padding: 1rem; margin-bottom: 1.5rem; border-radius: 4px; white-space: pre-wrap; }
+    ol.questions{counter-reset:q; margin:0;padding:0 0 0 1rem}
+    li.q{margin:.9rem 0;padding:.6rem;border-radius:8px; list-style-type: none;}
+    .stem{margin-bottom:.45rem}
+    .options label{display:block;padding:.38rem .6rem;border-radius:6px;cursor:pointer;border:1px solid transparent;margin-bottom:.32rem}
+    .options input{margin-right:.6rem}
+    .controls{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin-top:1rem}
+    .btn{background:#2563eb;color:#fff;border:none;padding:.55rem .9rem;border-radius:8px;cursor:pointer; transition: background-color 0.2s;}
+    .btn:hover {background: #1d4ed8;}
+    .btn.secondary{background:#eef2ff;color:#2563eb}
+    .btn.secondary:hover{background:#dbeafe;}
+    .note{font-size:.9rem;color:#555;margin-top:.5rem}
+    .small{font-size:.9rem;color:#666}
+    @media (max-width:720px){ .panel{padding:.85rem} }
+
+    /* grading styles */
+    .option-correct { background: #ecfdf5 !important; border-color: #34d399 !important; }
+    .option-wrong { background: #fff1f2 !important; border-color: #f87171 !important; opacity: 0.95; }
+    .correct-badge { display:inline-block; margin-left:.5rem; font-weight:700; color:#065f46; background:#bbf7d0; border-radius:4px; padding:2px 6px; font-size:.8rem; }
+    .wrong-badge { display:inline-block; margin-left:.5rem; font-weight:700; color:#7f1d1d; background:#fecaca; border-radius:4px; padding:2px 6px; font-size:.8rem; }
+    .grading-summary { margin-top:1rem; padding:.75rem; background:#f3f4f6; border-radius:8px; font-weight:600; }
+    .grading-details { margin-top:.5rem; font-size:.95rem; }
+
+    /* Modal styles for custom alerts */
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; }
+    .modal-content { background: #fff; padding: 1.5rem; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); text-align: center; max-width: 400px; width: 90%; transform: scale(0.9); transition: transform 0.3s; }
+    .modal-buttons { margin-top: 1rem; display: flex; justify-content: center; gap: 0.5rem; }
+    .modal-overlay.visible { opacity: 1; visibility: visible; }
+    .modal-overlay.visible .modal-content { transform: scale(1); }
+  </style>
+</head>
+<body>
+<div id="header"></div>
+<script src="header.js"></script>
+  <div class="container">
+    <div class="panel">
+      <h1>Reading Comprehension Practice Quiz Module 1 (52 questions)</h1>
+      <p class="lead">Select the most applicable answer for each question based on the passages.</p>
+      <div class="controls">
+        <button class="btn" id="saveAll">Save answers</button>
+        <button class="btn secondary" id="loadAll">Load saved</button>
+        <button class="btn" id="exportCsv">Export (CSV)</button>
+        <button class="btn secondary" id="clearAll">Clear</button>
+        <button class="btn" id="checkAnswers">Check answers</button>
+      </div>
+
+      <div id="timerContainer" style="display:flex;align-items:center;gap:.5rem;margin-top:0.5rem">
+          <div id="timerDisplay" style="font-weight:700;font-size:0.95rem;background:#fff;padding:.35rem .6rem;border-radius:6px;border:1px solid #e6e6e6">
+            32:00
+          </div>
+          <button class="btn secondary" id="timerStart">Start</button>
+          <button class="btn secondary" id="timerPause" disabled>Pause</button>
+          <button class="btn" id="timerReset">Reset</button>
+      </div>
+
+      <hr style="margin-top:1rem;margin-bottom:1rem;border:none;height:1px;background:#f0f3ff">
+
+      <form id="quizForm">
+        <h2>📖 Passage 1 – Literature</h2>
+        <p class="passage">"The train lurched forward with a whistle, and Eleanor gripped the worn leather strap above her seat. She had always imagined that leaving home would feel triumphant, like stepping into a brighter future. Instead, the landscape flying past her window looked gray and indistinct, and a curious hollowness pressed against her chest.
+She thought of her father’s stern handshake that morning, more a farewell to a soldier than to a daughter. He had not spoken a word of encouragement, only the familiar injunction: “Do not disappoint us.”
+The words echoed now, louder than the wheels on the tracks. Eleanor wondered whether she had already disappointed him simply by leaving. The university was far away—two days’ travel—and though she longed for its promise of books and lectures, she feared the whispers of her relatives were true: that a woman’s mind had no place there.
+The carriage door opened, and a young man entered, his jacket dusted with coal ash. He tipped his hat politely before settling across from her. For several minutes, silence stretched between them, broken only by the steady clatter of the train. Finally, he said, “First time away?”
+Eleanor started at the question, surprised he had guessed so quickly. She nodded, then turned back to the window, hoping the conversation would end. Yet something in his tone had been kind, without the judgment she was accustomed to hearing.
+‘My brother left last year,’ the man continued. ‘Went to study engineering. My parents weren’t pleased, but he says it was worth every mile.’
+Eleanor felt a flush of recognition—here was someone who understood the distance between duty and desire. Tentatively, she asked about the university, and for the next hour they spoke of lectures, professors, and the exhilaration of ideas too large to contain.
+When the train slowed at a junction, the man gathered his bag. He smiled as he stood. “Courage, miss. That’s what my brother always says. You’ll need it.”
+Eleanor watched him step onto the platform and vanish into the crowd. The carriage felt emptier without him, but the echo of his words remained. For the first time since she left home, the weight on her chest lifted slightly, and she allowed herself a small, secret smile."</p>
+        <ol class="questions" start="1">
+          <li class="q"><div class="stem"><strong>1</strong>. The main purpose of the passage is to:</div><div class="options"><label><input type="radio" name="q1" value="A"> A) contrast two students’ journeys to university</label><label><input type="radio" name="q1" value="B"> B) describe Eleanor’s conflicted feelings about leaving home</label><label><input type="radio" name="q1" value="C"> C) illustrate the hardships of train travel in the 19th century</label><label><input type="radio" name="q1" value="D"> D) explain the expectations of women in professional life</label></div></li>
+          <li class="q"><div class="stem"><strong>2</strong>. Which choice best describes Eleanor’s relationship with her father?</div><div class="options"><label><input type="radio" name="q2" value="A"> A) He is encouraging but worried.</label><label><input type="radio" name="q2" value="B"> B) He is distant and demanding.</label><label><input type="radio" name="q2" value="C"> C) He is affectionate but controlling.</label><label><input type="radio" name="q2" value="D"> D) He is indifferent to her ambitions.</label></div></li>
+          <li class="q"><div class="stem"><strong>3</strong>. In line 7, “injunction” most nearly means:</div><div class="options"><label><input type="radio" name="q3" value="A"> A) command</label><label><input type="radio" name="q3" value="B"> B) warning</label><label><input type="radio" name="q3" value="C"> C) suggestion</label><label><input type="radio" name="q3" value="D"> D) conversation</label></div></li>
+          <li class="q"><div class="stem"><strong>4</strong>. The imagery of “gray and indistinct” (line 4) primarily serves to:</div><div class="options"><label><input type="radio" name="q4" value="A"> A) foreshadow Eleanor’s future struggles</label><label><input type="radio" name="q4" value="B"> B) emphasize the dreariness of her journey</label><label><input type="radio" name="q4" value="C"> C) highlight the beauty of the landscape</label><label><input type="radio" name="q4" value="D"> D) symbolize her excitement for change</label></div></li>
+          <li class="q"><div class="stem"><strong>5</strong>. What can be inferred about Eleanor’s relatives?</div><div class="options"><label><input type="radio" name="q5" value="A"> A) They believe women should remain at home.</label><label><input type="radio" name="q5" value="B"> B) They secretly admire her independence.</label><label><input type="radio" name="q5" value="C"> C) They envy her opportunity.</label><label><input type="radio" name="q5" value="D"> D) They encouraged her decision.</label></div></li>
+          <li class="q"><div class="stem"><strong>6</strong>. The young man’s introduction into the story functions mainly to:</div><div class="options"><label><input type="radio" name="q6" value="A"> A) distract Eleanor from her worries</label><label><input type="radio" name="q6" value="B"> B) reinforce her doubts about leaving</label><label><input type="radio" name="q6" value="C"> C) symbolize her connection to family</label><label><input type="radio" name="q6" value="D"> D) provide a voice of reassurance</label></div></li>
+          <li class="q"><div class="stem"><strong>7</strong>. Eleanor’s response to the man’s question (“First time away?”) shows she is:</div><div class="options"><label><input type="radio" name="q7" value="A"> A) embarrassed by her inexperience</label><label><input type="radio" name="q7" value="B"> B) eager to share her plans</label><label><input type="radio" name="q7" value="C"> C) irritated by his interruption</label><label><input type="radio" name="q7" value="D"> D) dismissive of his friendliness</label></div></li>
+          <li class="q"><div class="stem"><strong>8</strong>. The conversation between Eleanor and the man develops the theme of:</div><div class="options"><label><input type="radio" name="q8" value="A"> A) the isolation of travel</label><label><input type="radio" name="q8" value="B"> B) the tension between tradition and ambition</label><label><input type="radio" name="q8" value="C"> C) the importance of social class</label><label><input type="radio" name="q8" value="D"> D) the inevitability of disappointment</label></div></li>
+          <li class="q"><div class="stem"><strong>9</strong>. Which choice provides the best evidence for the answer to Question 8?</div><div class="options"><label><input type="radio" name="q9" value="A"> A) “My brother left last year…”</label><label><input type="radio" name="q9" value="B"> B) “My parents weren’t pleased, but he says it was worth every mile.”</label><label><input type="radio" name="q9" value="C"> C) “Eleanor felt a flush of recognition…”</label><label><input type="radio" name="q9" value="D"> D) “Courage, miss. That’s what my brother always says.”</label></div></li>
+          <li class="q"><div class="stem"><strong>10</strong>. By the end of the passage, Eleanor’s attitude has shifted from:</div><div class="options"><label><input type="radio" name="q10" value="A"> A) pride to shame</label><label><input type="radio" name="q10" value="B"> B) fear to cautious hope</label><label><input type="radio" name="q10" value="C"> C) curiosity to disinterest</label><label><input type="radio" name="q10" value="D"> D) doubt to certainty</label></div></li>
+          <li class="q"><div class="stem"><strong>11</strong>. The central conflict of the passage can best be described as:</div><div class="options"><label><input type="radio" name="q11" value="A"> A) Eleanor’s struggle to overcome her father’s disapproval</label><label><input type="radio" name="q11" value="B"> B) Eleanor’s effort to adapt to unfamiliar surroundings</label><label><input type="radio" name="q11" value="C"> C) Eleanor’s internal conflict between fear and ambition</label><label><input type="radio" name="q11" value="D"> D) Eleanor’s rivalry with her relatives over education</label></div></li>
+        </ol>
+
+        <h2>📖 Passage 2 – Social Science</h2>
+        <p class="passage">"Over the past century, cities have undergone a transformation that would have astonished earlier generations. Where once bustling squares and crowded sidewalks defined urban life, wide boulevards and highways now carve through neighborhoods, prioritizing the movement of automobiles above all else. For much of the twentieth century, planners believed that car-centered design symbolized modernity and progress.
+Yet in the past two decades, a different philosophy has gained momentum. Urban planners, public health experts, and environmental activists have begun advocating for ‘walkable cities.’ The term refers to communities designed not around the automobile but around people—where homes, shops, schools, and offices lie within easy walking distance, and where public spaces are designed for interaction rather than traffic flow.
+The appeal of walkability rests on three intertwined benefits: health, environment, and community. Researchers have documented that residents of walkable neighborhoods tend to exercise more frequently, leading to lower rates of obesity and cardiovascular disease. Environmental studies suggest that cities with extensive pedestrian zones emit less carbon per capita, in large part because residents drive less. And sociologists have noted that residents of walkable neighborhoods report higher levels of social trust and civic participation, as casual encounters on sidewalks foster stronger community bonds.
+Of course, the transition to walkability is not without challenges. Retrofitting a car-dominated city requires enormous investment and political will. Removing lanes to create bike paths, or converting parking lots into parks, often sparks fierce opposition from businesses worried about losing customers or drivers resistant to change. Moreover, not all neighborhoods benefit equally; affluent areas may attract the first investments in walkability, while poorer communities remain mired in unsafe streets and inadequate public transit.
+Despite these difficulties, examples from around the world suggest that the transformation is possible. Copenhagen, long celebrated for its cycling culture, has built more than 200 miles of protected bike lanes and witnessed steady declines in car use. In Bogotá, Colombia, city leaders launched “Ciclovía,” a weekly program that closes major roads to cars and opens them to cyclists, runners, and families; the initiative has become a model for other cities worldwide. Even in the United States, where the automobile once seemed untouchable, cities like Portland and New York have expanded pedestrian plazas and restricted car access in key districts.
+The debate over walkability is ultimately a debate about what cities are for. Are they simply channels for the efficient movement of vehicles, or are they shared spaces meant to enhance the daily lives of the people who inhabit them? The answer, increasingly, seems to be shifting toward the latter. Walkable cities, advocates argue, do more than reduce traffic—they redefine urban life itself."</p>
+        <ol class="questions" start="12">
+          <li class="q"><div class="stem"><strong>12</strong>. The main purpose of the passage is to:</div><div class="options"><label><input type="radio" name="q12" value="A"> A) argue that car-centered design is superior to walkable design</label><label><input type="radio" name="q12" value="B"> B) describe the rise of walkable cities and their benefits</label><label><input type="radio" name="q12" value="C"> C) explain how highways transformed twentieth-century commerce</label><label><input type="radio" name="q12" value="D"> D) critique governments for failing to invest in public health</label></div></li>
+          <li class="q"><div class="stem"><strong>13</strong>. The author suggests that twentieth-century planners associated cars with:</div><div class="options"><label><input type="radio" name="q13" value="A"> A) danger</label><label><input type="radio" name="q13" value="B"> B) inconvenience</label><label><input type="radio" name="q13" value="C"> C) modernity</label><label><input type="radio" name="q13" value="D"> D) decline</label></div></li>
+          <li class="q"><div class="stem"><strong>14</strong>. Which of the following is NOT listed as a benefit of walkable cities?</div><div class="options"><label><input type="radio" name="q14" value="A"> A) Lower carbon emissions</label><label><input type="radio" name="q14" value="B"> B) Stronger civic participation</label><label><input type="radio" name="q14" value="C"> C) Higher rates of physical activity</label><label><input type="radio" name="q14" value="D"> D) Cheaper construction costs</label></div></li>
+          <li class="q"><div class="stem"><strong>15</strong>. According to the passage, one social advantage of walkable communities is that:</div><div class="options"><label><input type="radio" name="q15" value="A"> A) they attract more tourists</label><label><input type="radio" name="q15" value="B"> B) they foster casual interactions among neighbors</label><label><input type="radio" name="q15" value="C"> C) they eliminate the need for schools and offices</label><label><input type="radio" name="q15" value="D"> D) they discourage people from civic participation</label></div></li>
+          <li class="q"><div class="stem"><strong>16</strong>. The word “retrofitting” (paragraph 4) most nearly means:</div><div class="options"><label><input type="radio" name="q16" value="A"> A) repairing</label><label><input type="radio" name="q16" value="B"> B) adapting</label><label><input type="radio" name="q16" value="C"> C) measuring</label><label><input type="radio" name="q16" value="D"> D) decorating</label></div></li>
+          <li class="q"><div class="stem"><strong>17</strong>. The author mentions opposition to bike lanes and parks primarily to:</div><div class="options"><label><input type="radio" name="q17" value="A"> A) show that businesses always resist change</label><label><input type="radio" name="q17" value="B"> B) illustrate practical challenges to creating walkable cities</label><label><input type="radio" name="q17" value="C"> C) argue that car drivers have stronger political power</label><label><input type="radio" name="q17" value="D"> D) suggest that walkability is universally unpopular</label></div></li>
+          <li class="q"><div class="stem"><strong>18</strong>. Which statement best represents the author’s view of walkability in poorer communities?</div><div class="options"><label><input type="radio" name="q18" value="A"> A) They often benefit more quickly than affluent areas.</label><label><input type="radio" name="q18" value="B"> B) They may be left behind in the transition.</label><label><input type="radio" name="q18" value="C"> C) They have always been models of walkability.</label><label><input type="radio" name="q18" value="D"> D) They resist walkability more than wealthier areas.</label></div></li>
+          <li class="q"><div class="stem"><strong>19</strong>. The example of Bogotá’s “Ciclovía” serves to:</div><div class="options"><label><input type="radio" name="q19" value="A"> A) show that walkability is limited to wealthy nations</label><label><input type="radio" name="q19" value="B"> B) illustrate a successful and replicable initiative</label><label><input type="radio" name="q19" value="C"> C) prove that cars are unnecessary for urban life</label><label><input type="radio" name="q19" value="D"> D) suggest that Latin America has fewer transportation issues</label></div></li>
+          <li class="q"><div class="stem"><strong>20</strong>. Which choice provides the best evidence for the answer to Question 19?</div><div class="options"><label><input type="radio" name="q20" value="A"> A) “Copenhagen… built more than 200 miles of protected bike lanes…”</label><label><input type="radio" name="q20" value="B"> B) “city leaders launched ‘Ciclovía’…”</label><label><input type="radio" name="q20" value="C"> C) “Even in the United States, where the automobile once seemed untouchable…”</label><label><input type="radio" name="q20" value="D"> D) “Walkable cities, advocates argue, do more than reduce traffic…”</label></div></li>
+          <li class="q"><div class="stem"><strong>21</strong>. The phrase “debate about what cities are for” implies that:</div><div class="options"><label><input type="radio" name="q21" value="A"> A) cities must prioritize economic activity over social life</label><label><input type="radio" name="q21" value="B"> B) the role of cities is contested between efficiency and livability</label><label><input type="radio" name="q21" value="C"> C) most people prefer highways to sidewalks</label><label><input type="radio" name="q21" value="D"> D) city planning has little impact on daily life</label></div></li>
+          <li class="q"><div class="stem"><strong>22</strong>. The author’s overall tone can best be described as:</div><div class="options"><label><input type="radio" name="q22" value="A"> A) critical and pessimistic</label><label><input type="radio" name="q22" value="B"> B) informative and optimistic</label><label><input type="radio" name="q22" value="C"> C) humorous and sarcastic</label><label><input type="radio" name="q22" value="D"> D) neutral and detached</label></div></li>
+        </ol>
+
+        <h2>📖 Passage 3 – Science</h2>
+        <p class="passage">"For centuries, the Arctic Ocean was viewed as a static, unchanging wilderness. Explorers described its thick pack ice as impenetrable, a frozen lid sealing the top of the world. Yet satellite records beginning in the late 1970s have revealed a striking reality: the Arctic is one of the fastest-changing environments on the planet.
+The most visible change has been the decline of summer sea ice. In 1980, satellite images showed that roughly 7.5 million square kilometers of the Arctic Ocean remained covered each September. Today, that figure has dropped by nearly half. Scientists warn that by mid-century, the Arctic could experience its first ice-free summers.
+The implications of this transformation extend far beyond the polar regions. Sea ice acts as Earth’s mirror, reflecting sunlight back into space. As ice vanishes, darker ocean water absorbs more solar energy, accelerating global warming in a feedback loop known as Arctic amplification. Researchers estimate that the Arctic is warming nearly four times faster than the global average.
+These changes have immediate consequences for ecosystems. Polar bears, seals, and walruses rely on sea ice as a platform for hunting and breeding. With ice retreating, bears must swim greater distances to find food, leading to higher mortality rates. Walruses crowd onto beaches in dangerous numbers, and the timing of plankton blooms that support the marine food chain is shifting. Indigenous communities, too, are directly affected: thinning ice endangers traditional hunting routes and threatens food security.
+The retreat of sea ice also raises geopolitical and economic questions. As waters open, nations eye new shipping routes that could cut transit times between Asia and Europe by thousands of miles. Oil and gas reserves, once inaccessible beneath the ice, are now targets of exploration. Yet these opportunities carry risks: increased vessel traffic heightens the chance of oil spills, and resource extraction threatens fragile ecosystems already under stress.
+Despite broad agreement about the reality of Arctic change, uncertainty remains about its pace and magnitude. Climate models vary in predicting when ice-free summers might occur. Some suggest the 2040s; others point to later in the century. What unites these projections is the recognition that the Arctic, once thought immutable, is entering an era of rapid transformation whose consequences will ripple across the globe."</p>
+        <ol class="questions" start="23">
+          <li class="q"><div class="stem"><strong>23</strong>. The main purpose of the passage is to:</div><div class="options"><label><input type="radio" name="q23" value="A"> A) argue that Arctic ecosystems are resilient to change</label><label><input type="radio" name="q23" value="B"> B) describe recent transformations in the Arctic and their global effects</label><label><input type="radio" name="q23" value="C"> C) criticize nations for pursuing Arctic shipping routes</label><label><input type="radio" name="q23" value="D"> D) explain why polar exploration has declined</label></div></li>
+          <li class="q"><div class="stem"><strong>24</strong>. According to the passage, summer sea ice in 1980 measured approximately:</div><div class="options"><label><input type="radio" name="q24" value="A"> A) 15 million square kilometers</label><label><input type="radio" name="q24" value="B"> B) 7.5 million square kilometers</label><label><input type="radio" name="q24" value="C"> C) 5 million square kilometers</label><label><input type="radio" name="q24" value="D"> D) 3.75 million square kilometers</label></div></li>
+          <li class="q"><div class="stem"><strong>25</strong>. The author uses the phrase “Earth’s mirror” (paragraph 3) to emphasize that:</div><div class="options"><label><input type="radio" name="q25" value="A"> A) the Arctic is an accurate model for other regions</label><label><input type="radio" name="q25" value="B"> B) sea ice reflects sunlight and regulates temperature</label><label><input type="radio" name="q25" value="C"> C) Arctic warming is slower than global warming</label><label><input type="radio" name="q25" value="D"> D) oceans have no role in climate</label></div></li>
+          <li class="q"><div class="stem"><strong>26</strong>. The term “feedback loop” (paragraph 3) most nearly refers to:</div><div class="options"><label><input type="radio" name="q26" value="A"> A) a repeating cycle that strengthens itself</label><label><input type="radio" name="q26" value="B"> B) a one-time climate event</label><label><input type="radio" name="q26" value="C"> C) a reversal of warming trends</label><label><input type="radio" name="q26" value="D"> D) a conflict among scientists</label></div></li>
+          <li class="q"><div class="stem"><strong>27</strong>. The passage suggests polar bears are threatened primarily because:</div><div class="options"><label><input type="radio" name="q27" value="A"> A) their hunting grounds are shrinking</label><label><input type="radio" name="q27" value="B"> B) they cannot adapt to warmer temperatures</label><label><input type="radio" name="q27" value="C"> C) seals and walruses compete for food</label><label><input type="radio" name="q27" value="D"> D) plankton blooms are disappearing</label></div></li>
+          <li class="q"><div class="stem"><strong>28</strong>. Which piece of evidence from the passage best supports the answer to Question 27?</div><div class="options"><label><input type="radio" name="q28" value="A"> A) “Polar bears, seals, and walruses rely on sea ice as a platform…”</label><label><input type="radio" name="q28" value="B"> B) “With ice retreating, bears must swim greater distances…”</label><label><input type="radio" name="q28" value="C"> C) “Walruses crowd onto beaches in dangerous numbers…”</label><label><input type="radio" name="q28" value="D"> D) “The timing of plankton blooms… is shifting.”</label></div></li>
+          <li class="q"><div class="stem"><strong>29</strong>. The discussion of shipping routes and oil reserves serves mainly to:</div><div class="options"><label><input type="radio" name="q29" value="A"> A) highlight economic opportunities created by ice loss</label><label><input type="radio" name="q29" value="B"> B) suggest that Arctic warming has little impact</label><label><input type="radio" name="q29" value="C"> C) compare Arctic and Antarctic conditions</label><label><input type="radio" name="q29" value="D"> D) criticize nations for ignoring indigenous rights</label></div></li>
+          <li class="q"><div class="stem"><strong>30</strong>. The author’s attitude toward economic activity in the Arctic is best described as:</div><div class="options"><label><input type="radio" name="q30" value="A"> A) supportive and enthusiastic</label><label><input type="radio" name="q30" value="B"> B) cautious and concerned</label><label><input type="radio" name="q30" value="C"> C) neutral and disinterested</label><label><input type="radio" name="q30" value="D"> D) dismissive and mocking</label></div></li>
+          <li class="q"><div class="stem"><strong>31</strong>. Which choice provides the best evidence for the answer to Question 30?</div><div class="options"><label><input type="radio" name="q31" value="A"> A) “As waters open, nations eye new shipping routes…”</label><label><input type="radio" name="q31" value="B"> B) “Oil and gas reserves… are now targets of exploration.”</label><label><input type="radio" name="q31" value="C"> C) “Yet these opportunities carry risks: increased vessel traffic heightens the chance of oil spills…”</label><label><input type="radio" name="q31" value="D"> D) “Climate models vary in predicting when ice-free summers might occur.”</label></div></li>
+          <li class="q"><div class="stem"><strong>32</strong>. According to the passage, a major source of uncertainty is:</div><div class="options"><label><input type="radio" name="q32" value="A"> A) whether Arctic ecosystems will survive</label><label><input type="radio" name="q32" value="B"> B) how quickly ice-free summers will arrive</label><label><input type="radio" name="q32" value="C"> C) if nations will pursue Arctic trade</label><label><input type="radio" name="q32" value="D"> D) whether oil extraction is profitable</label></div></li>
+          <li class="q"><div class="stem"><strong>33</strong>. The central idea of the passage is that:</div><div class="options"><label><input type="radio" name="q33" value="A"> A) the Arctic is changing rapidly, with consequences for climate, ecosystems, and global politics</label><label><input type="radio" name="q33" value="B"> B) scientists disagree about whether Arctic warming is real</label><label><input type="radio" name="q33" value="C"> C) Arctic change has limited effects outside the region</label><label><input type="radio" name="q33" value="D"> D) economic benefits of Arctic access outweigh environmental risks</label></div></li>
+        </ol>
+
+        <h2>📖 Passage 4 – History (Speech, 1852, adapted)</h2>
+        <p class="passage">"Fellow citizens, the promises of liberty are written boldly in your founding charter, yet I ask you: what is liberty to those who do not share in its blessings? You celebrate freedom with grand orations and fireworks, while millions labor in chains. The contradiction is as glaring as the midday sun.
+You tell me the nation was built upon the principle that all men are created equal. I do not deny the beauty of those words, nor the wisdom of those who first proclaimed them. But what, I ask, is their value to the enslaved? To him, your Declaration is but empty rhetoric, a brilliant banner under which his misery is concealed.
+I do not speak these words to scorn your institutions, but to call you back to their true meaning. If liberty is a natural right, as you insist, then to withhold it from any man is to mock the very principle you claim to cherish. To celebrate freedom while denying it to others is to profane the altar on which your republic stands.
+Some will say: “The institution of slavery is old, older than our republic, older than any living memory. Who are we to sweep it away in a single generation?” I answer: age does not sanctify injustice. Time cannot transform cruelty into virtue. If slavery were eternal, it would be eternally wrong.
+Others plead for patience. They say the progress of freedom must be gradual, lest the nation tear itself apart. To this I reply: justice that is delayed is justice denied. No nation was ever strengthened by postponing righteousness. The longer the delay, the heavier the burden, until the people themselves rise to cast it off in fury.
+Do not mistake me: I do not despair of this republic. Its foundations, though stained, are strong. The principles of liberty, once sincerely embraced, have power to redeem the nation. The question is not whether freedom is right—it is whether you, as a people, will be brave enough to live by the truths you so proudly proclaim."</p>
+        <ol class="questions" start="34">
+          <li class="q"><div class="stem"><strong>34</strong>. The main purpose of the passage is to:</div><div class="options"><label><input type="radio" name="q34" value="A"> A) defend the institution of slavery as a historical necessity</label><label><input type="radio" name="q34" value="B"> B) call out the hypocrisy of celebrating liberty while denying it to millions</label><label><input type="radio" name="q34" value="C"> C) argue that freedom should be delayed until the nation is ready</label><label><input type="radio" name="q34" value="D"> D) praise the Founding Fathers without criticism</label></div></li>
+          <li class="q"><div class="stem"><strong>35</strong>. In lines 1–2 (“promises of liberty… do not share in its blessings”), the author primarily emphasizes:</div><div class="options"><label><input type="radio" name="q35" value="A"> A) the universal enjoyment of liberty</label><label><input type="radio" name="q35" value="B"> B) the contradiction between ideals and reality</label><label><input type="radio" name="q35" value="C"> C) the wisdom of America’s founding documents</label><label><input type="radio" name="q35" value="D"> D) the difficulty of achieving equality</label></div></li>
+          <li class="q"><div class="stem"><strong>36</strong>. The author’s tone throughout the passage is best described as:</div><div class="options"><label><input type="radio" name="q36" value="A"> A) mocking and dismissive</label><label><input type="radio" name="q36" value="B"> B) urgent and moral</label><label><input type="radio" name="q36" value="C"> C) indifferent and scholarly</label><label><input type="radio" name="q36" value="D"> D) fearful and hesitant</label></div></li>
+          <li class="q"><div class="stem"><strong>37</strong>. The phrase “empty rhetoric” (paragraph 2) most nearly means:</div><div class="options"><label><input type="radio" name="q37" value="A"> A) words without true effect</label><label><input type="radio" name="q37" value="B"> B) language full of technical terms</label><label><input type="radio" name="q37" value="C"> C) words intended to comfort the oppressed</label><label><input type="radio" name="q37" value="D"> D) speech filled with poetic imagery</label></div></li>
+          <li class="q"><div class="stem"><strong>38</strong>. The author uses the metaphor “profane the altar” (paragraph 3) to suggest that:</div><div class="options"><label><input type="radio" name="q38" value="A"> A) the republic is sacred but corrupted by hypocrisy</label><label><input type="radio" name="q38" value="B"> B) liberty is a religious belief</label><label><input type="radio" name="q38" value="C"> C) citizens must attend church to be patriotic</label><label><input type="radio" name="q38" value="D"> D) injustice is forgiven by time</label></div></li>
+          <li class="q"><div class="stem"><strong>39</strong>. According to the passage, why is the age of slavery irrelevant to its morality?</div><div class="options"><label><input type="radio" name="q39" value="A"> A) Slavery is a recent institution in America.</label><label><input type="radio" name="q39" value="B"> B) Injustice cannot be justified by tradition.</label><label><input type="radio" name="q39" value="C"> C) Older institutions are easier to abolish.</label><label><input type="radio" name="q39" value="D"> D) Few people remember its origins.</label></div></li>
+          <li class="q"><div class="stem"><strong>40</strong>. Which statement best captures the author’s view of gradual reform?</div><div class="options"><label><input type="radio" name="q40" value="A"> A) Gradual reform is necessary to preserve unity.</label><label><input type="radio" name="q40" value="B"> B) Delay strengthens injustice rather than weakening it.</label><label><input type="radio" name="q40" value="C"> C) Gradual reform ensures peace and prosperity.</label><label><input type="radio" name="q40" value="D"> D) Delay guarantees eventual justice.</label></div></li>
+          <li class="q"><div class="stem"><strong>41</strong>. Which choice provides the best evidence for the answer to Question 40?</div><div class="options"><label><input type="radio" name="q41" value="A"> A) “Some will say: ‘The institution of slavery is old…’”</label><label><input type="radio" name="q41" value="B"> B) “If slavery were eternal, it would be eternally wrong.”</label><label><input type="radio" name="q41" value="C"> C) “Others plead for patience… justice that is delayed is justice denied.”</label><label><input type="radio" name="q41" value="D"> D) “The longer the delay, the heavier the burden…”</label></div></li>
+          <li class="q"><div class="stem"><strong>42</strong>. The author acknowledges the Founding Fathers by:</div><div class="options"><label><input type="radio" name="q42" value="A"> A) praising their wisdom but highlighting the failure to extend liberty</label><label><input type="radio" name="q42" value="B"> B) dismissing their words as meaningless</label><label><input type="radio" name="q42" value="C"> C) arguing they supported slavery</label><label><input type="radio" name="q42" value="D"> D) claiming their principles no longer matter</label></div></li>
+          <li class="q"><div class="stem"><strong>43</strong>. By the end of the passage, the author expresses:</div><div class="options"><label><input type="radio" name="q43" value="A"> A) despair that liberty will never be achieved</label><label><input type="radio" name="q43" value="B"> B) cautious optimism that America can redeem itself</label><label><input type="radio" name="q43" value="C"> C) confidence that slavery will continue indefinitely</label><label><input type="radio" name="q43" value="D"> D) neutrality about the issue of slavery</label></div></li>
+          <li class="q"><div class="stem"><strong>44</strong>. The central idea of the passage is that:</div><div class="options"><label><input type="radio" name="q44" value="A"> A) liberty is meaningless unless extended to all people</label><label><input type="radio" name="q44" value="B"> B) gradual reform is the only solution to slavery</label><label><input type="radio" name="q44" value="C"> C) America has no obligation to live by its principles</label><label><input type="radio" name="q44" value="D"> D) slavery is justified by historical tradition</label></div></li>
+        </ol>
+
+        <h2>📖 Paired Passage – Technology & Society</h2>
+        <p class="passage"><strong>Passage A (early 20th-century scientist)</strong><br>"It is a truth evident to all who observe the march of human progress that technology is the surest path to improvement. Consider the advances of the past century: electricity illuminated our cities, railways knit distant towns together, and medicine banished diseases once thought unconquerable. Each invention has been met first with skepticism, then with acceptance, and finally with gratitude.
+The lesson is clear: human problems yield to human ingenuity. Poverty, hunger, and ignorance persist not because they are insurmountable, but because invention has not yet fully turned its attention to them. When the printing press spread knowledge, illiteracy began to decline. When vaccines were discovered, epidemics receded. In like manner, I am confident that future devices—perhaps new engines of industry, or machines that lighten domestic burdens—will sweep away the ills that still plague society.
+There are those who claim that social problems stem from greed, prejudice, or inequality, and that no machine can cure such flaws of character. I do not deny the persistence of vice, but I contend that progress in science reduces its power. The wider the opportunities technology affords, the less grip ignorance and want will have upon humanity. Invention does not merely alter our tools; it elevates our morals by enlarging the sphere of human possibility. To doubt this is to doubt the very evidence of history."
+
+<strong>Passage B (contemporary sociologist)</strong><br>"The belief that technology alone can solve society’s greatest challenges is alluring, but dangerously simplistic. History is replete with inventions that promised liberation yet deepened inequality. The railroad expanded commerce, but it also displaced indigenous communities. Factories created jobs, but they also exploited laborers, including children. The internet connects billions, yet it spreads misinformation as swiftly as truth.
+Technology magnifies the conditions into which it is introduced. In a society already divided, it can exacerbate divisions rather than heal them. Consider education: a wealthy student with access to computers, tutors, and stable housing will benefit enormously from online resources. A poor student without internet access gains nothing. The same device, hailed as a democratizer of knowledge, becomes instead a mirror reflecting inequality.
+This is not to disparage innovation; it has brought extraordinary improvements. But when we mistake invention for justice, we risk ignoring the deeper roots of human suffering. Prejudice, poverty, and political corruption cannot be engineered away. They demand policy, reform, and collective effort. Technology may be a tool in that effort, but it is no substitute for it.
+To imagine otherwise is to believe that machines possess a moral power they do not. It is human choices—how we distribute, regulate, and share technology—that determine whether progress truly benefits all."</p>
+        <ol class="questions" start="45">
+          <li class="q"><div class="stem"><strong>45</strong>. Both authors would most likely agree that technology:</div><div class="options"><label><input type="radio" name="q45" value="A"> A) always reduces inequality</label><label><input type="radio" name="q45" value="B"> B) plays an important role in shaping society</label><label><input type="radio" name="q45" value="C"> C) is powerless against social problems</label><label><input type="radio" name="q45" value="D"> D) should be restricted to prevent harm</label></div></li>
+          <li class="q"><div class="stem"><strong>46</strong>. How does Passage A’s view of technology differ from Passage B’s?</div><div class="options"><label><input type="radio" name="q46" value="A"> A) Passage A sees technology as inherently moral; Passage B sees it as neutral and shaped by society.</label><label><input type="radio" name="q46" value="B"> B) Passage A dismisses past innovations; Passage B praises them uncritically.</label><label><input type="radio" name="q46" value="C"> C) Passage A emphasizes politics; Passage B emphasizes invention.</label><label><input type="radio" name="q46" value="D"> D) Passage A and Passage B both argue technology worsens inequality.</label></div></li>
+          <li class="q"><div class="stem"><strong>47</strong>. The author of Passage A would most likely respond to Passage B’s argument about inequality by saying:</div><div class="options"><label><input type="radio" name="q47" value="A"> A) Inequality is inevitable regardless of invention.</label><label><input type="radio" name="q47" value="B"> B) Technological progress itself gradually reduces inequality.</label><label><input type="radio" name="q47" value="C"> C) Governments, not machines, are the true agents of change.</label><label><input type="radio" name="q47" value="D"> D) Education has no connection to technology.</label></div></li>
+          <li class="q"><div class="stem"><strong>48</strong>. Which choice best supports the answer to Question 47?</div><div class="options"><label><input type="radio" name="q48" value="A"> A) “Poverty, hunger, and ignorance persist not because they are insurmountable…” (Passage A)</label><label><input type="radio" name="q48" value="B"> B) “The railroad expanded commerce, but it also displaced indigenous communities.” (Passage B)</label><label><input type="radio" name="q48" value="C"> C) “The internet connects billions, yet it spreads misinformation…” (Passage B)</label><label><input type="radio" name="q48" value="D"> D) “Prejudice, poverty, and political corruption cannot be engineered away.” (Passage B)</label></div></li>
+          <li class="q"><div class="stem"><strong>49</strong>. Passage B suggests that the internet:</div><div class="options"><label><input type="radio" name="q49" value="A"> A) has created complete equality in education</label><label><input type="radio" name="q49" value="B"> B) is entirely harmful to society</label><label><input type="radio" name="q49" value="C"> C) can both connect and mislead people</label><label><input type="radio" name="q49" value="D"> D) has eliminated the need for teachers</label></div></li>
+          <li class="q"><div class="stem"><strong>50</strong>. The tone of Passage A can best be described as:</div><div class="options"><label><input type="radio" name="q50" value="A"> A) cautious and skeptical</label><label><input type="radio" name="q50" value="B"> B) optimistic and confident</label><label><input type="radio" name="q50" value="C"> C) neutral and detached</label><label><input type="radio" name="q50" value="D"> D) resigned and hopeless</label></div></li>
+          <li class="q"><div class="stem"><strong>51</strong>. Which statement would the author of Passage B most likely agree with?</div><div class="options"><label><input type="radio" name="q51" value="A"> A) Machines themselves determine the morality of society.</label><label><input type="radio" name="q51" value="B"> B) Technology must be accompanied by reform to address injustice.</label><label><input type="radio" name="q51" value="C"> C) Scientific progress automatically eliminates corruption.</label><label><input type="radio" name="q51" value="D"> D) Human character flaws are irrelevant to inequality.</label></div></li>
+          <li class="q"><div class="stem"><strong>52</strong>. The central difference between the two passages is that:</div><div class="options"><label><input type="radio" name="q52" value="A"> A) Passage A views technology as a force that drives moral progress, while Passage B argues technology reflects existing social conditions.</label><label><input type="radio" name="q52" value="B"> B) Passage A argues that inequality will always exist, while Passage B denies inequality exists.</label><label><input type="radio" name="q52" value="C"> C) Passage A emphasizes the harms of innovation, while Passage B emphasizes its benefits.</label><label><input type="radio" name="q52" value="D"> D) Passage A and Passage B both argue that technology worsens society.</label></div></li>
+        </ol>
+      </form>
+
+      <div id="gradingResults" class="grading-summary" style="display:none"></div>
+
+      <div class="note">When you click <strong>Save answers</strong> they are stored locally in your browser. Use <strong>Export (CSV)</strong> to download your responses.</div>
+    </div>
+  </div>
+
+  <!-- Custom Modal for Alerts and Confirms -->
+  <div id="customModal" class="modal-overlay">
+    <div class="modal-content">
+      <p id="modalMessage"></p>
+      <div id="modalButtons" class="modal-buttons">
+        <!-- Buttons will be injected here by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- Custom Modal Logic ---
+    const modal = document.getElementById('customModal');
+    const modalMessage = document.getElementById('modalMessage');
+    const modalButtons = document.getElementById('modalButtons');
+    
+    // --- Timer Logic ---
+    let timerInterval = null;
+    let timeRemaining = QUIZ_DURATION;
+
+    const timerDisplay = document.getElementById('timerDisplay');
+    const startBtn = document.getElementById('timerStart');
+    const pauseBtn = document.getElementById('timerPause');
+    const resetBtn = document.getElementById('timerReset');
+
+    startBtn.addEventListener('click', startTimer);
+    pauseBtn.addEventListener('click', pauseTimer);
+    resetBtn.addEventListener('click', resetTimer);
+
+
+    // --- Event Listeners ---
+    document.getElementById('saveAll').addEventListener('click', saveAll);
+    document.getElementById('loadAll').addEventListener('click', loadAll);
+    document.getElementById('exportCsv').addEventListener('click', exportCsv);
+    document.getElementById('clearAll').addEventListener('click', clearAll);
+    document.getElementById('checkAnswers').addEventListener('click', checkAnswers);
+
+    // Auto-load saved answers on page load
+    (function(){
+      if (localStorage.getItem(STORAGE_KEY)) {
+          loadAll();
+      }
+    })();
+  </script>
+
+<div style="margin-top: 1.5rem; text-align: center;">
+  <button class="btn" onclick="window.location.href='sat-practice-rw-m2.html'">
+    Continue to Next Module &rarr;
+  </button>
+</div>
+
+<div id="footer"></div>
+ <script src="footer.js"></script>
+
+<script src="quiz-logic.js"></script>
+
+<script>
+    const STORAGE_KEY = 'uq_reading_quiz_answers_v1';
+    const MIN_Q = 1;
+    const MAX_Q = 52;
+    const TOTAL_QUESTIONS = MAX_Q - MIN_Q + 1;
+    const QUIZ_DURATION = 32 * 60; // 65 minutes in seconds
+  const ANSWER_KEY = {
+      1: "B", 2: "B", 3: "A", 4: "B", 5: "A", 6: "D", 7: "A", 8: "B", 9: "B", 10: "B", 11: "C",
+      12: "B", 13: "C", 14: "D", 15: "B", 16: "B", 17: "B", 18: "B", 19: "B", 20: "B", 21: "B", 22: "B",
+      23: "B", 24: "B", 25: "B", 26: "A", 27: "A", 28: "B", 29: "A", 30: "B", 31: "C", 32: "B", 33: "A",
+      34: "B", 35: "B", 36: "B", 37: "A", 38: "A", 39: "B", 40: "B", 41: "C", 42: "A", 43: "B", 44: "A",
+      45: "B", 46: "A", 47: "B", 48: "A", 49: "C", 50: "B", 51: "B", 52: "A"
+    };
+
+  document.getElementById('checkAnswers').addEventListener('click', checkAnswers);
+</script>
+</body>
+</html>
