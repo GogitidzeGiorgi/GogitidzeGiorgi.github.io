@@ -18,9 +18,23 @@
   <span class="lang-flag-current">
     <img src="images/UK-flag.png" alt="Current Language: English">
   </span>
-  <a href="/UniQuest/ka/index.html" class="lang-flag-link">
+  <a href="#" id="switchToGeorgianLink" class="lang-flag-link">
     <img src="images/Georgian-flag.png" alt="ქართულ საიტზე გადასვლა">
   </a>
 </div>
   </div>
 </nav>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const GeorgianLink = document.getElementById('switchToGeorgianLink');
+    const currentPath = window.location.pathname;
+
+    const currentPage = currentPath.substring(currentPath.lastIndexOf('/') + 1);
+
+    const targetPage = currentPage === '' ? 'index.html' : currentPage;
+
+    const newUrl = '/UniQuest/ka/' + targetPage;
+
+    GeorgianLink.href = newUrl;
+  });
+</script>
