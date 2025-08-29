@@ -6,52 +6,31 @@
         <span class="UniquestFont">Uniquest</span>
       </a>
     </div>
+
     <div class="nav-links">
       <a href="about.html">About Uniquest</a>
       <a href="Roadmap.html">Roadmap</a>
       <a href="resources.html">Resources</a>
     </div>
+
     <div class="nav-cta">
-      <a href="https://calendar.app.google/ target="_blank" rel="noopener">Book Consultation</a>
+      <a href="https://calendar.app.google/BmUNypCZjLcHDvY5A" target="_blank" rel="noopener">Book Consultation</a>
     </div>
+
     <div class="lang-switcher">
-      <!-- Georgian flag = switch button -->
-      <a href="#" id="switchToGeorgianLink" class="lang-flag-link" aria-label="Switch to Georgian">
+      <a href="#" id="switchToGeorgianLink" class="lang-flag-link">
         <img src="images/Georgian-flag.png" alt="ქართული">
       </a>
-      <!-- English flag = current language -->
-      <span class="lang-flag-current" aria-hidden="true">
+      <span class="lang-flag-current">
         <img src="images/UK-flag.png" alt="English">
       </span>
     </div>
   </div>
 </nav>
 
-<style>
-  .lang-switcher {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
-
-  .lang-flag-link img,
-  .lang-flag-current img {
-    display: block;
-    width: 26px;
-    height: auto;
-  }
-
-  .lang-flag-link {
-    cursor: pointer;
-    text-decoration: none;
-  }
-</style>
-
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const georgianLink = document.getElementById('switchToGeorgianLink');
-  if (!georgianLink) return;
-
+const georgianLink = document.getElementById('switchToGeorgianLink');
+if (georgianLink) {
   georgianLink.addEventListener('click', function (e) {
     e.preventDefault();
 
@@ -59,16 +38,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const file = path.split('/').pop() || 'index.html';
 
     let newPath;
-
     if (path.includes('/en/')) {
-      // Replace /en/ with /ka/
       newPath = path.replace(/\/en\//i, '/ka/');
     } else {
-      // Default: go to /ka/<file>
       newPath = '/ka/' + file;
     }
 
     window.location.href = window.location.origin + newPath;
   });
-});
+}
 </script>
