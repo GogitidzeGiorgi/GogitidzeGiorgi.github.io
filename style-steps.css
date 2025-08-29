@@ -1,11 +1,9 @@
-
 /* Font for Logo */
 .UniquestFont {
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-style: normal;
 }
-
 /* Reset & Base */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { height: 100%; }
@@ -50,16 +48,6 @@ nav {
   background: url('images/test.jpg') center/cover no-repeat;
 }
 
-/* full-hero overlay (covers background image, sits under .content) */
-#hero::before {
-  content: "";
-  position: absolute;
-  inset: 0; /* top:0; right:0; bottom:0; left:0; */
-  background: rgba(6,54,81,0.45); 
-  z-index: 1;                      
-  pointer-events: none;             
-}
-
 /* content inside hero; sits above the overlay */
 #hero .content {
   position: relative;
@@ -72,6 +60,42 @@ nav {
   color: #fff;
 }
 
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+  color: #063651;
+  background: #063651;
+  color: #fff;
+  flex-shrink: 0; /* Prevents footer from shrinking */
+}
+
+.footer-container { max-width: 1000px; margin: auto; display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; }
+.footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+.footer-links a { color: #fff; font-size: 0.95rem; transition: color 0.3s; }
+.footer-links a:hover { color: #69e0ce; }
+
+.social-icons { display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; }
+.social-icons a { color: #fff; font-size: 1.5rem; transition: color 0.3s; }
+.social-icons a.facebook:hover { color: #1877F2; }
+.social-icons a.twitter:hover  { color: #1DA1F2; }
+.social-icons a.instagram:hover{ color: #E4405F; }
+
+.footer-contact { font-size: 0.95rem; }
+.footer-contact, footer p { text-align: center; width: 100%; }
+html, body {
+  height: 100%;       /* full height */
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+#hero {
+  flex: 1;            /* expand hero to fill leftover space between header + footer */
+}
+header, footer {
+  flex-shrink: 0;
+}
 /* heading & paragraph */
 #hero .content h1 {
   font-size: 2.25rem;
@@ -108,41 +132,7 @@ nav {
 ul { margin: 1rem 0 2rem 1.25rem; }
 li { margin-bottom: 0.6rem; }
 
-/* Footer */
-footer {
-  text-align: center;
-  padding: 2rem 1rem;
-  font-size: 0.9rem;
-  color: #063651;
-  background: #063651;
-  color: #fff;
-}
 
-.footer-container { max-width: 1000px; margin: auto; display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; }
-.footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
-.footer-links a { color: #fff; font-size: 0.95rem; transition: color 0.3s; }
-.footer-links a:hover { color: #69e0ce; }
-
-.social-icons { display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; }
-.social-icons a { color: #fff; font-size: 1.5rem; transition: color 0.3s; }
-.social-icons a.facebook:hover { color: #1877F2; }
-.social-icons a.twitter:hover  { color: #1DA1F2; }
-.social-icons a.instagram:hover{ color: #E4405F; }
-
-.footer-contact { font-size: 0.95rem; }
-.footer-contact, footer p { text-align: center; width: 100%; }
-html, body {
-  height: 100%;       /* full height */
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-}
-#hero {
-  flex: 1;            /* expand hero to fill leftover space between header + footer */
-}
-header, footer {
-  flex-shrink: 0;
-}
 
 /* Language Switcher Container */
 .lang-switcher {
