@@ -402,3 +402,15 @@ header, footer {
         font-size: clamp(1rem, 3vw, 1.25rem);
     }
 }
+
+/* content inside hero; sits above the overlay */
+#hero .content {
+  position: relative;
+  z-index: 3;                     
+  max-width: 800px;
+  padding: 2rem;
+  border-radius: 10px;
+  background: rgba(6,54,81,0.55);  
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  color: #fff;
+}

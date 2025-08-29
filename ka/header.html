@@ -15,26 +15,40 @@
       <a href="https://calendar.app.google/BmUNypCZjLcHDvY5A" target="_blank">დაჯავშნე კონსულტაცია</a>
     </div>
     <div class="lang-switcher">
-  <span class="lang-flag-current">
-    <img src="images/Georgian-flag.png" alt="მიმდინარე ენა: ქართული">
-  </span>
-  <a href="#" id="switchToEnglishLink" class="lang-flag-link">
-    <img src="images/UK-flag.png" alt="Switch to English">
-  </a>
-</div>
+      <span class="lang-flag-current">
+        <img src="images/UK-flag.png">
+      </span>
+      <a href="#" id="switchToEnglishLink" class="lang-flag-link">
+        <img src="images/Georgian-flag.png">
+      </a>
+    </div>
   </div>
 </nav>
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const englishLink = document.getElementById('switchToEnglishLink');
-    const currentPath = window.location.pathname;
+document.addEventListener('DOMContentLoaded', function () {
+  const englishLink = document.getElementById('switchToEnglishLink');
+  if (!englishLink) return;
 
-    const currentPage = currentPath.substring(currentPath.lastIndexOf('/') + 1);
+  // determine current page file name
+  let current = location.pathname.split('/').pop();
+  if (!current) current = 'index.html';
 
-    const targetPage = currentPage === '' ? 'index.html' : currentPage;
+  // preferred relative target (works locally and when site files are side-by-side)
+  const relativeTarget = `en/${current}`;
 
-    const newUrl = '/UniQuest/en/' + targetPage;
+  // if site is served from a known subfolder like /UniQuest, build absolute URL
+  const pathParts = location.pathname.split('/').filter(Boolean); // removes empty parts
+  let href;
+  if (location.protocol === 'file:') {
+    // opened via file:// (local dev)
+    href = relativeTarget;
+  } else if (pathParts[0] && pathParts[0].toLowerCase() === 'uniquest') {
+    href = `${location.origin}/UniQuest/en/${current}`;
+  } else {
+    // default to relative path which is compatible with most deployments
+    href = relativeTarget;
+  }
 
-    englishLink.href = newUrl;
-  });
+  englishLink.setAttribute('href', href);
+});
 </script>

@@ -12,29 +12,43 @@
       <a href="resources.html">Resources</a>
     </div>
     <div class="nav-cta">
-      <a href="https://calendar.app.google/BmUNypCZjLcHDvY5A" target="_blank">Book Consultation</a>
+      <a href="https://calendar.app.google/BmUNypCZjLcHDvY5A" target="_blank" rel="noopener">Book Consultation</a>
     </div>
     <div class="lang-switcher">
-  <span class="lang-flag-current">
-    <img src="images/UK-flag.png" alt="Current Language: English">
-  </span>
-  <a href="#" id="switchToGeorgianLink" class="lang-flag-link">
-    <img src="images/Georgian-flag.png" alt="ქართულ საიტზე გადასვლა">
-  </a>
-</div>
+      <a href="#" id="switchToGeorgianLink" class="lang-flag-link">
+        <img src="images/Georgian-flag.png">
+      </a>
+      <span class="lang-flag-current">
+        <img src="images/UK-flag.png">
+      </span>
+    </div>
   </div>
 </nav>
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const GeorgianLink = document.getElementById('switchToGeorgianLink');
-    const currentPath = window.location.pathname;
+document.addEventListener('DOMContentLoaded', function () {
+  const georgianLink = document.getElementById('switchToGeorgianLink');
+  if (!georgianLink) return;
 
-    const currentPage = currentPath.substring(currentPath.lastIndexOf('/') + 1);
+  // determine current page file name
+  let current = location.pathname.split('/').pop();
+  if (!current) current = 'index.html';
 
-    const targetPage = currentPage === '' ? 'index.html' : currentPage;
+  // preferred relative target (works locally and when site files are side-by-side)
+  const relativeTarget = `ka/${current}`;
 
-    const newUrl = '/UniQuest/ka/' + targetPage;
+  // if site is served from a known subfolder like /UniQuest, build absolute URL
+  const pathParts = location.pathname.split('/').filter(Boolean); // removes empty parts
+  let href;
+  if (location.protocol === 'file:') {
+    // opened via file:// (local dev)
+    href = relativeTarget;
+  } else if (pathParts[0] && pathParts[0].toLowerCase() === 'uniquest') {
+    href = `${location.origin}/UniQuest/ka/${current}`;
+  } else {
+    // default to relative path which is compatible with most deployments
+    href = relativeTarget;
+  }
 
-    GeorgianLink.href = newUrl;
-  });
+  georgianLink.setAttribute('href', href);
+});
 </script>
