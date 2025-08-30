@@ -17,40 +17,33 @@
       <a href="https://calendar.app.google/BmUNypCZjLcHDvY5A" target="_blank" rel="noopener">Book Consultation</a>
     </div>
 
-    <div class="nav-language-switcher">
-      <button class="flag-button" data-language="ka">
-        <img src="images/Georgian-flag.png" alt="Switch to Georgian">
-      </button>
-      <button class="flag-button" data-language="en">
-        <img src="images/UK-flag.png" alt="Switch to English">
-      </button>
+    <div class="lang-switcher">
+      <a href="#" id="switchToGeorgianLink" class="lang-flag-link">
+        <img src="images/Georgian-flag.png" alt="ქართული">
+      </a>
+      <span class="lang-flag-current">
+        <img src="images/UK-flag.png" alt="English">
+      </span>
     </div>
   </div>
 </nav>
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-  const flagButtons = document.querySelectorAll('.flag-button');
-  // Define your site's supported language codes
-  const supportedLangs = ['en', 'ka'];
+const georgianLink = document.getElementById('switchToGeorgianLink');
+if (georgianLink) {
+  georgianLink.addEventListener('click', function (e) {
+    e.preventDefault();
 
-  flagButtons.forEach(button => {
-    button.addEventListener('click', function () {
-      const targetLang = this.dataset.language;
-      const pathParts = window.location.pathname.split('/').filter(Boolean);
+    const path = window.location.pathname;
+    const file = path.split('/').pop() || 'index.html';
 
-      // Check if the first part of the URL is a known language code
-      if (supportedLangs.includes(pathParts[0])) {
-        // If yes, replace it with the new language code
-        pathParts[0] = targetLang;
-      } else {
-        // If not (e.g. you're on a root page), add the new lang code to the start
-        pathParts.unshift(targetLang);
-      }
+    let newPath;
+    if (path.includes('/en/')) {
+      newPath = path.replace(/\/en\//i, '/ka/');
+    } else {
+      newPath = '/ka/' + file;
+    }
 
-      // Re-join the parts into a valid URL and navigate
-      const newPath = '/' + pathParts.join('/');
-      window.location.href = newPath;
-    });
+    window.location.href = window.location.origin + newPath;
   });
-});
+}
 </script>
