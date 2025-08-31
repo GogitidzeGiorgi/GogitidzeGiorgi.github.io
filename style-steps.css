@@ -168,3 +168,37 @@ li { margin-bottom: 0.6rem; }
   box-shadow: 0 0 6px rgba(0, 82, 155, 0.7);
   border: 1px solid #00529B;
 }
+
+    .navigation-arrows {
+      position: fixed; /* Keeps arrows in place while scrolling */
+      top: 50%;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transform: translateY(-50%);
+      z-index: 1000; /* Ensures arrows are on top of other content */
+      pointer-events: none; /* Allows clicking through the container */
+      padding: 0 20px; /* Adds some space from the screen edges */
+      box-sizing: border-box;
+    }
+
+    .nav-arrow {
+      pointer-events: auto; /* Makes the arrows clickable */
+      color: white;
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      font-size: 24px;
+      transition: background-color 0.3s ease;
+    }
+
+    .nav-arrow:hover {
+      background-color: rgba(0, 0, 0, 0.8); /* Darker on hover */
+    }
