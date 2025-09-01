@@ -189,27 +189,20 @@ li { margin-bottom: 0.6rem; }
   }
 
   .pagination-btn {
-    /* Sizing and Layout */
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem 1rem; /* Using padding for size like .nav-cta */
-    min-width: 40px; /* Ensures even single-digit numbers have a good width */
-    
-    /* Styling to match .nav-cta a */
-    border: 1px solid #067880; /* Changed from 2px and new color */
-    background-color: #ffffff;
-    color: #067880; /* Changed color */
-    border-radius: 20px; /* Changed from 50% to match pill shape */
-    
-    /* Font and Text */
-    text-decoration: none;
-    font-weight: 500; /* Matching font-weight from .nav-cta */
-    font-size: 1rem;
-
-    /* Effects */
-    transition: background-color 0.2s ease, color 0.2s ease; /* Matching transition time */
-  }
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #067880; /* Using your site's color */
+  background-color: #ffffff;
+  color: #067880;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  border-radius: 50%; /* This makes it a circle */
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
 
   /* Hover effect for clickable buttons */
   .pagination-btn:not(.active):hover {
@@ -224,3 +217,4 @@ li { margin-bottom: 0.6rem; }
     color: #ffffff; /* Matching hover/active text color */
     pointer-events: none; 
   }
+  
