@@ -8,9 +8,9 @@
     </div>
 
     <div class="nav-links">
-      <a href="about.html">About Uniquest</a>
-      <a href="Roadmap.html">Roadmap</a>
-      <a href="resources.html">Resources</a>
+      <a href="about">About Uniquest</a>
+      <a href="Roadmap">Roadmap</a>
+      <a href="resources">Resources</a>
     </div>
 
     <div class="nav-cta">
@@ -35,7 +35,7 @@ if (georgianLink) {
     e.preventDefault();
 
     const path = window.location.pathname;
-    const file = path.split('/').pop() || 'index.html';
+    const file = path.split('/').pop() || 'index';
 
     let newPath;
     if (path.includes('/en/')) {

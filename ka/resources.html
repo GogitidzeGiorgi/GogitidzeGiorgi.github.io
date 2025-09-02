@@ -126,12 +126,12 @@
     </section>
   </main>
 
-  <script>
-    // Clicking or pressing enter on a card navigates to <key>.html
+  <script> 
+    // Clicking or pressing enter on a card navigates to <key> (removed html)
     const cards = Array.from(document.querySelectorAll('.card'));
 
     function navigateTo(key){
-      const url = key + '.html';
+      const url = key;// (removed +html)
       window.location.href = url;
     }
 

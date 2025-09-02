@@ -7,9 +7,9 @@
       </a>
     </div>
     <div class="nav-links">
-      <a href="about.html">უნიქვესთის შესახებ</a>
-      <a href="Roadmap.html">გზამკვლევი</a>
-      <a href="resources.html">რესურსები</a>
+      <a href="about">უნიქვესთის შესახებ</a>
+      <a href="Roadmap">გზამკვლევი</a>
+      <a href="resources">რესურსები</a>
     </div>
     <div class="nav-cta">
       <a href="https://calendar.app.google/BmUNypCZjLcHDvY5A" target="_blank">დაჯავშნე კონსულტაცია</a>
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // determine current page file name
   let current = location.pathname.split('/').pop();
-  if (!current) current = 'index.html';
+  if (!current) current = 'index';
 
   // preferred relative target (works locally and when site files are side-by-side)
   const relativeTarget = `en/${current}`;
