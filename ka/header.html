@@ -1,54 +1,80 @@
 <nav>
-  <div class="nav-container">
-    <div class="nav-logo">
-      <a href="./" class="nav-logo">
-        <img src="images/logo.png" alt="UniQuest Logo">
-        <span class="UniquestFont">უნიქვესთი</span>
-      </a>
+    <div class="nav-container">
+        <div class="nav-logo">
+            <a href="./">
+                <img src="images/logo.png" alt="UniQuest Logo">
+                <span class="UniquestFont">Uniquest</span>
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="about">უნიქვესთის შესახებ</a>
+            <a href="Roadmap">გზამკვლევი</a>
+            <a href="resources">რესურსები</a>
+        </div>
+        <div class="nav-actions">
+            <div class="lang-switcher">
+                <button class="lang-switcher-button" aria-haspopup="true" aria-expanded="false">
+                    <img src="images/UK-flag.png" alt="English Flag">
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="lang-dropdown">
+                    <a href="/ka/" class="lang-option">
+                        <img src="images/Georgian-flag.png" alt="Georgian Flag">
+                        <span>ქართული</span>
+                    </a>
+                </div>
+            </div>
+            <div class="profile-dropdown">
+                <button class="profile-button" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa-solid fa-user"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="/profile"><i class="fa-solid fa-user-circle"></i> ჩემი პროფილი</a>
+                    <a href="/dashboard"><i class="fa-solid fa-table-columns"></i> Dashboard</a>
+                    <hr>
+                    <a href="/logout" class="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> გასვლა</a>
+                </div>
+            </div>
+            <div class="nav-cta">
+                <a href="https://calendar.app.google/BmUNypCZjLcHDvY5A" target="_blank" rel="noopener">
+                    კონსულტაციის დაჯავშნა
+                </a>
+            </div>
+        </div>
     </div>
-    <div class="nav-links">
-      <a href="about">უნიქვესთის შესახებ</a>
-      <a href="Roadmap">გზამკვლევი</a>
-      <a href="resources">რესურსები</a>
-    </div>
-    <div class="nav-cta">
-      <a href="https://calendar.app.google/BmUNypCZjLcHDvY5A" target="_blank">დაჯავშნე კონსულტაცია</a>
-    </div>
-    <div class="lang-switcher">
-      <span class="lang-flag-current">
-        <img src="images/UK-flag.png">
-      </span>
-      <a href="#" id="switchToEnglishLink" class="lang-flag-link">
-        <img src="images/Georgian-flag.png">
-      </a>
-    </div>
-  </div>
 </nav>
+
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const englishLink = document.getElementById('switchToEnglishLink');
-  if (!englishLink) return;
+    const langButton = document.querySelector('.lang-switcher-button');
+    const langDropdown = document.querySelector('.lang-dropdown');
+    if (langButton && langDropdown) {
+        langButton.addEventListener('click', function (event) {
+            event.stopPropagation();
+            langDropdown.classList.toggle('show');
+            if (profileDropdown && profileDropdown.classList.contains('show')) {
+                profileDropdown.classList.remove('show');
+            }
+        });
+    }
 
-  // determine current page file name
-  let current = location.pathname.split('/').pop();
-  if (!current) current = 'index';
+    const profileButton = document.querySelector('.profile-button');
+    const profileDropdown = document.querySelector('.dropdown-menu');
+    if (profileButton && profileDropdown) {
+        profileButton.addEventListener('click', function (event) {
+            event.stopPropagation();
+            profileDropdown.classList.toggle('show');
+            if (langDropdown && langDropdown.classList.contains('show')) {
+                langDropdown.classList.remove('show');
+            }
+        });
+    }
 
-  // preferred relative target (works locally and when site files are side-by-side)
-  const relativeTarget = `en/${current}`;
-
-  // if site is served from a known subfolder like /UniQuest, build absolute URL
-  const pathParts = location.pathname.split('/').filter(Boolean); // removes empty parts
-  let href;
-  if (location.protocol === 'file:') {
-    // opened via file:// (local dev)
-    href = relativeTarget;
-  } else if (pathParts[0] && pathParts[0].toLowerCase() === 'uniquest') {
-    href = `${location.origin}/UniQuest/en/${current}`;
-  } else {
-    // default to relative path which is compatible with most deployments
-    href = relativeTarget;
-  }
-
-  englishLink.setAttribute('href', href);
-});
+    document.addEventListener('click', function () {
+        if (langDropdown && langDropdown.classList.contains('show')) {
+            langDropdown.classList.remove('show');
+        }
+        if (profileDropdown && profileDropdown.classList.contains('show')) {
+            profileDropdown.classList.remove('show');
+        }
+    });
 </script>
