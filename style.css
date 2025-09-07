@@ -1,10 +1,12 @@
 /* ==========================================================================
    FONTS & BASE STYLES
    ========================================================================== */
+
 /* Font for Logo */
 .UniquestFont {
     font-family: "Montserrat", sans-serif;
-    font-weight: 600;
+    font-weight: 600; /* pick weight between 100–900 */
+    font-style: normal;
 }
 
 /* Reset & Base */
@@ -22,10 +24,9 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #063651;
     background: #f0f3f5;
+    /* The flex properties below are needed for the hero flex: 1 to work */
     display: flex;
     flex-direction: column;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -60,6 +61,7 @@ nav {
     gap: 0.5rem;
     font-size: 1.5rem;
     font-weight: bold;
+    color: #063651;
 }
 
 .nav-logo img {
@@ -71,7 +73,6 @@ nav {
 .nav-links {
     display: flex;
     gap: 1.5rem;
-    margin: 0 auto; /* Helps center the links */
 }
 
 .nav-links a {
@@ -84,33 +85,318 @@ nav {
     color: #067880;
 }
 
+.nav-cta a {
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    background: #067880;
+    color: #fff;
+    border: none;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+}
+
+.nav-cta a:hover {
+    background: #067880;
+    color: #fff;
+}
+
+
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+#hero {
+    position: relative;
+    overflow: hidden;
+    height: 500px;
+    text-align: center;
+    color: #fff;
+    flex: 1; /* Expands to fill space */
+}
+
+#hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background: rgba(6,54,81,0.4); */
+    z-index: 1;
+    pointer-events: none;
+}
+
+.hero-illustration {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+#hero .content {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    top: 50%;
+    padding: 2rem;
+    border-radius: 10px;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+
+#hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+#hero p {
+    font-size: 1.15rem;
+    margin-bottom: 2rem;
+}
+
+#hero .btn-primary {
+    background: #69e0ce;
+    color: #063651;
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+#hero .btn-primary:hover {
+    background: #62a6b1;
+}
+
+/* ==========================================================================
+   CONTENT SECTIONS
+   ========================================================================== */
+
+/* Generic Page Content */
+.page-content {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+}
+
+.page-content h2 {
+    color: #2e8699;
+    margin-bottom: 1rem;
+}
+
+.page-content p {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+/* Roadmap Section */
+#roadmap {
+    max-width: 1000px;
+    margin: 4rem auto;
+    padding: 0 1rem;
+}
+
+#roadmap h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    color: #2e8699;
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+}
+
+.step-card {
+    background: #fff;
+    padding: 1.8rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.step-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.step-number {
+    width: 3rem;
+    height: 3rem;
+    background: #067880;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.step-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    color: #063651;
+}
+
+.step-desc {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+  color: #063651;
+  background: #063651;
+  color: #fff;
+  flex-shrink: 0; /* Prevents footer from shrinking */
+}
+
+.footer-container { max-width: 1000px; margin: auto; display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; }
+.footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+.footer-links a { color: #fff; font-size: 0.95rem; transition: color 0.3s; }
+.footer-links a:hover { color: #69e0ce; }
+
+.social-icons { display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; }
+.social-icons a { color: #fff; font-size: 1.5rem; transition: color 0.3s; }
+.social-icons a.facebook:hover { color: #1877F2; }
+.social-icons a.twitter:hover  { color: #1DA1F2; }
+.social-icons a.instagram:hover{ color: #E4405F; }
+
+.footer-contact { font-size: 0.95rem; }
+.footer-contact, footer p { text-align: center; width: 100%; }
+html, body {
+  height: 100%;       /* full height */
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+#hero {
+  flex: 1;            /* expand hero to fill leftover space between header + footer */
+}
+header, footer {
+  flex-shrink: 0;
+}
+
+
+/* Social Icons (Used in Footer) */
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.social-icons a {
+    font-size: 1.5rem;
+    transition: color 0.3s;
+}
+
+.social-icons a.facebook:hover { color: #1877F2; }
+.social-icons a.instagram:hover{ color: #962FBF; }
+.social-icons a.tiktok:hover   { color: #fe2858; } 
+
+
+/* ==========================================================================
+   MEDIA QUERIES
+   ========================================================================== */
+
+/* Larger screens */
+@media (min-width: 768px) {
+    #hero h1 {
+        font-size: 4rem;
+    }
+    #hero p {
+        font-size: 1.25rem;
+    }
+}
+
+/* Smaller screens */
+@media (max-width: 768px) {
+    /* Stack nav on mobile */
+    .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .nav-links {
+        flex-direction: column;
+        gap: 0.75rem;
+        width: 100%;
+    }
+    .nav-cta {
+        width: 100%;
+    }
+    .lang-switcher {
+        margin-left: auto;
+    }
+
+    /* Make hero adapt to screen */
+    #hero {
+        height: auto;
+        min-height: 60vh;
+        padding: 4rem 1rem;
+    }
+    .hero-illustration {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        transform: none;
+    }
+    #hero .content {
+        top: auto;
+        transform: none;
+        padding: 1rem;
+    }
+
+    /* Responsive typography for hero */
+    #hero h1 {
+        font-size: clamp(1.8rem, 5vw, 3rem);
+    }
+    #hero p {
+        font-size: clamp(1rem, 3vw, 1.25rem);
+    }
+}
+
+/* content inside hero; sits above the overlay */
+#hero .content {
+  position: relative;
+  z-index: 3;                     
+  max-width: 800px;
+  padding: 2rem;
+  border-radius: 10px;
+  background: rgba(6,54,81,0.55);  
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  color: #fff;
+}
+/* ADD all of these new styles */
 .nav-actions {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-.nav-cta a {
-    padding: 0.6rem 1.4rem;
-    border-radius: 8px;
-    background: #067880;
-    color: #fff;
-    font-weight: 500;
-    transition: background 0.2s;
-    border: none;
-}
-
-.nav-cta a:hover {
-    background: #055a60;
-}
-
-/* ==========================================================================
-   LANGUAGE & PROFILE DROPDOWNS
-   ========================================================================== */
-.lang-switcher, .profile-dropdown {
+/* Language Switcher Dropdown */
+.lang-switcher {
     position: relative;
 }
-
 .lang-switcher-button {
     display: flex;
     align-items: center;
@@ -132,7 +418,21 @@ nav {
 .lang-switcher-button i {
     font-size: 0.7rem;
 }
+.lang-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+}
+.lang-option img {
+    width: 24px;
+    border-radius: 3px;
+}
 
+/* Profile Icon Dropdown */
+.profile-dropdown {
+    position: relative;
+}
 .profile-button {
     display: flex;
     align-items: center;
@@ -153,6 +453,7 @@ nav {
     color: #555;
 }
 
+/* SHARED styles for both dropdown menus */
 .lang-dropdown, .dropdown-menu {
     display: none;
     position: absolute;
@@ -166,27 +467,20 @@ nav {
     z-index: 20;
     overflow: hidden;
 }
-
 .lang-dropdown.show, .dropdown-menu.show {
     display: block;
 }
 
-.lang-option {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+/* Links inside the language dropdown */
+.lang-dropdown a {
     padding: 10px 15px;
-    font-size: 0.95rem;
     transition: background-color 0.2s;
 }
-.lang-option:hover {
-    background-color: #f5f5f5;
-}
-.lang-option img {
-    width: 24px;
-    border-radius: 3px;
+.lang-dropdown a:hover {
+     background-color: #f5f5f5;
 }
 
+/* Links inside the profile dropdown */
 .dropdown-menu a {
     display: flex;
     align-items: center;
@@ -215,107 +509,4 @@ nav {
 }
 .dropdown-menu .logout:hover i {
     color: #c82333;
-}
-
-/* ==========================================================================
-   HERO SECTION
-   ========================================================================== */
-#hero {
-    position: relative;
-    overflow: hidden;
-    text-align: center;
-    color: #fff;
-    flex: 1; /* Expands to fill space */
-}
-#hero .content {
-    position: relative;
-    z-index: 3;
-    max-width: 800px;
-    padding: 2rem;
-    border-radius: 10px;
-    background: rgba(6,54,81,0.55);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-    color: #fff;
-    margin: 0 auto;
-    top: 50%;
-    transform: translateY(-50%);
-}
-#hero .content h1 {
-    font-size: 2.25rem;
-    margin-bottom: 0.5rem;
-    line-height: 1.1;
-}
-#hero .content p {
-    font-size: 1.05rem;
-    margin: 0;
-}
-
-/* ==========================================================================
-   CONTENT SECTIONS
-   ========================================================================== */
-.page-content {
-    max-width: 900px;
-    margin: 3rem auto;
-    padding: 0 1rem;
-}
-.page-content h2 {
-    color: #2e8699;
-    margin-bottom: 1rem;
-}
-.page-content p {
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-}
-ul { margin: 1rem 0 2rem 1.25rem; }
-li { margin-bottom: 0.6rem; }
-
-/* ==========================================================================
-   FOOTER
-   ========================================================================== */
-footer {
-    text-align: center;
-    padding: 2rem 1rem;
-    font-size: 0.9rem;
-    background: #063651;
-    color: #fff;
-    flex-shrink: 0;
-}
-.social-icons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin-top: 1rem;
-}
-.social-icons a {
-    font-size: 1.5rem;
-    transition: color 0.3s;
-}
-.social-icons a.facebook:hover { color: #1877F2; }
-.social-icons a.instagram:hover{ color: #962FBF; }
-.social-icons a.tiktok:hover { color: #fe2858; }
-.footer-contact { font-size: 0.95rem; }
-
-/* ==========================================================================
-   MEDIA QUERIES
-   ========================================================================== */
-@media (min-width: 768px) {
-    #hero .content h1 { font-size: 3rem; }
-    #hero .content p { font-size: 1.15rem; }
-}
-@media (max-width: 768px) {
-    .nav-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
-    .nav-links {
-        order: 3;
-        margin: 0;
-    }
-    .nav-actions {
-        order: 2;
-    }
-    .nav-logo {
-        order: 1;
-    }
 }
