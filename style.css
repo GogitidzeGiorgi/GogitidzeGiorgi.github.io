@@ -508,3 +508,23 @@ header, footer {
 .dropdown-menu .logout:hover i {
     color: #c82333;
 }
+
+/* CORRECTED styles for the logo */
+.nav-logo {
+    /* This container can remain simple */
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-logo a {
+    /* Make the link itself the flex container */
+    display: flex;
+    align-items: center; /* This vertically centers the image and text */
+    gap: 0.5rem;
+}
+
+.nav-logo img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
