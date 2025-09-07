@@ -1,50 +1,92 @@
-<nav>
-  <div class="nav-container">
-    <div class="nav-logo">
-      <a href="./" class="nav-logo">
-        <img src="images/logo.png" alt="UniQuest Logo">
-        <span class="UniquestFont">Uniquest</span>
-      </a>
-    </div>
 
-    <div class="nav-links">
-      <a href="about">About Uniquest</a>
-      <a href="Roadmap">Roadmap</a>
-      <a href="resources">Resources</a>
-    </div>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="./" class="nav-logo">
+                    <img src="images/logo.png" alt="UniQuest Logo">
+                    <span class="UniquestFont">Uniquest</span>
+                </a>
+            </div>
 
-    <div class="nav-cta">
-      <a href="https://calendar.app.google/BmUNypCZjLcHDvY5A" target="_blank" rel="noopener">Book Consultation</a>
-    </div>
+            <div class="nav-links">
+                <a href="about">About Uniquest</a>
+                <a href="Roadmap">Roadmap</a>
+                <a href="resources">Resources</a>
+            </div>
 
-    <div class="lang-switcher">
-      <a href="#" id="switchToGeorgianLink" class="lang-flag-link">
-        <img src="images/Georgian-flag.png" alt="ქართული">
-      </a>
-      <span class="lang-flag-current">
-        <img src="images/UK-flag.png" alt="English">
-      </span>
+            <div class="nav-cta">
+                <a href="https://calendar.app.google" target="_blank" rel="noopener">Book Consultation</a>
+            </div>
+            
+            
+            
+            <div class="lang-switcher">
+    <button class="lang-switcher-button" aria-haspopup="true" aria-expanded="false">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1200px-Flag_of_the_United_Kingdom_%283-5%29.svg.png" alt="English Flag">
+        <span>English</span>
+        <i class="fa-solid fa-chevron-down"></i>
+    </button>
+    <div class="lang-dropdown">
+        <a href="/ka/" class="lang-option">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Flag_of_Georgia.svg/1200px-Flag_of_Georgia.svg.png" alt="Georgian Flag">
+            <span>ქართული</span>
+        </a>
+        </div>
+</div>
+<div class="profile-dropdown">
+        <button class="profile-button" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-user"></i>
+        </button>
+        <div class="dropdown-menu">
+            <a href="/profile"><i class="fa-solid fa-user-circle"></i> My Profile</a>
+            <a href="/dashboard"><i class="fa-solid fa-table-columns"></i> Dashboard</a>
+            <a href="/settings"><i class="fa-solid fa-cog"></i> Settings</a>
+            <hr>
+            <a href="/logout" class="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</a>
+        </div>
     </div>
-  </div>
-</nav>
+            </div>
+            
+    </nav>
 
 <script>
-const georgianLink = document.getElementById('switchToGeorgianLink');
-if (georgianLink) {
-  georgianLink.addEventListener('click', function (e) {
-    e.preventDefault();
+    // --- Language Switcher Logic ---
+    const langButton = document.querySelector('.lang-switcher-button');
+    const langDropdown = document.querySelector('.lang-dropdown');
 
-    const path = window.location.pathname;
-    const file = path.split('/').pop() || 'index';
-
-    let newPath;
-    if (path.includes('/en/')) {
-      newPath = path.replace(/\/en\//i, '/ka/');
-    } else {
-      newPath = '/ka/' + file;
+    if (langButton && langDropdown) {
+        langButton.addEventListener('click', function (event) {
+            event.stopPropagation();
+            langDropdown.classList.toggle('show');
+            // Close profile menu if it's open
+            if (profileDropdown && profileDropdown.classList.contains('show')) {
+                profileDropdown.classList.remove('show');
+            }
+        });
     }
 
-    window.location.href = window.location.origin + newPath;
-  });
-}
+    // --- Profile Dropdown Logic ---
+    const profileButton = document.querySelector('.profile-button');
+    const profileDropdown = document.querySelector('.dropdown-menu');
+
+    if (profileButton && profileDropdown) {
+        profileButton.addEventListener('click', function (event) {
+            event.stopPropagation();
+            profileDropdown.classList.toggle('show');
+            // Close language menu if it's open
+            if (langDropdown && langDropdown.classList.contains('show')) {
+                langDropdown.classList.remove('show');
+            }
+        });
+    }
+
+    // --- Close dropdowns if clicking outside ---
+    document.addEventListener('click', function () {
+        if (langDropdown && langDropdown.classList.contains('show')) {
+            langDropdown.classList.remove('show');
+        }
+        if (profileDropdown && profileDropdown.classList.contains('show')) {
+            profileDropdown.classList.remove('show');
+        }
+    });
 </script>
