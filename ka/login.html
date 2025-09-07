@@ -1,324 +1,385 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <style>
-            /* Google Fonts - Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ავტორიზაცია - უნიქვესთი</title>
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-.container{
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    column-gap: 30px;
-    background-image: url('https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=1470&q=80');
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat;
-    background-color: #4070f4; 
-}
-.form{
-    position: absolute;
-    max-width: 430px;
-    width: 100%;
-    padding: 30px;
-    border-radius: 6px;
-    background: #FFF;
-}
-.form.signup{
-    opacity: 0;
-    pointer-events: none;
-}
-.forms.show-signup .form.signup{
-    opacity: 1;
-    pointer-events: auto;
-}
-.forms.show-signup .form.login{
-    opacity: 0;
-    pointer-events: none;
-}
-header{
-    font-size: 28px;
-    font-weight: 600;
-    color: #232836;
-    text-align: center;
-}
-form{
-    margin-top: 30px;
-}
-.form .field{
-    position: relative;
-    height: 50px;
-    width: 100%;
-    margin-top: 20px;
-    border-radius: 6px;
-}
-.field input,
-.field button{
-    height: 100%;
-    width: 100%;
-    border: none;
-    font-size: 16px;
-    font-weight: 400;
-    border-radius: 6px;
-}
-.field input{
-    outline: none;
-    padding: 0 15px;
-    border: 1px solid#CACACA;
-}
-.field input:focus{
-    border-bottom-width: 2px;
-}
-.eye-icon{
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    font-size: 18px;
-    color: #8b8b8b;
-    cursor: pointer;
-    padding: 5px;
-}
-.field button{
-    color: #fff;
-    background-color: #0171d3;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-.field button:hover{
-    background-color: #016dcb;
-}
-.form-link{
-    text-align: center;
-    margin-top: 10px;
-}
-.form-link span,
-.form-link a{
-    font-size: 14px;
-    font-weight: 400;
-    color: #232836;
-}
-.form a{
-    color: #0171d3;
-    text-decoration: none;
-}
-.form-content a:hover{
-    text-decoration: underline;
-}
-.line{
-    position: relative;
-    height: 1px;
-    width: 100%;
-    margin: 36px 0;
-    background-color: #d4d4d4;
-}
-.line::before{
-    content: 'Or';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #FFF;
-    color: #8b8b8b;
-    padding: 0 15px;
-}
-.media-options a{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Unified styles for social login buttons */
-a.facebook,
-a.google{
-    border: 1px solid #CACACA;
-}
-
-/* Unified text styles for social login buttons */
-a.facebook span,
-a.google span{
-    font-weight: 500;
-    opacity: 0.6;
-    color: #232836;
-}
-
-/* Common icon positioning and sizing */
-.facebook-icon,
-img.google-img{
-    position: absolute;
-    top: 50%;
-    left: 15px;
-    transform: translateY(-50%);
-    height: 20px;
-    width: 20px;
-}
-
-/* Facebook icon specific adjustments */
-.facebook-icon {
-    color: #4267b2; /* Keep FB brand color */
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Google image specific adjustments */
-img.google-img{
-    object-fit: cover;
-}
-
-
-@media screen and (max-width: 400px) {
-    .form{
-        padding: 20px 10px;
-    }
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     
-}
-        </style>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login - Uniquest</title>
+    <style>
+        /* Google Fonts - Poppins */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
-        <!-- CSS -->
-        <link rel="stylesheet" href="css/style.css">
-                
-        <!-- Boxicons CSS -->
-        <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-                        
-    </head>
-    <body>
-        <section class="container forms">
-            <div class="form login">
-                <div class="form-content">
-                    <header>ავტორიზაცია</header>
-                    <form action="#">
-                        <div class="field input-field">
-                            <input type="email" placeholder="Email" class="input">
-                        </div>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        .container {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            column-gap: 30px;
+            background-image: url('images/coverimage.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #4070f4;
+        }
+        .form {
+            position: absolute;
+            max-width: 430px;
+            width: 100%;
+            padding: 30px;
+            border-radius: 6px;
+            background: #FFF;
+        }
+        .form.signup {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .forms.show-signup .form.signup {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .forms.show-signup .form.login {
+            opacity: 0;
+            pointer-events: none;
+        }
+        header {
+            font-size: 28px;
+            font-weight: 600;
+            color: #232836;
+            text-align: center;
+        }
+        form {
+            margin-top: 30px;
+        }
+        .form .field {
+            position: relative;
+            height: 50px;
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 6px;
+        }
+        .field input,
+        .field button {
+            height: 100%;
+            width: 100%;
+            border: none;
+            font-size: 16px;
+            font-weight: 400;
+            border-radius: 6px;
+        }
+        .field input {
+            outline: none;
+            padding: 0 15px;
+            border: 1px solid#CACACA;
+        }
+        .field input:focus {
+            border-bottom-width: 2px;
+        }
+        .eye-icon {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: #8b8b8b;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .field button {
+            color: #fff;
+            background-color: #0171d3;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .field button:hover {
+            background-color: #016dcb;
+        }
+        .form-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .form-link span,
+        .form-link a {
+            font-size: 14px;
+            font-weight: 400;
+            color: #232836;
+        }
+        .form a {
+            color: #0171d3;
+            text-decoration: none;
+        }
+        .form-content a:hover {
+            text-decoration: underline;
+        }
+        .line {
+            position: relative;
+            height: 1px;
+            width: 100%;
+            margin: 36px 0;
+            background-color: #d4d4d4;
+        }
+        .line::before {
+            content: 'Or';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #FFF;
+            color: #8b8b8b;
+            padding: 0 15px;
+        }
+        .media-options a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        a.facebook,
+        a.google {
+            border: 1px solid #CACACA;
+        }
+        a.facebook span,
+        a.google span {
+            font-weight: 500;
+            opacity: 0.6;
+            color: #232836;
+        }
+        .facebook-icon,
+        img.google-img {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            height: 20px;
+            width: 20px;
+        }
+        .facebook-icon {
+            color: #4267b2;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        img.google-img {
+            object-fit: cover;
+        }
+        @media screen and (max-width: 400px) {
+            .form {
+                padding: 20px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
 
-                        <div class="field input-field">
-                            <input type="password" placeholder="Password" class="password">
-                            <i class='bx bx-hide eye-icon'></i>
-                        </div>
+    <div id="header"></div>
+    <script src="header.js"></script>
 
-                        <div class="form-link">
-                            <a href="#" class="forgot-pass">დაგავიწყდა პაროლი?</a>
-                        </div>
-
-                        <div class="field button-field">
-                            <button>ავტორიზაცია</button>
-                        </div>
-                    </form>
-
-                    <div class="form-link">
-                        <span>არ გაქვს ანგარიში? <a href="#" class="link signup-link">რეგისტრაცია</a></span>
+    <section class="container forms">
+        <div class="form login">
+            <div class="form-content">
+                <header>Login</header>
+                <form id="login-form">
+                    <div class="field input-field">
+                        <input id="login-email" type="email" placeholder="Email" class="input" required>
                     </div>
+                    <div class="field input-field">
+                        <input id="login-password" type="password" placeholder="Password" class="password" required>
+                        <i class='bx bx-hide eye-icon'></i>
+                    </div>
+                    <div class="form-link">
+                        <a href="#" class="forgot-pass">დაგავიწყდა პაროლი?</a>
+                    </div>
+                    <div class="field button-field">
+                        <button type="submit">ავტორიზაცია</button>
+                    </div>
+                </form>
+                <div class="form-link">
+                    <span>არ გაქვს ანგარიში? <a href="#" class="link signup-link">რეგისტრაცია</a></span>
                 </div>
-
-                <div class="line"></div>
-
-                <div class="media-options">
-                    <a href="#" class="field facebook">
-                        <img src="images/facebook.png" alt="" class="google-img">
-                        <span>ავტორიზაცია Facebook-ით</span>
-                    </a>
-                </div>
-
-                <div class="media-options">
-                    <a href="#" class="field google">
-                        <img src="images/google.png" alt="" class="google-img">
-                        <span>ავტორიზაცია Google-ით</span>
-                    </a>
-                </div>
-
             </div>
 
-            <!-- Signup Form -->
-
-            <div class="form signup">
-                <div class="form-content">
-                    <header>რეგისტრაცია</header>
-                    <form action="#">
-                        <div class="field input-field">
-                            <input type="email" placeholder="Email" class="input">
-                        </div>
-
-                        <div class="field input-field">
-                            <input type="password" placeholder="Create password" class="password">
-                        </div>
-
-                        <div class="field input-field">
-                            <input type="password" placeholder="Confirm password" class="password">
-                            <i class='bx bx-hide eye-icon'></i>
-                        </div>
-
-                        <div class="field button-field">
-                            <button>რეგისტრაცია</button>
-                        </div>
-                    </form>
-
-                    <div class="form-link">
-                        <span>უკვე გაქვს ანგარიში? <a href="#" class="link login-link">ავტორიზაცია</a></span>
-                    </div>
-                </div>
-
-                <div class="line"></div>
-
-                <div class="media-options">
-                    <a href="#" class="field facebook">
-                        <i class='bx bxl-facebook facebook-icon'></i>
-                        <span>ავტორიზაცია Facebook-ით</span>
-                    </a>
-                </div>
-
-                <div class="media-options">
-                    <a href="#" class="field google">
-                        <img src="images/google.png" alt="" class="google-img">
-                        <span>ავტორიზაცია Google-ით</span>
-                    </a>
-                </div>
-
+            <div class="line"></div>
+            <div class="media-options">
+                <a href="#" class="field facebook">
+                    <img src="images/facebook.png" alt="Facebook Logo" class="google-img">
+                    <span>ავტორიზაცია Facebook-ით</span>
+                </a>
             </div>
-        </section>
+            <div class="media-options">
+                <a href="#" id="google-login-btn-1" class="field google">
+                    <img src="images/google.png" alt="Google Logo" class="google-img">
+                    <span>ავტორიზაცია Google-ით</span>
+                </a>
+            </div>
+        </div>
 
-        <!-- JavaScript -->
-        <script>
-            const forms = document.querySelector(".forms"),
-      pwShowHide = document.querySelectorAll(".eye-icon"),
-      links = document.querySelectorAll(".link");
+        <div class="form signup">
+            <div class="form-content">
+                <header>რეგისტრაცია</header>
+                <form id="signup-form">
+                    <div class="field input-field">
+                        <input type="email" id="signup-email" placeholder="Email" class="input" required>
+                    </div>
+                    <div class="field input-field">
+                        <input type="password" id="signup-password" placeholder="Create password" class="password" required>
+                    </div>
+                    <div class="field input-field">
+                        <input type="password" id="signup-confirm-password" placeholder="Confirm password" class="password" required>
+                        <i class='bx bx-hide eye-icon'></i>
+                    </div>
+                    <div class="field button-field">
+                        <button type="submit">რეგისტრაცია</button>
+                    </div>
+                </form>
+                <div class="form-link">
+                    <span>უკვე გაქვს ანგარიში? <a href="#" class="link login-link">ავტორიზაცია</a></span>
+                </div>
+            </div>
 
-pwShowHide.forEach(eyeIcon => {
-    eyeIcon.addEventListener("click", () => {
-        let pwFields = eyeIcon.parentElement.parentElement.querySelectorAll(".password");
-        
-        pwFields.forEach(password => {
-            if(password.type === "password"){
-                password.type = "text";
-                eyeIcon.classList.replace("bx-hide", "bx-show");
+            <div class="line"></div>
+            <div class="media-options">
+                <a href="#" class="field facebook">
+                    <i class='bx bxl-facebook facebook-icon'></i>
+                    <span>ავტორიზაცია Facebook-ით</span>
+                </a>
+            </div>
+            <div class="media-options">
+                <a href="#" id="google-login-btn-2" class="field google">
+                    <img src="images/google.png" alt="Google Logo" class="google-img">
+                    <span>ავტორიზაცია Google-ით</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer"></div>
+    <script src="footer.js"></script>
+
+    <script type="module">
+        // 1. FIREBASE IMPORTS & INITIALIZATION
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { 
+            getAuth, 
+            createUserWithEmailAndPassword, 
+            signInWithEmailAndPassword,
+            GoogleAuthProvider,
+            signInWithPopup,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+        //Firebase configuration object 
+        const firebaseConfig = {
+    apiKey: "AIzaSyBVDgOQdDO1FgLMUBppeQIOtlC1SweF5lg",
+    authDomain: "uniquestge.firebaseapp.com",
+    projectId: "uniquestge",
+    storageBucket: "uniquestge.firebasestorage.app",
+    messagingSenderId: "659241473667",
+    appId: "1:659241473667:web:683a13f4ceddf91a74adb6"
+  };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const googleProvider = new GoogleAuthProvider();
+
+        // 2. AUTH STATE LISTENER (Redirects if already logged in)
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                console.log("User is already logged in, redirecting to homepage.");
+                window.location.href = '/'; // Change to your homepage URL if it's not the root
+            } else {
+                console.log("No user logged in, showing login page.");
+            }
+        });
+
+        // 3. UI LOGIC (Toggle forms and password visibility)
+        const forms = document.querySelector(".forms");
+        const pwShowHide = document.querySelectorAll(".eye-icon");
+        const links = document.querySelectorAll(".link");
+
+        pwShowHide.forEach(eyeIcon => {
+            eyeIcon.addEventListener("click", () => {
+                let pwField = eyeIcon.closest(".field").querySelector(".password");
+                if (pwField.type === "password") {
+                    pwField.type = "text";
+                    eyeIcon.classList.replace("bx-hide", "bx-show");
+                } else {
+                    pwField.type = "password";
+                    eyeIcon.classList.replace("bx-show", "bx-hide");
+                }
+            });
+        });
+
+        links.forEach(link => {
+            link.addEventListener("click", e => {
+                e.preventDefault();
+                forms.classList.toggle("show-signup");
+            });
+        });
+
+        // 4. AUTHENTICATION EVENT LISTENERS
+
+        // --- SIGNUP FORM ---
+        document.getElementById("signup-form").addEventListener("submit", (e) => {
+            e.preventDefault();
+            const email = document.getElementById("signup-email").value;
+            const password = document.getElementById("signup-password").value;
+            const confirmPassword = document.getElementById("signup-confirm-password").value;
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
                 return;
             }
-            password.type = "password";
-            eyeIcon.classList.replace("bx-show", "bx-hide");
-        })
-        
-    })
-})      
 
-links.forEach(link => {
-    link.addEventListener("click", e => {
-       e.preventDefault(); //preventing form submit
-       forms.classList.toggle("show-signup");
-    })
-})
-        </script>
-    </body>
+            createUserWithEmailAndPassword(auth, email, password)
+                .then(userCredential => {
+                    console.log("Signup successful:", userCredential.user);
+                    alert("Welcome! Your account has been created.");
+                })
+                .catch(error => {
+                    console.error("Signup Error:", error);
+                    alert(`Error: ${error.message}`);
+                });
+        });
+
+        // --- LOGIN FORM ---
+        document.getElementById("login-form").addEventListener("submit", (e) => {
+            e.preventDefault();
+            const email = document.getElementById("login-email").value;
+            const password = document.getElementById("login-password").value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then(userCredential => {
+                    console.log("Login successful:", userCredential.user);
+                })
+                .catch(error => {
+                    console.error("Login Error:", error);
+                    alert(`Error: ${error.message}`);
+                });
+        });
+        
+        // --- GOOGLE SIGN-IN ---
+        // Attaching the same event to both Google buttons
+        document.querySelectorAll("[id^=google-login-btn]").forEach(button => {
+            button.addEventListener("click", (e) => {
+                e.preventDefault();
+                signInWithPopup(auth, googleProvider)
+                    .then(result => {
+                        console.log("Google Sign-In Successful:", result.user);
+                    }).catch(error => {
+                        console.error("Google Sign-In Error:", error);
+                        alert(`Error: ${error.message}`);
+                    });
+            });
+        });
+    </script>
+</body>
 </html>
