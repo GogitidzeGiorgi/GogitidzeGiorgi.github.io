@@ -3,10 +3,29 @@
 <head>
   <link rel="icon" href="images/logo.png" type="image/png">
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=/UniQuest/ka/">
   <title>Redirecting...</title>
+  <script>
+    // This script checks the user's preferred language.
+    // If the language starts with "en" (like "en-US" or "en-GB"), it redirects to the English page.
+    // Otherwise, it defaults to the Georgian page.
+    (function() {
+      const userLang = navigator.language || navigator.userLanguage;
+      if (userLang.startsWith('en')) {
+        window.location.href = '/UniQuest/en/';
+      } else {
+        window.location.href = '/UniQuest/ka/';
+      }
+    })();
+  </script>
 </head>
 <body>
-  <p>If you are not redirected, <a href="/UniQuest/ka/">click here</a>.</p>
+  <!-- This content is shown if JavaScript is disabled or the redirect fails. -->
+  <p>If you are not redirected, please choose your language:</p>
+  <p>თუ არ გადამისამართდით, გთხოვთ, აირჩიოთ ენა:</p>
+  <p>
+    <a href="/UniQuest/en/">English</a> | 
+    <a href="/UniQuest/ka/">ქართული</a>
+  </p>
 </body>
 </html>
+

@@ -34,6 +34,56 @@ a {
     color: inherit;
 }
 
+/* Smaller screens */
+@media (max-width: 768px) {
+    /* Stack nav on mobile */
+    .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+
+    .nav-links {
+        flex-direction: column;
+        gap: 0.75rem;
+        width: 100%;
+    }
+    .nav-cta {
+        width: 100%;
+    }
+    .lang-switcher {
+        margin-left: auto;
+    }
+
+    /* Make hero adapt to screen */
+    #hero {
+        height: auto;
+        min-height: 60vh;
+        padding: 4rem 1rem;
+    }
+    .hero-illustration {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        transform: none;
+    }
+    #hero .content {
+        top: auto;
+        transform: none;
+        padding: 1rem;
+    }
+
+    /* Responsive typography for hero */
+    #hero h1 {
+        font-size: clamp(1.8rem, 5vw, 3rem);
+    }
+    #hero p {
+        font-size: clamp(1rem, 3vw, 1.25rem);
+    }
+}
+
 /* ==========================================================================
    NAVIGATION
    ========================================================================== */
@@ -54,7 +104,6 @@ nav {
     align-items: center;
     justify-content: space-between;
 }
-
 .nav-logo {
     display: flex;
     align-items: center;
@@ -275,9 +324,6 @@ footer {
 
 .social-icons { display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; }
 .social-icons a { color: #fff; font-size: 1.5rem; transition: color 0.3s; }
-.social-icons a.facebook:hover { color: #1877F2; }
-.social-icons a.twitter:hover  { color: #1DA1F2; }
-.social-icons a.instagram:hover{ color: #E4405F; }
 
 .footer-contact { font-size: 0.95rem; }
 .footer-contact, footer p { text-align: center; width: 100%; }
@@ -324,54 +370,6 @@ header, footer {
     }
     #hero p {
         font-size: 1.25rem;
-    }
-}
-
-/* Smaller screens */
-@media (max-width: 768px) {
-    /* Stack nav on mobile */
-    .nav-container {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-    }
-    .nav-links {
-        flex-direction: column;
-        gap: 0.75rem;
-        width: 100%;
-    }
-    .nav-cta {
-        width: 100%;
-    }
-    .lang-switcher {
-        margin-left: auto;
-    }
-
-    /* Make hero adapt to screen */
-    #hero {
-        height: auto;
-        min-height: 60vh;
-        padding: 4rem 1rem;
-    }
-    .hero-illustration {
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        transform: none;
-    }
-    #hero .content {
-        top: auto;
-        transform: none;
-        padding: 1rem;
-    }
-
-    /* Responsive typography for hero */
-    #hero h1 {
-        font-size: clamp(1.8rem, 5vw, 3rem);
-    }
-    #hero p {
-        font-size: clamp(1rem, 3vw, 1.25rem);
     }
 }
 
