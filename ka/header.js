@@ -8,19 +8,19 @@ document.addEventListener("DOMContentLoaded", () => {
             // NOW, run the dropdown logic since the header exists in the DOM
             const langButton = document.querySelector('.lang-switcher-button');
             const langDropdown = document.querySelector('.lang-dropdown');
+            const profileButton = document.querySelector('.profile-button');
+            const profileDropdown = document.querySelector('.dropdown-menu');
+
             if (langButton && langDropdown) {
                 langButton.addEventListener('click', function (event) {
                     event.stopPropagation();
                     langDropdown.classList.toggle('show');
-                    const profileDropdown = document.querySelector('.dropdown-menu');
                     if (profileDropdown && profileDropdown.classList.contains('show')) {
                         profileDropdown.classList.remove('show');
                     }
                 });
             }
 
-            const profileButton = document.querySelector('#user-profile-section .profile-button');
-            const profileDropdown = document.querySelector('#user-profile-section .dropdown-menu');
             if (profileButton && profileDropdown) {
                 profileButton.addEventListener('click', function (event) {
                     event.stopPropagation();

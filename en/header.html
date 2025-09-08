@@ -43,38 +43,3 @@
         </div>
     </div>
 </nav>
-
-<script>
-    const langButton = document.querySelector('.lang-switcher-button');
-    const langDropdown = document.querySelector('.lang-dropdown');
-    if (langButton && langDropdown) {
-        langButton.addEventListener('click', function (event) {
-            event.stopPropagation();
-            langDropdown.classList.toggle('show');
-            if (profileDropdown && profileDropdown.classList.contains('show')) {
-                profileDropdown.classList.remove('show');
-            }
-        });
-    }
-
-    const profileButton = document.querySelector('.profile-button');
-    const profileDropdown = document.querySelector('.dropdown-menu');
-    if (profileButton && profileDropdown) {
-        profileButton.addEventListener('click', function (event) {
-            event.stopPropagation();
-            profileDropdown.classList.toggle('show');
-            if (langDropdown && langDropdown.classList.contains('show')) {
-                langDropdown.classList.remove('show');
-            }
-        });
-    }
-
-    document.addEventListener('click', function () {
-        if (langDropdown && langDropdown.classList.contains('show')) {
-            langDropdown.classList.remove('show');
-        }
-        if (profileDropdown && profileDropdown.classList.contains('show')) {
-            profileDropdown.classList.remove('show');
-        }
-    });
-</script>
