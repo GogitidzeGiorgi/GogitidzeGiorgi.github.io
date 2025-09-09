@@ -21,10 +21,18 @@ body {
    /*  flex-direction: column;*/
 }
 
-.main-content {
-    background-color: #f0f3f5; /* The new background */
-    padding: 3rem 1rem;
+
+
+/* * This targets the main content section that comes
+ * right after the hero section on every page.
+*/
+section#hero + section {
+    /* We can move the styles that were inline in the HTML here */
+    max-width: 800px;
+    margin: 3rem auto; /* Centers it and gives top/bottom space */
+    padding: 1rem;
 }
+
 
 a {
     text-decoration: none;
