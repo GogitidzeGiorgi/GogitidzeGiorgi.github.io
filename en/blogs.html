@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <link rel="icon" href="images/logo.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Blogs - UniQuest</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* Base styles matching your existing design */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #063651;
+            background: #f0f3f5;
+        }
+
+        /* Blogs Section */
+        #blogs {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 1rem;
+        }
+
+        #blogs h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            color: #2e8699;
+        }
+
+        /* Student Grid */
+        .students-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .student-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .student-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .student-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #067880, #2e8699);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .student-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .student-image .placeholder {
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .student-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .student-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #063651;
+            margin-bottom: 0.5rem;
+        }
+
+        .student-field {
+            color: #067880;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal-content {
+            background: #fff;
+            border-radius: 12px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            padding: 2rem;
+            border-bottom: 1px solid #e0e0e0;
+            text-align: center;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #999;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .modal-close:hover {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .modal-student-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #067880, #2e8699);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .modal-student-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .modal-student-name {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #063651;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-student-field {
+            color: #067880;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-body h3 {
+            color: #2e8699;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .modal-body p {
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .achievements-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .achievements-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .achievements-list li:last-child {
+            border-bottom: none;
+        }
+
+        .achievements-list .icon {
+            color: #067880;
+            font-size: 1.1rem;
+            margin-top: 0.2rem;
+            flex-shrink: 0;
+        }
+
+        /* Coming Soon Card */
+        .coming-soon {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .students-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal {
+                padding: 1rem;
+            }
+            
+            .modal-header,
+            .modal-body {
+                padding: 1.5rem;
+            }
+            
+            .modal-student-name {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+  <div id="header"></div>
+    <script src="header.js"></script>
+
+    <!-- Blogs Section -->
+    <section id="blogs">
+        <h2>Blogs</h2>
+        
+        <div class="students-grid">
+            <!-- Giorgi Dzadzamia Card -->
+            <div class="student-card" onclick="openModal('giorgi-modal')">
+                <div class="student-image">
+                    <img src="images/giorgi.png" alt="Giorgi Dzadzamia">
+                </div>
+                <div class="student-info">
+                    <div class="student-name">Giorgi Dzadzamia</div>
+                    <div class="student-field">Physics • Vanderbilt University • Full Funding</div>
+                </div>
+            </div>
+
+            <!-- Irakli Mataradze Card -->
+            <div class="student-card" onclick="openModal('irakli-modal')">
+                <div class="student-image">
+                    <img src="images/irakli.png" alt="Irakli Mataradze">
+                </div>
+                <div class="student-info">
+                    <div class="student-name">Irakli Mataradze</div>
+                    <div class="student-field">Molecular Biology • Wingate University • $200,000 Scholarship</div>
+                </div>
+            </div>
+
+            <!-- Lasha-Giorgi Shamugia Card -->
+            <div class="student-card" onclick="openModal('lasha-modal')">
+                <div class="student-image">
+                    <img src="images/lasha-giorgi.png" alt="Lasha-Giorgi Shamugia">
+                </div>
+                <div class="student-info">
+                    <div class="student-name">Lasha-Giorgi Shamugia</div>
+                    <div class="student-field">Aerospace Engineering • Princeton University • $250,000 Scholarship</div>
+                </div>
+            </div>
+
+            <!-- Nika Devidze Card -->
+            <div class="student-card" onclick="openModal('nikad-modal')">
+                <div class="student-image">
+                    <img src="images/Nikadevidze.png" alt="Nika Devidze">
+                </div>
+                <div class="student-info">
+                    <div class="student-name">Nika Devidze</div>
+                    <div class="student-field">Information Technology • Carnegie Mellon University • Full Funding</div>
+                </div>
+            </div>
+
+            <!-- Nika Tskitishvili Card -->
+            <div class="student-card" onclick="openModal('nika-modal')">
+                <div class="student-image">
+                    <img src="images/nika.png" alt="Nika Tskitishvili">
+                </div>
+                <div class="student-info">
+                    <div class="student-name">Nika Tskitishvili</div>
+                    <div class="student-field">Astrophysics • NYU Abu Dhabi • $330,000 Scholarship</div>
+                </div>
+            </div>
+
+            <!-- Coming Soon Card -->
+            <div class="student-card coming-soon">
+                <div class="student-image">
+                    <div class="placeholder">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                </div>
+                <div class="student-info">
+                    <div class="student-name">Coming Soon</div>
+                    <div class="student-field">Next Student Profile</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for Giorgi Dzadzamia -->
+    <div id="giorgi-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('giorgi-modal')">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="modal-header">
+                <div class="modal-student-image">
+                    <img src="images/giorgi.png" alt="Giorgi Dzadzamia">
+                </div>
+                <div class="modal-student-name">Giorgi Dzadzamia</div>
+                <div class="modal-student-field">Physics • Vanderbilt University • Full Funding</div>
+            </div>
+
+            <div class="modal-body">
+                <h3>About Giorgi</h3>
+                <p>Giorgi was accepted to Vanderbilt University (USA) in Physics with full funding! Giorgi's choice was influenced by his love for physics, physics classes, physics club, and the school environment, while his decision to continue studying in the United States was motivated by unlimited opportunities, quality education, and the diverse international university environment.</p>
+                
+                <p>At Vanderbilt University, which is among the top 15 universities in the United States according to US News, only 4 Georgian students study. All four Georgian students continue their studies with full funding and all four of them are Komaroveli alumni.</p>
+
+                <h3>Achievements and Activities</h3>
+                <ul class="achievements-list">
+                    <li>
+                        <i class="fas fa-chalkboard-teacher icon"></i>
+                        <span>Physics circle teacher at Komarovi</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-medal icon"></i>
+                        <span>European Physics Olympiad Silver Medalist (2020)</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-trophy icon"></i>
+                        <span>Winner of Silver (2020) and Bronze (2019) medals at Zhautikov International Physics Olympiad</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-users icon"></i>
+                        <span>Under Giorgi's team leadership, Georgia's national team won: 4 Bronze medals at the International Olympiad, 2 Silver and 3 Bronze medals at the European Physics Olympiad</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-book icon"></i>
+                        <span>Interests include fantasy literature, storytelling, and creative board games</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Irakli Mataradze -->
+    <div id="irakli-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('irakli-modal')">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="modal-header">
+                <div class="modal-student-image">
+                    <img src="images/irakli.png" alt="Irakli Mataradze">
+                </div>
+                <div class="modal-student-name">Irakli Mataradze</div>
+                <div class="modal-student-field">Molecular Biology • Wingate University • $200,000 Scholarship</div>
+            </div>
+
+            <div class="modal-body">
+                <h3>About Irakli</h3>
+                <p>Irakli was accepted to Wingate University with full $200,000 funding and continues his studies in Molecular Biology and Biochemistry! Additionally, Irakli received 100% funding from the leading North Carolina university in Chapel Hill.</p>
+                
+                <p>Irakli achieved a perfect score of 800/800 on the SAT mathematics section and scored 8.0/9.0 on the IELTS exam, which speaks to his exceptional academic abilities.</p>
+
+                <h3>Achievements and Activities</h3>
+                <ul class="achievements-list">
+                    <li>
+                        <i class="fas fa-calculator icon"></i>
+                        <span>Teacher in the "Fun Mathematics" project</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-heart icon"></i>
+                        <span>Voluntarily teaches mathematics to Georgian and foreign students</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-star icon"></i>
+                        <span>Perfect SAT Mathematics score: 800/800</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-language icon"></i>
+                        <span>IELTS score: 8.0/9.0</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-dna icon"></i>
+                        <span>Passionate about studying biological engineering and genetic modifications</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-globe icon"></i>
+                        <span>Studies multiple languages: Russian, Armenian, English, Japanese, and German</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Lasha-Giorgi Shamugia -->
+    <div id="lasha-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('lasha-modal')">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="modal-header">
+                <div class="modal-student-image">
+                    <img src="images/lasha.png" alt="Lasha-Giorgi Shamugia">
+                </div>
+                <div class="modal-student-name">Lasha-Giorgi Shamugia</div>
+                <div class="modal-student-field">Aerospace Engineering • Princeton University • $250,000 Scholarship</div>
+            </div>
+
+            <div class="modal-body">
+                <h3>About Lasha-Giorgi</h3>
+                <p>Lasha-Giorgi Shamugia was accepted to Princeton University with $250,000 funding! Princeton University is one of the most competitive and prestigious universities in the Ivy League, America, and the world.</p>
+                
+                <p>Lasha plans to continue his studies in aerospace and mechanical engineering. As he says, aviation and the idea of interplanetary travel have always fascinated him, and his knowledge and love of physics and mathematics made choosing his future profession even easier.</p>
+
+                <h3>Achievements and Activities</h3>
+                <ul class="achievements-list">
+                    <li>
+                        <i class="fas fa-atom icon"></i>
+                        <span>Successful student of Komarovi's physics circle</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-trophy icon"></i>
+                        <span>National Educational Olympiad finalist in Physics and Mathematics in 2019, 2020</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-users-cog icon"></i>
+                        <span>Initiator and organizer of the innovative volunteer project "Math Meetings" - prepared 14 sixth-graders for 5 months</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-graduation-cap icon"></i>
+                        <span>EducationUSA Georgia Competitive College Club student and delegate of the first international student congress (2020)</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-pen icon"></i>
+                        <span>2021 semifinalist of the international writers' competition "Between the Lines" (IWP BTL)</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-music icon"></i>
+                        <span>Former soloist of the folklore group "Shavnabada" and participant in many local and international events</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Nika Devidze -->
+    <div id="nikad-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('nikad-modal')">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="modal-header">
+                <div class="modal-student-image">
+                    <img src="images/nikad.png" alt="Nika Devidze">
+                </div>
+                <div class="modal-student-name">Nika Devidze</div>
+                <div class="modal-student-field">Information Technology • Carnegie Mellon University • Full Funding</div>
+            </div>
+
+            <div class="modal-body">
+                <h3>About Nika</h3>
+                <p>Nika was accepted to Carnegie Mellon University's Doha campus with full funding and will continue his studies in Information Technology! It should be noted that Carnegie Mellon University is one of the world's leading universities in information technology.</p>
+                
+                <p>The full funding obtained by Nika covers accommodation, food, and study materials costs, providing complete support for his academic journey.</p>
+
+                <h3>Achievements and Activities</h3>
+                <ul class="achievements-list">
+                    <li>
+                        <i class="fas fa-brain icon"></i>
+                        <span>Founder of Komarovi School's "What? Where? When?" club, which held intellectual competitions in English</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-graduation-cap icon"></i>
+                        <span>Member of EducationUSA Georgia network's Competitive College Club in 2021</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-hands-helping icon"></i>
+                        <span>Former organizer of the non-governmental educational organization "Wing", participant in many successful projects</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-lightbulb icon"></i>
+                        <span>Successful participant in Junior Achievement Georgia's "Innovation Camp: Innovations in Financial Education" project</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-chalkboard-teacher icon"></i>
+                        <span>Tutor who prepares Georgian and foreign students in mathematics (for SAT exam) and physics in Georgian and English</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-chess icon"></i>
+                        <span>Winner of various chess tournaments, in his free time dedicates himself to coding and reading books</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Nika Tskitishvili -->
+    <div id="nika-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('nika-modal')">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="modal-header">
+                <div class="modal-student-image">
+                    <img src="images/nika-tskitishvili.png" alt="Nika Tskitishvili" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="placeholder" style="display: none;">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+                <div class="modal-student-name">Nika Tskitishvili</div>
+                <div class="modal-student-field">Astrophysics • NYU Abu Dhabi • $330,000 Scholarship</div>
+            </div>
+
+            <div class="modal-body">
+                <h3>About Nika</h3>
+                <p>Nika Tskitishvili was accepted to New York University's Abu Dhabi campus (NYUAD) with full $330,000 funding in the Astrophysics faculty!</p>
+                
+                <p>New York University (NYU) is distinguished by high quality and international education. NYU has three main campuses in New York, Abu Dhabi, and Shanghai. The Abu Dhabi campus is home to students from more than 120 different nationalities.</p>
+
+                <h3>Achievements and Activities</h3>
+                <ul class="achievements-list">
+                    <li>
+                        <i class="fas fa-star icon"></i>
+                        <span>Administrator of Georgia's Astronomy Club (GAC). Organizes astronomy evenings and online lectures for more than 32,000 astronomy enthusiasts</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-calendar icon"></i>
+                        <span>Organizer of Georgia's first astronomy festival "Astrofest-2020", which was funded by Shota Rustaveli National Science Foundation of Georgia</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-medal icon"></i>
+                        <span>Member of Georgia's national team at the International Olympiad on Astronomy and Astrophysics (IOAA) in 2018-2019</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('show');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                const modalId = e.target.id;
+                closeModal(modalId);
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const openModal = document.querySelector('.modal.show');
+                if (openModal) {
+                    closeModal(openModal.id);
+                }
+            }
+        });
+    </script>
+
+    
+<div id="footer"></div>
+ <script src="footer.js"></script>
+
+</body>
+</html>
